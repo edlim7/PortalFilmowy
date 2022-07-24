@@ -4,10 +4,9 @@ html,
     height: 100%;
 }
 body {
-    background-image: radial-gradient(circle, #87805E 0%, #EDDFB3 100%);  
+    background: linear-gradient(90deg, rgba(176,155,113,1) 0%, rgba(237,223,179,1) 34%, rgba(135,128,94,1) 100%);
 }
 .naglowek{
-    background-color:#D8CCA3;
     width: 100%;
     height: 10%;                    /*????????*/  
 }
@@ -15,11 +14,24 @@ body {
     height:10%;
 }
 .zaloguj{  
-    float:right;
+    position:fixed;
+    top:5%;
+    right:1%;
+    height: 30x;
+    width: 100px;
+    background-color: #B09B71;
+    border: 1px solid black; 
 }
 .zarejestruj{
+    position:fixed;
+    top:7.25%;
+    right:1%;
 
+    height: 30x;
+    width: 100px;
     float:right;
+    background-color: #B09B71;
+    border: 1px solid black; 
 }
 .nawigacja{
     
@@ -30,23 +42,24 @@ body {
 button{                                 /*butony początek*/                          
     cursor: pointer;
     margin-right: 1px;
+    border-radius: 5px;
 }
 .listaFilmow{   
     height: 75px;
     width: 250px;
     background-color: #B09B71;
-    border: 2px solid black; 
+    border: 1.5px solid black; 
 }
 .listaFilmow:hover{
     transition-duration: 1s;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
 }
 
 .listaSerialow{
     height: 75px;
     width: 250px;
     background-color: #B09B71;
-    border: 2px solid black; 
+    border: 1.5px solid black; 
 }
 .listaSerialow:hover{
     transition-duration: 1s;
@@ -57,7 +70,7 @@ button{                                 /*butony początek*/
     height: 75px;
     width: 250px;
     background-color: #B09B71;
-    border: 2px solid black; 
+    border: 1.5px solid black; 
 }
 .rankingFilmow:hover{
     transition-duration: 1s;
@@ -68,7 +81,7 @@ button{                                 /*butony początek*/
     height: 75px;
     width: 250px;
     background-color: #B09B71;
-    border: 2px solid black; 
+    border: 1.5px solid black;  
 }
 .rankingSerialow:hover{
     transition-duration: 1s;
@@ -77,6 +90,8 @@ button{                                 /*butony początek*/
 .wyszukaj{                          /*butony koniec*/
     height: 30x;
     width: 100px;
+    background-color: #B09B71;
+    border: 1px solid black; 
 }                                                 
 .wyszukiwarka{  
     position: fixed;
@@ -86,7 +101,6 @@ button{                                 /*butony początek*/
     text-align: center;
 }
 .stopka{
-    background-color:#D8CCA3;
     position:fixed; 
     bottom:0;
     height: 7%;

@@ -8,7 +8,7 @@ const Main = () => {
 
   function handleClick(e){
     e.preventDefault();
-    console.log('The link was clicked.');     {/* tutaj te przejscia na podstrony???? */}
+    window.location.href='http://google.com';     {/* tutaj te przejscia na podstrony???? */}
   }
   function Example() {    {/* title jakies zbugowane */}
     useEffect(() => {
