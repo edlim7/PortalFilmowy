@@ -73,7 +73,9 @@ const Main = () => {
            <div class="bodyy">
             tutaj jakies mechanizm polecania x2
 
-
+            <button class="panelAdmina" >    {/* onClick={} */}
+                Panel Admina
+              </button>
            </div>
 
            <div class="stopka">

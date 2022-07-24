@@ -95,7 +95,8 @@ button{                                 /*butony początek*/
 }                                                 
 .wyszukiwarka{  
     position: fixed;
-    float: right;  
+    right: 2%;
+    top:14%; 
 }
 .bodyy{
     text-align: center;
@@ -111,12 +112,23 @@ button{                                 /*butony początek*/
     padding-left: 1%;
 }
 .stopkaSrodek{
-padding-left: 33%;
-        
+padding-left: 33%;      
    
 }
 .stopkaPrawo{
     float:right;
     text-align: center;
     padding-right: 1%;
+}
+.panelAdmina{
+    text-align:right;
+    position: fixed;
+    right: 2%;
+    bottom:10%;
+    padding-right: 1%;
+    background-color: #B09B71;
+    border: 1px solid black; 
+    height: 30px;
+    width: 120px;
+    
 }
