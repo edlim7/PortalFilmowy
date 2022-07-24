@@ -6,7 +6,10 @@ import { AppContext } from "../contexts/AppContext";
 const Main = () => {
   const TITLE = 'Filizone - strefa dobrego kina'
   const {Age, setAge} = useContext(AppContext);
-  
+  function handleClick(e){
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
 {/* title jakies zbugowane */}
 
   return (
@@ -24,29 +27,30 @@ const Main = () => {
          <Form>
           <div class="naglowek">
                <center><h1 class="nazwaStrony">Filizone</h1></center>
+               
           </div> 
-           <Field type="value" name="value" />
+           <Field type="value" name="value" />              {/* do usunięcia*/}
            <ErrorMessage name="email" component="div" />           
            <br/>
 
            <div class="nawigacja">                                      {/* nawigowanie, wyszukiwarka*/}
             <center>          
-              <button class="listaFilmow" >       {/* onClick={} */}
+              <button class="listaFilmow" onClick={handleClick}>       {/* onClick={}  to ma przenosic na podstr*/}
                 Filmy,
               </button>
-              <button class="listaSerialow">       {/* onClick={} */}
+              <button class="listaSerialow" >       {/* onClick={} */}
                 Seriale
               </button>
-              <button class="rankingFilmow">       {/* onClick={} */}
+              <button class="rankingFilmow" >       {/* onClick={} */}
                 Ranking filmów
               </button>
               <button class="rankingSerialow" >    {/* onClick={} */}
                 Ranking seriali
               </button>
-              <container class="wyszukiwarka">                          {/* container za diva?*/}
-                <Field type="password" name="password" />
-                <ErrorMessage name="password" component="div" />
-                <button class="wyszukaj" type="submit">          
+              <container class="wyszukiwarka">                          {/* container za diva? */}
+                <Field name="poleWyszukiwarki" />                        {/* wpisujesz nazwe filmu do wyszukania */}
+                <ErrorMessage name="poleWyszukiwarki" component="div" />  
+                <button class="wyszukaj" type="submit">                   {/* submit do wyszukiwania??? */}
                   Wyszukaj
                 </button>
               </container>  
@@ -63,7 +67,10 @@ const Main = () => {
            </div>
 
            <div class="stopka">
-            <p>Copyrifht, kontakt, sociale itp</p>
+            <p><center><span class="stopkaLewo">Autor: Patryk Milde</span>
+            <span class="stopkaSrodek">Numer telefonu: 48+******006</span>
+            <span class="stopkaPrawo">Email: patryk***@student.pl</span></center>         
+            </p>
            </div>
            
          </Form>

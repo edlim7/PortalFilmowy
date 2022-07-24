@@ -14,6 +14,12 @@ body {
 .nazwaStrony{                   /*dunno co chjcialek*/ 
     height:10%;
 }
+.zaloguj{  
+    float:right;
+}
+.rejestruj{
+    float:right;
+}
 .nawigacja{
     
     margin-top: 5px;
@@ -83,5 +89,18 @@ button{                                 /*butony początek*/
     position:fixed; 
     bottom:0;
     height: 7%;
-    width:100%;
+    width:99%;
+}
+.stopkaLewo{
+    float: left;
+    padding-left: 1%;
+}
+.stopkaSrodek{
+float:none
+   
+}
+.stopkaPrawo{
+    float:right;
+    text-align: center;
+    padding-right: 1%;
 }
