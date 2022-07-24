@@ -58,7 +58,7 @@ const Main = () => {
                 Ranking seriali
               </button>
               <container class="wyszukiwarka">                          {/* container za diva? */}
-                <Field name="poleWyszukiwarki" />                        {/* wpisujesz nazwe filmu do wyszukania */}
+                <input type="text" name="poleWyszukiwarki" />                        {/* wpisujesz nazwe filmu do wyszukania */}
                 <ErrorMessage name="poleWyszukiwarki" component="div" />  
                 <button class="wyszukaj" type="submit">                   {/* submit do wyszukiwania??? */}
                   Wyszukaj
