@@ -1,0 +1,87 @@
+html,
+.wszystko{
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-image: radial-gradient(circle, #87805E 0%, #EDDFB3 100%);  
+}
+.naglowek{
+    background-color:#D8CCA3;
+    width: 100%;
+    height: 10%;                    /*????????*/  
+}
+.nazwaStrony{                   /*dunno co chjcialek*/ 
+    height:10%;
+}
+.nawigacja{
+    
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+button{                                 /*butony początek*/                          
+    cursor: pointer;
+    margin-right: 1px;
+}
+.listaFilmow{   
+    height: 75px;
+    width: 250px;
+    background-color: #B09B71;
+    border: 2px solid black; 
+}
+.listaFilmow:hover{
+    transition-duration: 1s;
+    background-color: white;
+}
+
+.listaSerialow{
+    height: 75px;
+    width: 250px;
+    background-color: #B09B71;
+    border: 2px solid black; 
+}
+.listaSerialow:hover{
+    transition-duration: 1s;
+    background-color: white;
+}
+
+.rankingFilmow{
+    height: 75px;
+    width: 250px;
+    background-color: #B09B71;
+    border: 2px solid black; 
+}
+.rankingFilmow:hover{
+    transition-duration: 1s;
+    background-color: white;
+}
+
+.rankingSerialow{
+    height: 75px;
+    width: 250px;
+    background-color: #B09B71;
+    border: 2px solid black; 
+}
+.rankingSerialow:hover{
+    transition-duration: 1s;
+    background-color: white;
+}           
+.wyszukaj{                          /*butony koniec*/
+    height: 30x;
+    width: 100px;
+}                                                 
+.wyszukiwarka{  
+    position: fixed;
+    float: right;  
+}
+.bodyy{
+    text-align: center;
+}
+.stopka{
+    background-color:#D8CCA3;
+    position:fixed; 
+    bottom:0;
+    height: 7%;
+    width:100%;
+}
