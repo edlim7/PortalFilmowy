@@ -32,7 +32,7 @@ const Main = () => {
            <div class="nawigacja">                                      {/* nawigowanie, wyszukiwarka*/}
             <center>          
               <button class="listaFilmow" >       {/* onClick={} */}
-                Filmy
+                Filmy,
               </button>
               <button class="listaSerialow">       {/* onClick={} */}
                 Seriale
