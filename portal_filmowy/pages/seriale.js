@@ -1,11 +1,13 @@
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
-
-export default function Home() {
+const Seriale = () => {
 	return (
 		<>
 			<Navbar></Navbar>
 			<Search></Search>
+			<div>Seriale</div>
 		</>
 	);
-}
+};
+
+export default Seriale;

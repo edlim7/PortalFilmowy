@@ -1,11 +1,14 @@
+import React from "react";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
-
-export default function Home() {
+const Filmy = () => {
 	return (
 		<>
 			<Navbar></Navbar>
 			<Search></Search>
+			<div>Filmy</div>
 		</>
 	);
-}
+};
+
+export default Filmy;
