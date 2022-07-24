@@ -17,7 +17,8 @@ body {
 .zaloguj{  
     float:right;
 }
-.rejestruj{
+.zarejestruj{
+
     float:right;
 }
 .nawigacja{
@@ -96,7 +97,8 @@ button{                                 /*butony początek*/
     padding-left: 1%;
 }
 .stopkaSrodek{
-float:none
+padding-left: 33%;
+        
    
 }
 .stopkaPrawo{

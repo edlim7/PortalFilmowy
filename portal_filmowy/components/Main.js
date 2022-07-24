@@ -4,20 +4,25 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { AppContext } from "../contexts/AppContext";
 
 const Main = () => {
-  const TITLE = 'Filizone - strefa dobrego kina'
   const {Age, setAge} = useContext(AppContext);
+
   function handleClick(e){
     e.preventDefault();
-    console.log('The link was clicked.');
+    console.log('The link was clicked.');     {/* tutaj te przejscia na podstrony???? */}
   }
-{/* title jakies zbugowane */}
+  function Example() {    {/* title jakies zbugowane */}
+    useEffect(() => {
+      document.title = 'Filizone - strefa dobrego kina';
+    });
+  }
+
 
   return (
 
    <div class="wszystko">        {/* nie wiem czy nie lepiej to biale tlo */}
        
      <Formik
-       initialValues={{ value: 0, password: '' }}
+       initialValues={{ value: "do kicka to", poleWyszukiwarki: '' }}
        onSubmit={
         (values)=>{ setAge(prevAge => prevAge + parseInt(values.value, 10))}
       }
@@ -27,7 +32,12 @@ const Main = () => {
          <Form>
           <div class="naglowek">
                <center><h1 class="nazwaStrony">Filizone</h1></center>
-               
+               <button class="zaloguj" >       {/* onClick={}, pojawia sie "plansza" cos i tam wpisujesz login i haslo */}
+                Logowanie
+              </button>
+              <button class="zarejestruj" >       {/* onClick={} */}
+                Rejestracja
+              </button>
           </div> 
            <Field type="value" name="value" />              {/* do usunięcia*/}
            <ErrorMessage name="email" component="div" />           
@@ -61,15 +71,16 @@ const Main = () => {
            </div>
 
            <div class="bodyy">
-            tutaj jakies polecane i jakies stale reklamki moze
+            tutaj jakies mechanizm polecania x2
 
 
            </div>
 
            <div class="stopka">
-            <p><center><span class="stopkaLewo">Autor: Patryk Milde</span>
-            <span class="stopkaSrodek">Numer telefonu: 48+******006</span>
-            <span class="stopkaPrawo">Email: patryk***@student.pl</span></center>         
+            <p>
+              <span class="stopkaLewo">Autor: Patryk Milde</span>
+              <span class="stopkaSrodek">Numer telefonu: 48+******006</span>
+              <span class="stopkaPrawo">Email: patryk***@student.pl</span>    
             </p>
            </div>
            
