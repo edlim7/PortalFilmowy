@@ -28,6 +28,8 @@ const Navbar = () => {
 				<ul>
 					<Link href="/filmy">Filmy</Link>
 					<Link href="/seriale">Seriale</Link>
+					<Link href="/RankingFilmow">Ranking Filmów</Link>
+					<Link href="/RankingSeriali">Ranking Seriali</Link>
 				</ul>
 			</center>
 		</Container>
