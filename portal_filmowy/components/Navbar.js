@@ -23,11 +23,6 @@ const Navbar = () => {
 					{/* onClick={}, pojawia sie "plansza" cos i tam wpisujesz login i haslo */}
 					Logowanie
 				</button>
-				<button className="Register">
-					{" "}
-					{/* onClick={} */}
-					Rejestracja
-				</button>
 			</div>
 
 			<br />
