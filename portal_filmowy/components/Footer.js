@@ -5,7 +5,7 @@ import { AppContext } from "../contexts/AppContext";
 const Footer = () => {
 	return (
 		<Container>
-			<div className="kupa">Za to &#60;br&#62; to zabije</div>
+			<div className="foot">Za to &#60;br&#62; to zabije</div>
 		</Container>
 	);
 };
@@ -18,7 +18,7 @@ const Container = styled.div`
 	bottom: 0;
 	width: 100%;
 	text-align: center;
-	.kupa {
+	.foot {
 		margin: 1%;
 	}
 `;
