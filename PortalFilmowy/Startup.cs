@@ -2,17 +2,22 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PortalFilmowy.Data;
+using PortalFilmowy.Services;
 
 namespace PortalFilmowy
 {
     public class Startup
     {
+        public string ConnectionString{get;set;}
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectionString = Configuration.GetConnectionString("DefaultConnection");
         }
 
         public IConfiguration Configuration { get; }
@@ -20,9 +25,14 @@ namespace PortalFilmowy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Configure DBcontext
             services.AddDbContext<MyDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(ConnectionString));
             services.AddControllersWithViews();
+            //Configure services
+            services.AddTransient<ProdukcjaUsluga>();
+
+
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -57,8 +67,8 @@ namespace PortalFilmowy
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-
-            app.UseSpa(spa =>
+            AppDbInitializer.Seed(app);
+           /*  app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
 
@@ -66,7 +76,7 @@ namespace PortalFilmowy
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
-            });
+            }); */
         }
     }
 }
