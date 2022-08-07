@@ -29,6 +29,13 @@ namespace PortalFilmowy.Services
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
         }
-
+        public List<Produkcja> getAllProdukcja()
+        {
+            return _context.Produkcja.ToList();
+        }
+        public Produkcja getProdukcjaById(int produkcjaId)
+        {
+            return _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==produkcjaId);
+        }
     }   
 }

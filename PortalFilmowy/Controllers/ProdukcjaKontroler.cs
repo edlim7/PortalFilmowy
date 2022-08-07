@@ -20,11 +20,24 @@ namespace PortalFilmowy.Controllers
         {
             _produkcjaUsluga = produkcjaUsluga;
         }
-        [HttpPost("add-produkcja")]
+        [HttpPost]
         public IActionResult AddProdukcja([FromBody]ProdukcjaVM produkcja)
         {
             _produkcjaUsluga.AddProdukcja(produkcja);
             return Ok();
         }
+        [HttpGet("getAllProdukcja")]
+        public IActionResult GetAllProdukcja()
+        {
+            var allProdukcja = _produkcjaUsluga.getAllProdukcja();
+            return Ok(allProdukcja);
+        }
+        [HttpGet("getProdukcjaById/{id}")]
+        public IActionResult getProdukcjaById(int id)
+        {
+            var produkcja = _produkcjaUsluga.getProdukcjaById(id);
+            return Ok(produkcja);
+        }
+        
     }
 }
