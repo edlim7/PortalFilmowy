@@ -35,5 +35,26 @@ namespace PortalFilmowy.Data.Services
         {
             return _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==produkcjaId);
         }
+        public Produkcja updateProdukcjaById(int produkcjaId, ProdukcjaVM produkcja)
+        {
+            var _produkcja = _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==produkcjaId);
+            if(_produkcja!=null)
+            {
+                _produkcja.Nazwa=produkcja.Nazwa;
+                _produkcja.Zdjecie=produkcja.Zdjecie;
+                _produkcja.Opis = produkcja.Opis;
+                _context.SaveChanges();
+            }
+            return _produkcja;
+        }
+        public void deleteProdukcjaById(int produkcjaId)
+        {
+            var _produkcja = _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==produkcjaId);
+            if(_produkcja!=null)
+            {
+                _context.Produkcja.Remove(_produkcja);
+                _context.SaveChanges();
+            }
+        }
     }   
 }

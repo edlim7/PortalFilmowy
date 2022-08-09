@@ -13,7 +13,7 @@ namespace PortalFilmowy.Controllers
         {
             _produkcjaUsluga = produkcjaUsluga;
         }
-        [HttpPost]
+        [HttpPost("addProdukcja")]
         public IActionResult AddProdukcja([FromBody]ProdukcjaVM produkcja)
         {
             _produkcjaUsluga.AddProdukcja(produkcja);
@@ -30,6 +30,18 @@ namespace PortalFilmowy.Controllers
         {
             var produkcja = _produkcjaUsluga.getProdukcjaById(id);
             return Ok(produkcja);
+        }
+        [HttpPut("updateProdukcjaById/{id}")]
+        public IActionResult updateProdukcjaById(int id, [FromBody]ProdukcjaVM produkcja)
+        {
+            var updatedProdukcja = _produkcjaUsluga.updateProdukcjaById(id,produkcja);
+            return Ok(updatedProdukcja);
+        }
+         [HttpDelete("deleteProdukcjaById/{id}")]
+        public IActionResult deleteProdukcjaById(int id)
+        {
+            _produkcjaUsluga.deleteProdukcjaById(id);
+            return Ok();
         }
         
     }

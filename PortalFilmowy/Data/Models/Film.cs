@@ -5,7 +5,10 @@ namespace PortalFilmowy.Models
 {
     public class Film
     {
-        public int Id { get; set; }
-        public int Oscars { get; set; }
+        public int FilmId { get; set; }
+        public int Oskary { get; set; }
+
+        //Navigation property
+        public Produkcja produkcja{ get; set; }
     }
 }

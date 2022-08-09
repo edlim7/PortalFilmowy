@@ -32,6 +32,8 @@ namespace PortalFilmowy
             //services.AddControllersWithViews();
             //Configure services
             services.AddTransient<ProdukcjaUsluga>();
+            services.AddTransient<FilmUsluga>();
+            services.AddTransient<UzytkownikUsluga>();
 
 
 
