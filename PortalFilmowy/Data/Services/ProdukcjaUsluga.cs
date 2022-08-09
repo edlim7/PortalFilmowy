@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using PortalFilmowy.Data;
-using PortalFilmowy.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PortalFilmowy.Models;
 
-namespace PortalFilmowy.Services
+namespace PortalFilmowy.Data.Services
 {
     public class ProdukcjaUsluga
     {
@@ -29,10 +30,7 @@ namespace PortalFilmowy.Services
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
         }
-        public List<Produkcja> getAllProdukcja()
-        {
-            return _context.Produkcja.ToList();
-        }
+        public List<Produkcja> getAllProdukcja() => _context.Produkcja.ToList();
         public Produkcja getProdukcjaById(int produkcjaId)
         {
             return _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==produkcjaId);

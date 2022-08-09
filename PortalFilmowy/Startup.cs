@@ -7,7 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PortalFilmowy.Data;
-using PortalFilmowy.Services;
+using PortalFilmowy.Data.Services;
+
 
 namespace PortalFilmowy
 {
@@ -25,10 +26,10 @@ namespace PortalFilmowy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             //Configure DBcontext
-            services.AddDbContext<MyDbContext>(options =>
-            options.UseSqlServer(ConnectionString));
-            services.AddControllersWithViews();
+            services.AddDbContext<MyDbContext>(options =>options.UseSqlServer(ConnectionString));
+            //services.AddControllersWithViews();
             //Configure services
             services.AddTransient<ProdukcjaUsluga>();
 
@@ -56,16 +57,14 @@ namespace PortalFilmowy
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            //app.UseStaticFiles();
+            //app.UseSpaStaticFiles();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
             AppDbInitializer.Seed(app);
            /*  app.UseSpa(spa =>
