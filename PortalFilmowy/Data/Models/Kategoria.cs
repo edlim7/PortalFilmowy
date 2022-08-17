@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -9,7 +10,6 @@ namespace PortalFilmowy.Models
         public string NazwaKategorii { get; set; }
 
         //Navigarion properties
-        public int ProdukcjaId { get; set; }
-        public Produkcja produkcja{ get; set; }
+        public List<WybranaKategoria> WybranaKategoria;
     }
 }

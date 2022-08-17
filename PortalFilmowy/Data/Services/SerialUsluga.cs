@@ -24,15 +24,25 @@ namespace PortalFilmowy.Data.Services
             {
                 Emmy=serial.Emmy,
                 Sezony = serial.Sezony,
-                Odcinki=serial.Odcinki
+                Odcinki=serial.Odcinki,
+                ProdukcjaId=serial.ProdukcjaId
             };
             _context.Serial.Add(_serial);
             _context.SaveChanges();
         }
         public List<Serial> getAllSerial() => _context.Serial.ToList();
-        public Serial getSerialById(int serialId)
+        public SerialProdukcjaVM getSerialById(int serialId)
         {
-            return _context.Serial.FirstOrDefault(n=>n.SerialId==serialId);
+            var _serialProdukcja=_context.Serial.Where(n=>n.SerialId == serialId).Select(serial=>new SerialProdukcjaVM()
+            {
+                Emmy=serial.Emmy,
+                Sezony = serial.Sezony,
+                Odcinki=serial.Odcinki,
+                Nazwa = serial.produkcja.Nazwa,
+                Zdjecie =serial.produkcja.Zdjecie,
+                Opis = serial.produkcja.Opis
+            }).FirstOrDefault();
+            return _serialProdukcja;
         }
         public Serial updateSerialById(int serialId, SerialVM serial)
         {

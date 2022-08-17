@@ -13,10 +13,28 @@ namespace PortalFilmowy.Controllers
         {
             _produkcjaUsluga = produkcjaUsluga;
         }
-        [HttpPost("addProdukcja")]
-        public IActionResult AddProdukcja([FromBody]ProdukcjaVM produkcja)
+        [HttpPost("addProdukcjaUzytkownik")]
+        public IActionResult AddProdukcjaUzytkownik([FromBody]ProdukcjaVM produkcja)
         {
-            _produkcjaUsluga.AddProdukcja(produkcja);
+            _produkcjaUsluga.AddProdukcjaUzytkownik(produkcja);
+            return Ok();
+        }
+        [HttpPost("addProdukcjaOcena")]
+        public IActionResult AddProdukcjaOcena([FromBody]ProdukcjaVM produkcja)
+        {
+            _produkcjaUsluga.AddProdukcjaOcena(produkcja);
+            return Ok();
+        }
+        [HttpPost("addProdukcjaKomentarz")]
+        public IActionResult AddProdukcjaKomentarz([FromBody]ProdukcjaVM produkcja)
+        {
+            _produkcjaUsluga.AddProdukcjaKomentarz(produkcja);
+            return Ok();
+        }
+        [HttpPost("addProdukcjaKategoria")]
+        public IActionResult AddProdukcjaKategoria([FromBody]ProdukcjaVM produkcja)
+        {
+            _produkcjaUsluga.AddProdukcjaKategoria(produkcja);
             return Ok();
         }
         [HttpGet("getAllProdukcja")]
@@ -31,6 +49,7 @@ namespace PortalFilmowy.Controllers
             var produkcja = _produkcjaUsluga.getProdukcjaById(id);
             return Ok(produkcja);
         }
+     
         [HttpPut("updateProdukcjaById/{id}")]
         public IActionResult updateProdukcjaById(int id, [FromBody]ProdukcjaVM produkcja)
         {

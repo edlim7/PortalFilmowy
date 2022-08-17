@@ -11,7 +11,7 @@ namespace PortalFilmowy.Models
         public int Odcinki { get; set; }
 
         //Navigarion properties
-
+        public int ProdukcjaId{ get; set; }
         public Produkcja produkcja{ get; set; }
     }
 }

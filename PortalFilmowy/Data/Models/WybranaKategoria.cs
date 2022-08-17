@@ -3,15 +3,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PortalFilmowy.Models
 {
-    public class Ocena
+    public class WybranaKategoria
     {
-        public int OcenaId { get; set; }
-        public int Liczba { get; set; }
+        public int WybranaKategoriaId { get; set; }
 
         //Navigarion properties
         public int ProdukcjaId{ get; set; }
         public Produkcja produkcja { get; set; }
-        public int UzytkownikID { get; set; }
-        public Uzytkownik uzytkownik { get; set; } 
+        public int KategoriaID { get; set; }
+        public Kategoria kategoria { get; set; } 
     }
 }

@@ -6,7 +6,6 @@ namespace PortalFilmowy.Models
     public class WybranaProdukcja
     {
         public int WybranaProdukcjaId { get; set; }
-        public int Liczba { get; set; }
 
         //Navigarion properties
         public int ProdukcjaId{ get; set; }

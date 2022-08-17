@@ -10,5 +10,6 @@ namespace PortalFilmowy.Models
 
         //Navigation property
         public Produkcja produkcja{ get; set; }
+        public int ProdukcjaId{ get; set; }
     }
 }

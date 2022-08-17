@@ -54,12 +54,7 @@ namespace PortalFilmowy.Migrations
                     b.Property<string>("NazwaKategorii")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProdukcjaId")
-                        .HasColumnType("int");
-
                     b.HasKey("KategoriaId");
-
-                    b.HasIndex("ProdukcjaId");
 
                     b.ToTable("Kategoria");
                 });
@@ -98,10 +93,10 @@ namespace PortalFilmowy.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OcenaId"), 1L, 1);
 
-                    b.Property<int>("ProdukcjaId")
+                    b.Property<int>("Liczba")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rate")
+                    b.Property<int>("ProdukcjaId")
                         .HasColumnType("int");
 
                     b.Property<int>("UzytkownikID")
@@ -190,6 +185,29 @@ namespace PortalFilmowy.Migrations
                     b.ToTable("Uzytkownik");
                 });
 
+            modelBuilder.Entity("PortalFilmowy.Models.WybranaKategoria", b =>
+                {
+                    b.Property<int>("WybranaKategoriaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WybranaKategoriaId"), 1L, 1);
+
+                    b.Property<int>("KategoriaID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdukcjaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("WybranaKategoriaId");
+
+                    b.HasIndex("KategoriaID");
+
+                    b.HasIndex("ProdukcjaId");
+
+                    b.ToTable("WybranaKategoria");
+                });
+
             modelBuilder.Entity("PortalFilmowy.Models.WybranaProdukcja", b =>
                 {
                     b.Property<int>("WybranaProdukcjaId")
@@ -197,9 +215,6 @@ namespace PortalFilmowy.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WybranaProdukcjaId"), 1L, 1);
-
-                    b.Property<int>("Liczba")
-                        .HasColumnType("int");
 
                     b.Property<int>("ProdukcjaId")
                         .HasColumnType("int");
@@ -221,17 +236,6 @@ namespace PortalFilmowy.Migrations
                     b.HasOne("PortalFilmowy.Models.Produkcja", "produkcja")
                         .WithMany("film")
                         .HasForeignKey("ProdukcjaId");
-
-                    b.Navigation("produkcja");
-                });
-
-            modelBuilder.Entity("PortalFilmowy.Models.Kategoria", b =>
-                {
-                    b.HasOne("PortalFilmowy.Models.Produkcja", "produkcja")
-                        .WithMany("kategorie")
-                        .HasForeignKey("ProdukcjaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("produkcja");
                 });
@@ -283,6 +287,25 @@ namespace PortalFilmowy.Migrations
                     b.Navigation("produkcja");
                 });
 
+            modelBuilder.Entity("PortalFilmowy.Models.WybranaKategoria", b =>
+                {
+                    b.HasOne("PortalFilmowy.Models.Kategoria", "kategoria")
+                        .WithMany("wybranaKategoria")
+                        .HasForeignKey("KategoriaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PortalFilmowy.Models.Produkcja", "produkcja")
+                        .WithMany("wybranaKategoria")
+                        .HasForeignKey("ProdukcjaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("kategoria");
+
+                    b.Navigation("produkcja");
+                });
+
             modelBuilder.Entity("PortalFilmowy.Models.WybranaProdukcja", b =>
                 {
                     b.HasOne("PortalFilmowy.Models.Produkcja", "produkcja")
@@ -302,6 +325,11 @@ namespace PortalFilmowy.Migrations
                     b.Navigation("uzytkownik");
                 });
 
+            modelBuilder.Entity("PortalFilmowy.Models.Kategoria", b =>
+                {
+                    b.Navigation("wybranaKategoria");
+                });
+
             modelBuilder.Entity("PortalFilmowy.Models.Produkcja", b =>
                 {
                     b.Navigation("Komentarz");
@@ -312,9 +340,9 @@ namespace PortalFilmowy.Migrations
 
                     b.Navigation("film");
 
-                    b.Navigation("kategorie");
-
                     b.Navigation("serial");
+
+                    b.Navigation("wybranaKategoria");
                 });
 
             modelBuilder.Entity("PortalFilmowy.Models.Uzytkownik", b =>

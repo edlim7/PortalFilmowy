@@ -9,6 +9,19 @@ namespace PortalFilmowy.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Kategoria",
+                columns: table => new
+                {
+                    KategoriaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NazwaKategorii = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Kategoria", x => x.KategoriaId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Produkcja",
                 columns: table => new
                 {
@@ -59,26 +72,6 @@ namespace PortalFilmowy.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Kategoria",
-                columns: table => new
-                {
-                    KategoriaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NazwaKategorii = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProdukcjaId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Kategoria", x => x.KategoriaId);
-                    table.ForeignKey(
-                        name: "FK_Kategoria_Produkcja_ProdukcjaId",
-                        column: x => x.ProdukcjaId,
-                        principalTable: "Produkcja",
-                        principalColumn: "ProdukcjaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Serial",
                 columns: table => new
                 {
@@ -97,6 +90,32 @@ namespace PortalFilmowy.Migrations
                         column: x => x.ProdukcjaId,
                         principalTable: "Produkcja",
                         principalColumn: "ProdukcjaId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WybranaKategoria",
+                columns: table => new
+                {
+                    WybranaKategoriaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProdukcjaId = table.Column<int>(type: "int", nullable: false),
+                    KategoriaID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WybranaKategoria", x => x.WybranaKategoriaId);
+                    table.ForeignKey(
+                        name: "FK_WybranaKategoria_Kategoria_KategoriaID",
+                        column: x => x.KategoriaID,
+                        principalTable: "Kategoria",
+                        principalColumn: "KategoriaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WybranaKategoria_Produkcja_ProdukcjaId",
+                        column: x => x.ProdukcjaId,
+                        principalTable: "Produkcja",
+                        principalColumn: "ProdukcjaId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,7 +151,7 @@ namespace PortalFilmowy.Migrations
                 {
                     OcenaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Rate = table.Column<int>(type: "int", nullable: false),
+                    Liczba = table.Column<int>(type: "int", nullable: false),
                     ProdukcjaId = table.Column<int>(type: "int", nullable: false),
                     UzytkownikID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -159,7 +178,6 @@ namespace PortalFilmowy.Migrations
                 {
                     WybranaProdukcjaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Liczba = table.Column<int>(type: "int", nullable: false),
                     ProdukcjaId = table.Column<int>(type: "int", nullable: false),
                     UzytkownikID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -183,11 +201,6 @@ namespace PortalFilmowy.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Film_ProdukcjaId",
                 table: "Film",
-                column: "ProdukcjaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Kategoria_ProdukcjaId",
-                table: "Kategoria",
                 column: "ProdukcjaId");
 
             migrationBuilder.CreateIndex(
@@ -216,6 +229,16 @@ namespace PortalFilmowy.Migrations
                 column: "ProdukcjaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_WybranaKategoria_KategoriaID",
+                table: "WybranaKategoria",
+                column: "KategoriaID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WybranaKategoria_ProdukcjaId",
+                table: "WybranaKategoria",
+                column: "ProdukcjaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WybranaProdukcja_ProdukcjaId",
                 table: "WybranaProdukcja",
                 column: "ProdukcjaId");
@@ -232,9 +255,6 @@ namespace PortalFilmowy.Migrations
                 name: "Film");
 
             migrationBuilder.DropTable(
-                name: "Kategoria");
-
-            migrationBuilder.DropTable(
                 name: "Komentarz");
 
             migrationBuilder.DropTable(
@@ -244,7 +264,13 @@ namespace PortalFilmowy.Migrations
                 name: "Serial");
 
             migrationBuilder.DropTable(
+                name: "WybranaKategoria");
+
+            migrationBuilder.DropTable(
                 name: "WybranaProdukcja");
+
+            migrationBuilder.DropTable(
+                name: "Kategoria");
 
             migrationBuilder.DropTable(
                 name: "Produkcja");

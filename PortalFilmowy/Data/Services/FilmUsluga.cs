@@ -24,15 +24,23 @@ namespace PortalFilmowy.Data.Services
             var _film= new Film()
             {
                 Oskary = film.Oskary,
+                ProdukcjaId=film.ProdukcjaId
 
             };
             _context.Film.Add(_film);
             _context.SaveChanges();
         }
         public List<Film> getAllFilm() => _context.Film.ToList();
-        public Film getFilmById(int filmId)
+        public FilmProdukcjaVM getFilmById(int filmId)
         {
-            return _context.Film.FirstOrDefault(n=>n.FilmId==filmId);
+            var _filmProdukcja=_context.Film.Where(n=>n.FilmId == filmId).Select(film=>new FilmProdukcjaVM()
+            {
+                Oskary = film.Oskary,
+                Nazwa = film.produkcja.Nazwa,
+                Zdjecie =film.produkcja.Zdjecie,
+                Opis = film.produkcja.Opis
+            }).FirstOrDefault();
+            return _filmProdukcja;
         }
         public Film updateFilmById(int filmId, FilmVM film)
         {

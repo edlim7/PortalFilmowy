@@ -14,7 +14,7 @@ namespace PortalFilmowy.Models
         //Navigation properties
         public List<Film> film { get; set; }
         public List<Serial> serial { get; set; }
-        public List<Kategoria> kategorie { get; set; }
+        public List<WybranaKategoria> WybranaKategoria { get; set; }
         public List<WybranaProdukcja> WybranaProdukcja { get; set; }
         public List<Ocena> Ocena { get; set; }
         public List<Komentarz> Komentarz { get; set; }
