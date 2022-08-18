@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from "styled-components";
 const SingleContent = ({id,
-  nazwa,}) => {
+  nazwa,odcinki,}) => {
   return (
     <Wrapper className='media'>
     <b className='title'>{nazwa}</b>
+    <b className='emmy'>{odcinki}</b>
     </Wrapper>
 
   )

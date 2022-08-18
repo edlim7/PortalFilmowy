@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import SingleContent from "../components/SingleContent/SingleContent";
 export async function getStaticProps() {
 	// Call an external API endpoint to get posts
-	const res = await fetch("http://localhost:5000/api/SerialKontroler/getAllSerial"); // odkryc musze jeszcze jak przekazac obiekt zeby nie byl null i bedzie essasito
+	const res = await fetch("http://localhost:5000/api/ProdukcjaKontroler/getAllProdukcja");		// pozniej tutaj getallFimy raczej ale mozliwe ze je przerobie jeszcze
 	const posts = await res.json();
 	// By returning { props: { posts } }, the Blog component
 	// will receive `posts` as a prop at build time
@@ -16,21 +16,19 @@ export async function getStaticProps() {
 		revalidate: 1,
 	};
 }
-const Seriale = ({posts}) => {
-	const [dataValues, setDataValues] = useState(posts);
-	console.log("nowe"); 
-	console.log(dataValues);
-	
+const FilmyRanking = ({posts}) => {
+const [dataValues, setDataValues] = useState(posts);
+console.log(dataValues);
 	return (
 		<>
 			<Navbar></Navbar>
 			<Search></Search>
-			{dataValues.map((post)=>(
-				<SingleContent key={post.id} odcinki={post.odcinki} />
-			))}Na dniach ogarne kontrolery reszty ale jeszcze nie odkryłem jak wysłać produkcje razem z tym
+			{dataValues.map((post) => (
+				<SingleContent key={post.id} nazwa={post.nazwa}  />
+      ))}	Rank F
 			<Footer></Footer>
 		</>
 	);
 };
 
-export default Seriale;
+export default FilmyRanking;

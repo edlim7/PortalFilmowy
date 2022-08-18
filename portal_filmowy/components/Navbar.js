@@ -26,8 +26,10 @@ const Navbar = () => {
 			<br />
 			<center>
 				<ul>
-					<Link href="/filmy">Filmy</Link>
-					<Link href="/seriale">Seriale</Link>
+					<Link href="/filmy">Filmy </Link>
+					<Link href="/seriale">Seriale </Link>
+					<Link href="/filmyRanking">Ranking Filmów </Link>
+					<Link href="/serialeRanking">Ranking Serialii</Link>
 				</ul>
 			</center>
 		</Container>

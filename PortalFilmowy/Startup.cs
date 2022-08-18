@@ -36,6 +36,8 @@ namespace PortalFilmowy
             services.AddTransient<UzytkownikUsluga>();
             services.AddTransient<SerialUsluga>();
             services.AddTransient<KategoriaUsluga>();
+            services.AddTransient<KomentarzUsluga>();
+            services.AddTransient<OcenaUsluga>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
