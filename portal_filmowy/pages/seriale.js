@@ -27,7 +27,7 @@ const Seriale = ({posts}) => {
 			<Search></Search>
 			{dataValues.map((post)=>(
 				<SingleContent key={post.id} odcinki={post.odcinki} />
-			))}Na dniach ogarne kontrolery reszty ale jeszcze nie odkryłem jak wysłać produkcje razem z tym
+			))}Ogólnie dodawanie seriali działa es
 			<Footer></Footer>
 		</>
 	);

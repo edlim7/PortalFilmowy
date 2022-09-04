@@ -59,7 +59,7 @@ namespace PortalFilmowy.Migrations
                     FilmId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Oskary = table.Column<int>(type: "int", nullable: false),
-                    ProdukcjaId = table.Column<int>(type: "int", nullable: true)
+                    ProdukcjaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,8 @@ namespace PortalFilmowy.Migrations
                         name: "FK_Film_Produkcja_ProdukcjaId",
                         column: x => x.ProdukcjaId,
                         principalTable: "Produkcja",
-                        principalColumn: "ProdukcjaId");
+                        principalColumn: "ProdukcjaId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,7 +81,7 @@ namespace PortalFilmowy.Migrations
                     Emmy = table.Column<int>(type: "int", nullable: false),
                     Sezony = table.Column<int>(type: "int", nullable: false),
                     Odcinki = table.Column<int>(type: "int", nullable: false),
-                    ProdukcjaId = table.Column<int>(type: "int", nullable: true)
+                    ProdukcjaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,7 +90,8 @@ namespace PortalFilmowy.Migrations
                         name: "FK_Serial_Produkcja_ProdukcjaId",
                         column: x => x.ProdukcjaId,
                         principalTable: "Produkcja",
-                        principalColumn: "ProdukcjaId");
+                        principalColumn: "ProdukcjaId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

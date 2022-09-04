@@ -23,6 +23,7 @@ namespace PortalFilmowy.Data
                 .HasOne(b => b.produkcja)
                 .WithMany(ba => ba.WybranaProdukcja)
                 .HasForeignKey(bi => bi.ProdukcjaId);
+
             modelBuilder.Entity<Ocena>()
                 .HasOne(b => b.uzytkownik)
                 .WithMany(ba => ba.Ocena)
@@ -31,6 +32,7 @@ namespace PortalFilmowy.Data
                 .HasOne(b => b.produkcja)
                 .WithMany(ba => ba.Ocena)
                 .HasForeignKey(bi => bi.ProdukcjaId);
+                
             modelBuilder.Entity<Komentarz>()
                 .HasOne(b => b.uzytkownik)
                 .WithMany(ba => ba.Komentarz)
@@ -38,7 +40,7 @@ namespace PortalFilmowy.Data
             modelBuilder.Entity<Komentarz>()
                 .HasOne(b => b.produkcja)
                 .WithMany(ba => ba.Komentarz)
-                .HasForeignKey(bi => bi.ProdukcjaId); 
+                .HasForeignKey(bi => bi.ProdukcjaId);                
             modelBuilder.Entity<WybranaKategoria>()
                 .HasOne(b => b.kategoria)
                 .WithMany(ba => ba.WybranaKategoria)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -10,7 +11,7 @@ namespace PortalFilmowy.Models
         public int Odcinki { get; set; }
         public int ProdukcjaId { get; set; }
     }
-    public class SerialProdukcjaVM
+    public class SerialZProdukcjaKategoriaVM
     {
         public int Emmy { get; set; }
         public int Sezony { get; set; }
@@ -18,5 +19,18 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
+        public List<string> Kategorie { get; set; }
+    }
+public class SerialProdukcjaVM
+    {
+        public int Emmy { get; set; }
+        public int Sezony { get; set; }
+        public int Odcinki { get; set; }
+        public string Nazwa { get; set; }
+        public string Zdjecie { get; set; }
+        public string Opis { get; set; }
+        public int ProdukcjaId { get; set; }
     }
 }
+
+

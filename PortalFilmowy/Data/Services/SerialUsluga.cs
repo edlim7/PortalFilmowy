@@ -26,10 +26,27 @@ namespace PortalFilmowy.Data.Services
                 Sezony = serial.Sezony,
                 Odcinki=serial.Odcinki,
                 ProdukcjaId=serial.ProdukcjaId
+                
             };
             _context.Serial.Add(_serial);
             _context.SaveChanges();
         }
+        public void AddSerial2(SerialProdukcjaVM serial)
+        {
+            var _serial= new SerialProdukcjaVM()
+            {
+                Emmy=serial.Emmy,
+                Sezony = serial.Sezony,
+                Odcinki=serial.Odcinki,
+                Nazwa=serial.Nazwa,
+                Zdjecie=serial.Zdjecie,
+                Opis=serial.Opis
+                
+            };
+          //  _context.Serial.Add(_serial);
+            _context.SaveChanges();
+        }
+
         public List<SerialProdukcjaVM> getAllSerial()
         {
             var _serialProdukcja=_context.Serial.Select(serial=>new SerialProdukcjaVM()
@@ -39,7 +56,8 @@ namespace PortalFilmowy.Data.Services
                 Odcinki=serial.Odcinki,
                 Nazwa = serial.produkcja.Nazwa,
                 Zdjecie =serial.produkcja.Zdjecie,
-                Opis = serial.produkcja.Opis
+                Opis = serial.produkcja.Opis,
+                ProdukcjaId = serial.produkcja.ProdukcjaId
             });
             return _serialProdukcja.ToList();
         }  
@@ -52,10 +70,27 @@ namespace PortalFilmowy.Data.Services
                 Odcinki=serial.Odcinki,
                 Nazwa = serial.produkcja.Nazwa,
                 Zdjecie =serial.produkcja.Zdjecie,
-                Opis = serial.produkcja.Opis
+                Opis = serial.produkcja.Opis,
+                ProdukcjaId = serial.produkcja.ProdukcjaId
+
             }).FirstOrDefault();
             return _serialProdukcja;
         }
+        public List<SerialZProdukcjaKategoriaVM> getSerialKategoria()
+        {
+            var _serialKategoria=_context.Serial.Select(serial=>new SerialZProdukcjaKategoriaVM()
+            {
+                Emmy=serial.Emmy,
+                Sezony = serial.Sezony,
+                Odcinki=serial.Odcinki,
+                Nazwa = serial.produkcja.Nazwa,
+                Zdjecie =serial.produkcja.Zdjecie,
+                Opis = serial.produkcja.Opis,
+                //Kategorie = {"dom"}//serial.produkcja.WybranaKategoria.Select(n => n.kategoria.NazwaKategorii).ToList()       
+            });
+            return _serialKategoria.ToList();
+        }
+
         public Serial updateSerialById(int serialId, SerialVM serial)
         {
             var _serial = _context.Serial.FirstOrDefault(n=>n.SerialId==serialId);

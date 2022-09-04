@@ -38,7 +38,7 @@ namespace PortalFilmowy.Models
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
         public List<string> Komentarze{ get; set; }
-       public List<string> UzytkownikNazwa{ get; set; }
+        public List<string> UzytkownikNazwa{ get; set; }
         
     }
     

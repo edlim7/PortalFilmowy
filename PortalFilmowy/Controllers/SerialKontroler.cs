@@ -31,6 +31,14 @@ namespace PortalFilmowy.Controllers
             var serial = _serialUsluga.getSerialById(id);
             return Ok(serial);
         }
+        [HttpGet("getSerialKategoria")]
+        public IActionResult getSerialKategoria()
+        {
+            var serial = _serialUsluga.getSerialKategoria();
+            return Ok(serial);
+        }
+
+
         [HttpPut("updateSerialById/{id}")]
         public IActionResult updateSerialById(int id, [FromBody]SerialVM serial)
         {

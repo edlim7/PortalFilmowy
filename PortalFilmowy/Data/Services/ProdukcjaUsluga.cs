@@ -19,7 +19,7 @@ namespace PortalFilmowy.Data.Services
         {
             _context = context;
         }
-        public void AddProdukcjaUzytkownik(ProdukcjaVM produkcja)
+        public void AddProdukcjaUzytkownik(ProdukcjaVM produkcja)   //Delete mby
         {
             var _produkcja= new Produkcja()
             {
@@ -40,7 +40,7 @@ namespace PortalFilmowy.Data.Services
                 _context.SaveChanges();
             }
         }
-        public void AddProdukcjaOcena(ProdukcjaVM produkcja)
+        public void AddProdukcjaOcena(ProdukcjaVM produkcja) // Delete mby
         {
             var _produkcja= new Produkcja()
             {
@@ -62,7 +62,7 @@ namespace PortalFilmowy.Data.Services
                 _context.SaveChanges();
             }
         }
-        public void AddProdukcjaKomentarz(ProdukcjaVM produkcja)
+        public void AddProdukcjaKomentarz(ProdukcjaVM produkcja)    // Delete mby
         {
             var _produkcja= new Produkcja()
             {
@@ -85,6 +85,27 @@ namespace PortalFilmowy.Data.Services
             }
         }
         public void AddProdukcjaKategoria(ProdukcjaVM produkcja)
+        {
+            var _produkcja= new Produkcja()
+            {
+                Nazwa = produkcja.Nazwa,
+                Zdjecie=produkcja.Zdjecie,
+                Opis = produkcja.Opis
+            };
+            _context.Produkcja.Add(_produkcja);
+            _context.SaveChanges();
+            foreach(var id in produkcja.KategoriaId)
+            {
+                var _produkcja_kategoria = new WybranaKategoria()
+                {
+                    ProdukcjaId=_produkcja.ProdukcjaId,
+                    KategoriaID=id
+                };
+                _context.WybranaKategoria.Add(_produkcja_kategoria);
+                _context.SaveChanges();
+            }
+        }
+        public void AddProdukcja(ProdukcjaVM produkcja)
         {
             var _produkcja= new Produkcja()
             {
