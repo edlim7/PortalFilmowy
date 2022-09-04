@@ -10,6 +10,6 @@ namespace PortalFilmowy.Models
         public string NazwaKategorii { get; set; }
 
         //Navigarion properties
-        public List<WybranaKategoria> WybranaKategoria;
+        public List<Produkcja> Produkcje { get; set; }
     }
 }

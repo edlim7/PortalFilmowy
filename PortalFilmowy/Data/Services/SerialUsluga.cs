@@ -31,21 +31,6 @@ namespace PortalFilmowy.Data.Services
             _context.Serial.Add(_serial);
             _context.SaveChanges();
         }
-        public void AddSerial2(SerialProdukcjaVM serial)
-        {
-            var _serial= new SerialProdukcjaVM()
-            {
-                Emmy=serial.Emmy,
-                Sezony = serial.Sezony,
-                Odcinki=serial.Odcinki,
-                Nazwa=serial.Nazwa,
-                Zdjecie=serial.Zdjecie,
-                Opis=serial.Opis
-                
-            };
-          //  _context.Serial.Add(_serial);
-            _context.SaveChanges();
-        }
 
         public List<SerialProdukcjaVM> getAllSerial()
         {
@@ -57,6 +42,7 @@ namespace PortalFilmowy.Data.Services
                 Nazwa = serial.produkcja.Nazwa,
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
+                Edukacyjny = serial.produkcja.Edukacyjny,
                 ProdukcjaId = serial.produkcja.ProdukcjaId
             });
             return _serialProdukcja.ToList();
@@ -71,6 +57,7 @@ namespace PortalFilmowy.Data.Services
                 Nazwa = serial.produkcja.Nazwa,
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
+                Edukacyjny = serial.produkcja.Edukacyjny,
                 ProdukcjaId = serial.produkcja.ProdukcjaId
 
             }).FirstOrDefault();
@@ -86,7 +73,9 @@ namespace PortalFilmowy.Data.Services
                 Nazwa = serial.produkcja.Nazwa,
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
-                //Kategorie = {"dom"}//serial.produkcja.WybranaKategoria.Select(n => n.kategoria.NazwaKategorii).ToList()       
+                Edukacyjny = serial.produkcja.Edukacyjny,
+                ProdukcjaId = serial.produkcja.ProdukcjaId,
+                Kategoria = serial.produkcja.Kategoria.NazwaKategorii
             });
             return _serialKategoria.ToList();
         }

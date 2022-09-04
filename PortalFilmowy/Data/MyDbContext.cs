@@ -41,21 +41,13 @@ namespace PortalFilmowy.Data
                 .HasOne(b => b.produkcja)
                 .WithMany(ba => ba.Komentarz)
                 .HasForeignKey(bi => bi.ProdukcjaId);                
-            modelBuilder.Entity<WybranaKategoria>()
-                .HasOne(b => b.kategoria)
-                .WithMany(ba => ba.WybranaKategoria)
-                .HasForeignKey(bi => bi.KategoriaID);
-            modelBuilder.Entity<WybranaKategoria>()
-                .HasOne(b => b.produkcja)
-                .WithMany(ba => ba.WybranaKategoria)
-                .HasForeignKey(bi => bi.ProdukcjaId);     
+    
         }
         public DbSet<Produkcja> Produkcja{get; set;}
         public DbSet<Film> Film{get; set;}
         public DbSet<Serial> Serial{get; set;}
         public DbSet<Kategoria> Kategoria{get; set;}
         public DbSet<WybranaProdukcja> WybranaProdukcja{get; set;}
-        public DbSet<WybranaKategoria> WybranaKategoria{get; set;}
         public DbSet<Ocena> Ocena{get; set;}
         public DbSet<Komentarz> Komentarz{get; set;}
         public DbSet<Uzytkownik> Uzytkownik{get; set;}

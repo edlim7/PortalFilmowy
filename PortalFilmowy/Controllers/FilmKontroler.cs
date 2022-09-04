@@ -25,6 +25,12 @@ namespace PortalFilmowy.Controllers
             var allFilm = _filmUsluga.getAllFilm();
             return Ok(allFilm);
         }
+         [HttpGet("getFilmProdukcja")]
+        public IActionResult GetFilmProdukcja()
+        {
+            var allFilm = _filmUsluga.getFilmProdukcja();
+            return Ok(allFilm);
+        }
         [HttpGet("getFilmById/{id}")]
         public IActionResult getFilmById(int id)
         {

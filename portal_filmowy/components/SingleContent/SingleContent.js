@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from "styled-components";
 const SingleContent = ({id,
-  nazwa,odcinki,nazwakategorii,liczba,produkcjaid,ocena}) => {
+  nazwa,odcinki,kategoria,liczba,produkcjaid,ocena}) => {
   return (
     <Wrapper className='media'>
     <b className='title'>{nazwa}</b>
     <b className='emmy'>{odcinki}</b>
-    <b className='nazwakategorii'>{nazwakategorii}</b>
+    <b className='kategoria'>{kategoria}</b>
     <b className='liczba'>{liczba}</b>
     <b className='produkcjaid'>{produkcjaid}</b>
     <b className='ocena'>{ocena}</b>

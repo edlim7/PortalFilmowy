@@ -9,7 +9,8 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
-        public List<int> KategoriaId{ get; set; }
+        public bool Edukacyjny { get; set; }
+        public int KategoriaId{ get; set; }
         public List<int> OcenaId{ get; set; }
         public List<int> UzytkownikId{ get; set; }
         public List<int> KomentarzId{ get; set; }
@@ -19,6 +20,7 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
+        public bool Edukacyjny { get; set; }
         public List<int> OcenaLiczba{ get; set; }
         public List<string> UzytkownikNazwa{ get; set; }
         
@@ -28,7 +30,9 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
-        public List<string> KategoriaNazwa{ get; set; }
+        public bool Edukacyjny { get; set; }
+        public int KategoriaId { get; set; }
+        public string NazwaKategorii{ get; set; }
         
         
     }
@@ -37,6 +41,7 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
+        public bool Edukacyjny { get; set; }
         public List<string> Komentarze{ get; set; }
         public List<string> UzytkownikNazwa{ get; set; }
         

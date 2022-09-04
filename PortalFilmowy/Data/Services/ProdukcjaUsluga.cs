@@ -25,7 +25,9 @@ namespace PortalFilmowy.Data.Services
             {
                 Nazwa = produkcja.Nazwa,
                 Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis
+                Opis = produkcja.Opis,
+                Edukacyjny = produkcja.Edukacyjny,
+
             };
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
@@ -68,7 +70,8 @@ namespace PortalFilmowy.Data.Services
             {
                 Nazwa = produkcja.Nazwa,
                 Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis
+                Opis = produkcja.Opis,
+                Edukacyjny = produkcja.Edukacyjny
             };
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
@@ -84,52 +87,35 @@ namespace PortalFilmowy.Data.Services
                 _context.SaveChanges();
             }
         }
-        public void AddProdukcjaKategoria(ProdukcjaVM produkcja)
-        {
-            var _produkcja= new Produkcja()
-            {
-                Nazwa = produkcja.Nazwa,
-                Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis
-            };
-            _context.Produkcja.Add(_produkcja);
-            _context.SaveChanges();
-            foreach(var id in produkcja.KategoriaId)
-            {
-                var _produkcja_kategoria = new WybranaKategoria()
-                {
-                    ProdukcjaId=_produkcja.ProdukcjaId,
-                    KategoriaID=id
-                };
-                _context.WybranaKategoria.Add(_produkcja_kategoria);
-                _context.SaveChanges();
-            }
-        }
         public void AddProdukcja(ProdukcjaVM produkcja)
         {
             var _produkcja= new Produkcja()
             {
                 Nazwa = produkcja.Nazwa,
                 Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis
+                Opis = produkcja.Opis,
+                KategoriaId = produkcja.KategoriaId
             };
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
-            foreach(var id in produkcja.KategoriaId)
-            {
-                var _produkcja_kategoria = new WybranaKategoria()
-                {
-                    ProdukcjaId=_produkcja.ProdukcjaId,
-                    KategoriaID=id,
-                };
-                _context.WybranaKategoria.Add(_produkcja_kategoria);
-                _context.SaveChanges();
-            }
         }
 
 
 
         public List<Produkcja> getAllProdukcja() => _context.Produkcja.ToList();
+        public List<ProdukcjaKategoriaVM> getProdukcjaKategoria() 
+        {
+            var _produkcjaKategoria=_context.Produkcja.Select(produkcja=>new ProdukcjaKategoriaVM()
+            {
+                Nazwa=produkcja.Nazwa,
+                Zdjecie = produkcja.Zdjecie,
+                Opis=produkcja.Opis,
+                Edukacyjny = produkcja.Edukacyjny,
+                KategoriaId = produkcja.Kategoria.KategoriaId,
+                NazwaKategorii = produkcja.Kategoria.NazwaKategorii
+            });
+            return _produkcjaKategoria.ToList();
+        }
         public Produkcja getProdukcjaById(int produkcjaId)
         {
             return _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==produkcjaId);
@@ -157,17 +143,6 @@ namespace PortalFilmowy.Data.Services
                 UzytkownikNazwa = produkcja.Komentarz.Select(n=>n.uzytkownik.Login).ToList()
             }).FirstOrDefault();
             return _produkcjaKomentarz; 
-        }
-        public ProdukcjaKategoriaVM getProdukcjaKategoriaById(int produkcjaId)
-        {
-            var _produkcjaKategoria=_context.Produkcja.Select(produkcja => new ProdukcjaKategoriaVM()
-            {
-                Nazwa = produkcja.Nazwa,
-                Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis,
-                KategoriaNazwa  = produkcja.WybranaKategoria.Select(n=>n.kategoria.NazwaKategorii).ToList()
-            }).FirstOrDefault();
-            return _produkcjaKategoria; 
         }
 
         public Produkcja updateProdukcjaById(int produkcjaId, ProdukcjaVM produkcja)

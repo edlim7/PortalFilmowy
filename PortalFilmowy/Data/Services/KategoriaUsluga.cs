@@ -23,7 +23,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _kategoria= new Kategoria()
             {
-                NazwaKategorii = kategoria.NazwaKategorii,
+                NazwaKategorii = kategoria.NazwaKategorii
             };
             _context.Kategoria.Add(_kategoria);
             _context.SaveChanges();

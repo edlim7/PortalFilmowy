@@ -35,10 +35,9 @@ namespace PortalFilmowy
             services.AddTransient<FilmUsluga>();
             services.AddTransient<UzytkownikUsluga>();
             services.AddTransient<SerialUsluga>();
-            services.AddTransient<KategoriaUsluga>();
             services.AddTransient<KomentarzUsluga>();
             services.AddTransient<OcenaUsluga>();
-
+            services.AddTransient<KategoriaUsluga>();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -70,7 +69,7 @@ namespace PortalFilmowy
             {
                 endpoints.MapControllers();
             });
-            AppDbInitializer.Seed(app);
+           // AppDbInitializer.Seed(app);
            /*  app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";

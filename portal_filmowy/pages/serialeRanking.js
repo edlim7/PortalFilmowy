@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, isValidElement} from "react";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
 import SingleContent from "../components/SingleContent/SingleContent";
 export async function getStaticProps() {
 	// Call an external API endpoint to get posts
-	const res = await fetch("http://localhost:5000/api/SerialKontroler/getAllSerial"); //getSerialKategoria | http://localhost:5000/api/OcenaKontroler/getAllOcena
-	const res2 = await fetch("http://localhost:5000/api/OcenaKontroler/getAllOcena");
-	const posts = await res.json();
+	const res = await fetch("http://localhost:5000/api/SerialKontroler/getSerialKategoria"); //getSerialKategoria | getAllSerial | http://localhost:5000/api/OcenaKontroler/getAllOcena
+	const res2 = await fetch("http://localhost:5000/api/OcenaKontroler/getAllOcena"); //ProdukcjaKontroler/getAllProdukcja
+	const posts = await res.json();		//SerialKontroler/getSerialKategoria
 	const posts2 = await res2.json();
 	// By returning { props: { posts } }, the Blog component
 	// will receive `posts` as a prop at build time
@@ -63,7 +63,7 @@ const SerialeRanking = ({posts,posts2}) => {
 			<br/>
 			POLICE:
 			{testDesc.map((post3)=>
-			<SingleContent key={post3.id} nazwa={post3.nazwa} ocena={post3.ocena} />
+			<SingleContent key={post3.id} nazwa={post3.nazwa} ocena={post3.ocena} kategoria={post3.kategoria}/>
 			)} 
 			<Footer></Footer>
 		</>

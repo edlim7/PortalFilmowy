@@ -25,22 +25,28 @@ namespace PortalFilmowy.Controllers
             _produkcjaUsluga.AddProdukcjaOcena(produkcja);
             return Ok();
         }
+        [HttpPost("addProdukcja")]
+        public IActionResult AddProdukcja([FromBody]ProdukcjaVM produkcja)
+        {
+            _produkcjaUsluga.AddProdukcja(produkcja);
+            return Ok();
+        }
         [HttpPost("addProdukcjaKomentarz")]
         public IActionResult AddProdukcjaKomentarz([FromBody]ProdukcjaVM produkcja)
         {
             _produkcjaUsluga.AddProdukcjaKomentarz(produkcja);
             return Ok();
         }
-        [HttpPost("addProdukcjaKategoria")]
-        public IActionResult AddProdukcjaKategoria([FromBody]ProdukcjaVM produkcja)
-        {
-            _produkcjaUsluga.AddProdukcjaKategoria(produkcja);
-            return Ok();
-        }
         [HttpGet("getAllProdukcja")]
         public IActionResult GetAllProdukcja()
         {
             var allProdukcja = _produkcjaUsluga.getAllProdukcja();
+            return Ok(allProdukcja);
+        }
+        [HttpGet("getProdukcjaKategoria")]
+        public IActionResult GetProdukcjaKategoria()
+        {
+            var allProdukcja = _produkcjaUsluga.getProdukcjaKategoria();
             return Ok(allProdukcja);
         }
         [HttpGet("getProdukcjaById/{id}")]
