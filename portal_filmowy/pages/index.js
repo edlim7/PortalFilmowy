@@ -38,10 +38,12 @@ const Home= ({posts,posts2,posts3}) => {
 	const ocenioneProdukcje=[];
 	const policzoneKategorie=[];
 	var polecane=dataValues;
+	var edukacyjnePolecane=dataValues;
 	var sum=0;
 	var counter=0;
 	var test=[];
-	dataValues2.forEach((el)=>{
+	var eduOcena=[];
+	dataValues2.forEach((el)=>{			// wyszukanie ocenionych produkcji przez danego uzytkownika
 		if(el.uzytkownikID==userid)
 		{
 			dataValues.forEach((el2)=>{
@@ -52,7 +54,7 @@ const Home= ({posts,posts2,posts3}) => {
 			})
 		}
 	})
-	dataValues3.forEach((el3)=>{
+	dataValues3.forEach((el3)=>{			// Podliczenie ile razy uzytkownik ocenil film dla kazdej kategorii
 		ocenioneProdukcje.forEach((el4) => {
 			if(el3.kategoriaId==el4.kategoriaId)
 			{
@@ -66,17 +68,17 @@ const Home= ({posts,posts2,posts3}) => {
 		el3.Ilosc=licznikKategorii;
 		licznikKategorii=0;
 	})
-	const sortPoliczoneKategorie = [...policzoneKategorie].sort((a,b)=>b.Ilosc-a.Ilosc);
+	const sortPoliczoneKategorie = [...policzoneKategorie].sort((a,b)=>b.Ilosc-a.Ilosc);	// sortowanie podliczonych kategorii
 	console.log("ocenioneProdukcje:")
 	console.log(ocenioneProdukcje);
-	ocenioneProdukcje.forEach((el3)=>{
+	ocenioneProdukcje.forEach((el3)=>{		// polecane filmy dla uzytkownika
 		polecane = polecane.filter(obj => {
 			return obj.produkcjaId !== el3.produkcjaId && obj.kategoriaId==sortPoliczoneKategorie[0].kategoriaId;
 		})
 	})
 	console.log("polecane:")
 	console.log(polecane);
-	polecane.forEach((el)=>{
+	polecane.forEach((el)=>{		// liczenie oceny
 		dataValues2.forEach((el2)=>{
 			if(el2.produkcjaId==el.produkcjaId)
 				{
@@ -92,9 +94,38 @@ const Home= ({posts,posts2,posts3}) => {
 		sum=0;
 		counter=0;
 	})
-	const polecaneDesc = [...test].sort((a,b)=>b.ocena-a.ocena);
+	const polecaneDesc = [...test].sort((a,b)=>b.ocena-a.ocena);	//wyswietlanie polecanych od najwyzej ocenianego
 	console.log("posortowane polecanie");
 	console.log(polecaneDesc);
+
+	ocenioneProdukcje.forEach((el3)=>{		// polecane filmy dla uzytkownika
+		edukacyjnePolecane = edukacyjnePolecane.filter(obj => {
+			return obj.produkcjaId !== el3.produkcjaId && obj.edukacyjny==true;			// zmienic true na 1 po update bazy
+		})
+	})
+	console.log("Edukacujne:")
+	console.log(edukacyjnePolecane);
+	edukacyjnePolecane = edukacyjnePolecane.sort(() => Math.random()-0.5)
+	console.log("Wymieszane edu");
+	console.log(edukacyjnePolecane);
+	edukacyjnePolecane.forEach((el)=>{		// liczenie oceny
+		dataValues2.forEach((el2)=>{
+			if(el2.produkcjaId==el.produkcjaId)
+				{
+				sum+=el2.liczba;
+				counter++;
+				}
+		})
+		eduOcena.push(el);
+		if(sum==0)
+		el.ocena=0;
+		else
+		el.ocena=sum/counter;
+		sum=0;
+		counter=0;
+	})
+
+
 	return (
 		<>
 			<Navbar></Navbar>
@@ -102,6 +133,10 @@ const Home= ({posts,posts2,posts3}) => {
 			Strona główna<br/>
 			Mainstream:
 			{polecaneDesc.map((post3)=>
+			<SingleContent key={post3.id} nazwa={post3.nazwa} ocena={post3.ocena} kategoria={post3.kategoria}/>
+			)} 
+			Edukacyjne:
+			{eduOcena.map((post3)=>
 			<SingleContent key={post3.id} nazwa={post3.nazwa} ocena={post3.ocena} kategoria={post3.kategoria}/>
 			)} 
 			<Footer></Footer>

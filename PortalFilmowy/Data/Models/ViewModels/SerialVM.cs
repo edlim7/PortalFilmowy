@@ -19,7 +19,7 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
-        public bool Edukacyjny { get; set; }
+        public int Edukacyjny { get; set; }
         public int ProdukcjaId { get; set; }
         public string Kategoria { get; set; }
     }
@@ -31,7 +31,7 @@ public class SerialProdukcjaVM
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
-        public bool Edukacyjny { get; set; }
+        public int Edukacyjny { get; set; }
         public int ProdukcjaId { get; set; }
         public string Kategoria { get; set; }
     }
