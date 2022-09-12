@@ -3,6 +3,7 @@ import styled from "styled-components";
 const SingleContent = ({id,
   nazwa,odcinki,kategoria,liczba,produkcjaid,ocena}) => {
   return (
+  
     <Wrapper className='media'>
     <b className='title'>{nazwa}</b>
     <b className='emmy'>{odcinki}</b>

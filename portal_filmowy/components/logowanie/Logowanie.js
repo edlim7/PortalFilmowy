@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
-
 import styled from "styled-components";
 import { ModalContext } from "../../contexts/ModalContext";
 
 const Logowanie = () => {
-	const { showModal, setShowModal } = useContext(ModalContext);
+	const { showModalLogin, setShowModalLogin } = useContext(ModalContext);
 	const [isLogin, setIsLogin] = useState(true);
 
 	function switchAuthModeHandler() {
@@ -12,8 +11,8 @@ const Logowanie = () => {
 	}
 	return (
 		<>
-			{showModal ? (
-				<Background onClick={() => setShowModal((prevState) => !prevState)}>
+			{showModalLogin ? (
+				<Background onClick={() => setShowModalLogin((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<section className="auth">
 							<h1>{isLogin ? "Logowanie" : "Rejestracja"}</h1>

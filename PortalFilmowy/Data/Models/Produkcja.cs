@@ -10,7 +10,7 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
-        public int Edukacyjny { get; set; }
+        public bool Edukacyjny { get; set; } // na int 
 
         //Navigation properties
         public int KategoriaId { get; set; }

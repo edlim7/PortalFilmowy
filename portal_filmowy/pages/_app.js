@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-
 import { ModalContextProvider } from "../contexts/ModalContext";
 function MyApp({ Component, pageProps }) {
 	return (

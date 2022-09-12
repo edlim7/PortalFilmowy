@@ -27,7 +27,7 @@ const Seriale = ({posts}) => {
 			<Search></Search>
 			{dataValues.map((post)=>(
 				<SingleContent key={post.id} odcinki={post.odcinki} />
-			))}Ogólnie dodawanie seriali działa es
+			))}
 			<Footer></Footer>
 		</>
 	);

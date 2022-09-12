@@ -3,20 +3,19 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import Logowanie from "./logowanie/Logowanie";
-import Rejestracja from "./rejestracja/Rejestracja";
+
 const Navbar = () => {
-	const { showModal, setShowModal } = useContext(ModalContext);
+	const { setShowModalLogin } = useContext(ModalContext);
 
 	return (
 		<Container>
 			<Logowanie />
-
 			<div>
 				<center>
 					<h1>Filizone</h1>
 				</center>
 				<button
-					onClick={() => setShowModal((prevState) => !prevState)}
+					onClick={() => setShowModalLogin((prevState) => !prevState)}
 					className="Login"
 				>
 					Zaloguj się
