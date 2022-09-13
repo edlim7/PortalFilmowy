@@ -12,6 +12,7 @@ const MovieModal = () => {
 						<Content>
 							<p> Nazwa filmu to:  {movie.nazwa}</p>
 							<p> Ilość oskarów: {movie.oskary}</p>
+							<p>Koment: {movie.komentarze.map((post)=><p> UserID: {post.uzytkownikID} Tresc: {post.tresc}<button>delete</button></p>)} </p>
 						</Content>
           </Wrapper>
         </Background>
