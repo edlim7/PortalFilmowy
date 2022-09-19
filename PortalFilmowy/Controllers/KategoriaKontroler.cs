@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using PortalFilmowy.Data.Services;
 using PortalFilmowy.Models;
@@ -13,6 +14,7 @@ namespace PortalFilmowy.Controllers
         {
             _kategoriaUsluga = kategoriaUsluga;
         }
+        [EnableCors("AllowOrigin")]
         [HttpPost("addKategoria")]
         public IActionResult AddKategoria([FromBody]KategoriaVM kategoria)
         {

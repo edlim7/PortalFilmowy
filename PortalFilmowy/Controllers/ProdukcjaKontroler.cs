@@ -9,9 +9,11 @@ namespace PortalFilmowy.Controllers
     public class ProdukcjaKontroler : ControllerBase
     {
         public ProdukcjaUsluga _produkcjaUsluga;
-        public ProdukcjaKontroler(ProdukcjaUsluga produkcjaUsluga)
+        public FilmUsluga _filmUsluga;
+        public ProdukcjaKontroler(ProdukcjaUsluga produkcjaUsluga,FilmUsluga filmUsluga)
         {
             _produkcjaUsluga = produkcjaUsluga;
+            _filmUsluga=filmUsluga;
         }
         [HttpPost("addProdukcjaUzytkownik")]
         public IActionResult AddProdukcjaUzytkownik([FromBody]ProdukcjaVM produkcja)
@@ -19,24 +21,14 @@ namespace PortalFilmowy.Controllers
             _produkcjaUsluga.AddProdukcjaUzytkownik(produkcja);
             return Ok();
         }
-        [HttpPost("addProdukcjaOcena")]
-        public IActionResult AddProdukcjaOcena([FromBody]ProdukcjaVM produkcja)
-        {
-            _produkcjaUsluga.AddProdukcjaOcena(produkcja);
-            return Ok();
-        }
+        
         [HttpPost("addProdukcja")]
         public IActionResult AddProdukcja([FromBody]ProdukcjaVM produkcja)
         {
             _produkcjaUsluga.AddProdukcja(produkcja);
             return Ok();
         }
-        [HttpPost("addProdukcjaKomentarz")]
-        public IActionResult AddProdukcjaKomentarz([FromBody]ProdukcjaVM produkcja)
-        {
-            _produkcjaUsluga.AddProdukcjaKomentarz(produkcja);
-            return Ok();
-        }
+        
         [HttpGet("getAllProdukcja")]
         public IActionResult GetAllProdukcja()
         {

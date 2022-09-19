@@ -1,9 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
+import { Formik, Form, Field } from 'formik';
 
 const MovieModal = () => {
   const {showModalMovie, setShowModalMovie, movie} = useContext(ModalContext);
+	async function postKom(url, data) {
+		const res = await fetch(url, {
+			method:'POST',
+			headers:{'Content-type':'application/json'},
+			body: JSON.stringify({tresc:data.tresc, produkcjaId: data.id, uzytkownikID: data.name})
+		});
+		return res.json()
+	}
   return (
     <>
 {showModalMovie ? (
@@ -12,7 +21,23 @@ const MovieModal = () => {
 						<Content>
 							<p> Nazwa filmu to:  {movie.nazwa}</p>
 							<p> Ilość oskarów: {movie.oskary}</p>
-							<p>Koment: {movie.komentarze.map((post)=><p> UserID: {post.uzytkownikID} Tresc: {post.tresc}<button>delete</button></p>)} </p>
+							<p>Koment:</p>  {movie.komentarze.map((post)=> 
+							<ul key={post.id} >
+								<li key={post.id} >
+								{post.nazwaUzytkownika}: {post.tresc}
+								</li>
+							</ul>
+							)} 
+							<Formik initialValues={{id: movie.produkcjaId, name: 1, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+							values)
+							.then((data)=> console.log(data))
+							.catch((error)=>console.log(error)) }>
+		
+								<Form>
+									<Field type='tresc' name='tresc'></Field>
+									<button type='submit'></button>
+								</Form>
+							</Formik>
 						</Content>
           </Wrapper>
         </Background>

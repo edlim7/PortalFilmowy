@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,7 +27,31 @@ namespace PortalFilmowy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(
+            CertificateAuthenticationDefaults.AuthenticationScheme)
+            .AddCertificate();
             services.AddControllers();
+            // Default Policy
+            services.AddCors(options =>
+            {
+            options.AddDefaultPolicy(
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:3000", "https://localhost:5001", "http://localhost:5000","https://localhost:5001/api/KomentarzKontroler/addKomentarz","http://localhost:3000/filmy")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                });
+            });
+            services.AddCors(options =>
+            {
+              options.AddPolicy(name: "AllowOrigin",
+               builder =>
+                {
+                builder.WithOrigins("http://localhost:3000", "https://localhost:5001", "http://localhost:5000","https://localhost:5001/api/KomentarzKontroler/addKomentarz")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                });
+            });
             //Configure DBcontext
             services.AddDbContext<MyDbContext>(options =>options.UseSqlServer(ConnectionString));
             //services.AddControllersWithViews();
@@ -48,6 +73,16 @@ namespace PortalFilmowy
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+             app.UseCors();
+            // with a named pocili
+            app.UseCors("AllowOrigin");
+            app.UseCors(builder =>
+            {
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,7 +93,7 @@ namespace PortalFilmowy
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             //app.UseStaticFiles();
             //app.UseSpaStaticFiles();
@@ -69,6 +104,13 @@ namespace PortalFilmowy
             {
                 endpoints.MapControllers();
             });
+
+           
+
+
+
+
+
            // AppDbInitializer.Seed(app);
            /*  app.UseSpa(spa =>
             {
@@ -80,5 +122,6 @@ namespace PortalFilmowy
                 }
             }); */
         }
+        
     }
 }

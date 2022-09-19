@@ -35,10 +35,13 @@ namespace PortalFilmowy.Data.Services
         {
             var _filmProdukcja=_context.Film.Where(n=>n.FilmId == filmId).Select(film=>new FilmProdukcjaVM()
             {
-                Oskary = film.Oskary,
+                Oskary=film.Oskary,
                 Nazwa = film.produkcja.Nazwa,
                 Zdjecie =film.produkcja.Zdjecie,
-                Opis = film.produkcja.Opis
+                Opis = film.produkcja.Opis,
+                Edukacyjny = film.produkcja.Edukacyjny,
+                ProdukcjaId = film.produkcja.ProdukcjaId,
+                Kategoria = film.produkcja.Kategoria.NazwaKategorii
             }).FirstOrDefault();
             return _filmProdukcja;
         }

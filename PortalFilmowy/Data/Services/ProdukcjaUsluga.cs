@@ -42,51 +42,6 @@ namespace PortalFilmowy.Data.Services
                 _context.SaveChanges();
             }
         }
-        public void AddProdukcjaOcena(ProdukcjaVM produkcja) // Delete mby
-        {
-            var _produkcja= new Produkcja()
-            {
-                Nazwa = produkcja.Nazwa,
-                Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis
-            };
-            _context.Produkcja.Add(_produkcja);
-            _context.SaveChanges();
-            foreach(var id in produkcja.UzytkownikId)
-            {
-                var _produkcja_ocena = new Ocena()
-                {
-                    ProdukcjaId=_produkcja.ProdukcjaId,
-                    UzytkownikID=id,
-                    Liczba = 2                 //jak wlasna licbze to nie wiem
-                };
-                _context.Ocena.Add(_produkcja_ocena);
-                _context.SaveChanges();
-            }
-        }
-        public void AddProdukcjaKomentarz(ProdukcjaVM produkcja)    // Delete mby
-        {
-            var _produkcja= new Produkcja()
-            {
-                Nazwa = produkcja.Nazwa,
-                Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis,
-                Edukacyjny = produkcja.Edukacyjny
-            };
-            _context.Produkcja.Add(_produkcja);
-            _context.SaveChanges();
-            foreach(var id in produkcja.UzytkownikId)
-            {
-                var _produkcja_komentarz = new Komentarz()
-                {
-                    ProdukcjaId=_produkcja.ProdukcjaId,
-                    UzytkownikID=id,
-                    Tresc = "ale koks"                      //jak wlasny kom to nie wiem
-                };
-                _context.Komentarz.Add(_produkcja_komentarz);
-                _context.SaveChanges();
-            }
-        }
         public void AddProdukcja(ProdukcjaVM produkcja)
         {
             var _produkcja= new Produkcja()
@@ -94,12 +49,12 @@ namespace PortalFilmowy.Data.Services
                 Nazwa = produkcja.Nazwa,
                 Zdjecie=produkcja.Zdjecie,
                 Opis = produkcja.Opis,
-                KategoriaId = produkcja.KategoriaId
+                KategoriaId = produkcja.KategoriaId,
+                Edukacyjny = produkcja.Edukacyjny
             };
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
         }
-
 
 
         public List<Produkcja> getAllProdukcja() => _context.Produkcja.ToList();

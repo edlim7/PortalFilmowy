@@ -20,26 +20,26 @@ namespace PortalFilmowy.Controllers
             _uzytkownikUsluga.AddUzytkownik(uzytkownik);
             return Ok();
         }
-        [HttpGet("getAllProdukcja")]
-        public IActionResult GetAllProdukcja()
+        [HttpGet("getAllUzytkownik")]
+        public IActionResult GetAllUzytkownik()
         {
-            var allProdukcja = _uzytkownikUsluga.getAllUzytkownik();
-            return Ok(allProdukcja);
+            var allUzytkownik = _uzytkownikUsluga.getAllUzytkownik();
+            return Ok(allUzytkownik);
         }
-        [HttpGet("getProdukcjaById/{id}")]
-        public IActionResult getProdukcjaById(int id)
+        [HttpGet("getUzytkownikById/{id}")]
+        public IActionResult getUzytkownikById(int id)
         {
             var uzytkownik = _uzytkownikUsluga.getUzytkownikById(id);
             return Ok(uzytkownik);
         }
-        [HttpPut("updateProdukcjaById/{id}")]
-        public IActionResult updateProdukcjaById(int id, [FromBody]UzytkownikVM uzytkownik)
+        [HttpPut("updateUzytkownikById/{id}")]
+        public IActionResult updateUzytkownikById(int id, [FromBody]UzytkownikVM uzytkownik)
         {
-            var updatedProdukcja = _uzytkownikUsluga.updateUzytkownikById(id,uzytkownik);
-            return Ok(updatedProdukcja);
+            var updatedUzytkownik = _uzytkownikUsluga.updateUzytkownikById(id,uzytkownik);
+            return Ok(updatedUzytkownik);
         }
-         [HttpDelete("deleteProdukcjaById/{id}")]
-        public IActionResult deleteProdukcjaById(int id)
+         [HttpDelete("deleteUzytkownikById/{id}")]
+        public IActionResult deleteUzytkownikById(int id)
         {
             _uzytkownikUsluga.deleteUzytkownikById(id);
             return Ok();
