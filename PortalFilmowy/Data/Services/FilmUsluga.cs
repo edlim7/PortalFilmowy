@@ -30,6 +30,26 @@ namespace PortalFilmowy.Data.Services
             _context.Film.Add(_film);
             _context.SaveChanges();
         }
+        public void AddFilm2(FilmProdukcjaVM film)
+        {
+            var _produkcja=new Produkcja()
+            {
+                Nazwa = film.Nazwa,
+                Zdjecie= film.Zdjecie,
+                Opis = film.Opis,
+                KategoriaId = 6,
+                Edukacyjny = film.Edukacyjny
+            };
+            _context.Produkcja.Add(_produkcja);
+            _context.SaveChanges();
+            var _film= new Film()
+            {
+                Oskary = film.Oskary,
+                ProdukcjaId=_context.Produkcja.Select(n=>n.ProdukcjaId).Max()
+            };
+            _context.Film.Add(_film);
+            _context.SaveChanges();
+        }
         public List<Film> getAllFilm() => _context.Film.ToList();
         public FilmProdukcjaVM getFilmById(int filmId)
         {

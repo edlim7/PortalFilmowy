@@ -19,6 +19,12 @@ namespace PortalFilmowy.Controllers
             _filmUsluga.AddFilm(film);
             return Ok();
         }
+        [HttpPost("addFilm2")] // dodanie do filmu i do produkcji
+        public IActionResult AddFilm2([FromBody]FilmProdukcjaVM film)
+        {
+            _filmUsluga.AddFilm2(film);
+            return Ok();
+        }
         [HttpGet("getAllFilm")]
         public IActionResult GetAllFilm()
         {
