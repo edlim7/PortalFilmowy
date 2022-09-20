@@ -31,6 +31,29 @@ namespace PortalFilmowy.Data.Services
             _context.Serial.Add(_serial);
             _context.SaveChanges();
         }
+        public void AddSerial2(SerialProdukcjaVM2 serial)
+        {
+            var _produkcja=new Produkcja()
+            {
+                Nazwa = serial.Nazwa,
+                Zdjecie= serial.Zdjecie,
+                Opis = serial.Opis,
+                KategoriaId = serial.KategoriaId,
+                Edukacyjny = serial.Edukacyjny
+            };
+            _context.Produkcja.Add(_produkcja);
+            _context.SaveChanges();
+             var _serial= new Serial()
+            {
+                Emmy=serial.Emmy,
+                Sezony = serial.Sezony,
+                Odcinki=serial.Odcinki,
+                ProdukcjaId=_context.Produkcja.Select(n=>n.ProdukcjaId).Max()      
+            };
+            _context.Serial.Add(_serial);
+            _context.SaveChanges();
+
+        }
 
         public List<SerialProdukcjaVM> getAllSerial()
         {

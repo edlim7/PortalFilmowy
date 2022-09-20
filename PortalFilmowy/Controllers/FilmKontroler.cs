@@ -20,7 +20,7 @@ namespace PortalFilmowy.Controllers
             return Ok();
         }
         [HttpPost("addFilm2")] // dodanie do filmu i do produkcji
-        public IActionResult AddFilm2([FromBody]FilmProdukcjaVM film)
+        public IActionResult AddFilm2([FromBody]FilmProdukcjaVM2 film)
         {
             _filmUsluga.AddFilm2(film);
             return Ok();

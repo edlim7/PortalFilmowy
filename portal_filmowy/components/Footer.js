@@ -5,7 +5,7 @@ import { AppContext } from "../contexts/AppContext";
 const Footer = () => {
 	return (
 		<Container>
-			<div className="foot">Za to &#60;br&#62; to zabije</div>
+			<div className="foot">Dane kontaktowe</div>
 		</Container>
 	);
 };

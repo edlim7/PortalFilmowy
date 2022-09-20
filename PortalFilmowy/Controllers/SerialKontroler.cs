@@ -19,6 +19,12 @@ namespace PortalFilmowy.Controllers
             _serialUsluga.AddSerial(serial);
             return Ok();
         }
+        [HttpPost("addSerial2")]
+        public IActionResult AddSerial2([FromBody]SerialProdukcjaVM2 serial)
+        {
+            _serialUsluga.AddSerial2(serial);
+            return Ok();
+        }
         [HttpGet("getAllSerial")]
         public IActionResult GetAllSerial()
         {

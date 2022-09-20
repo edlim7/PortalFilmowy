@@ -30,14 +30,14 @@ namespace PortalFilmowy.Data.Services
             _context.Film.Add(_film);
             _context.SaveChanges();
         }
-        public void AddFilm2(FilmProdukcjaVM film)
+        public void AddFilm2(FilmProdukcjaVM2 film)
         {
             var _produkcja=new Produkcja()
             {
                 Nazwa = film.Nazwa,
                 Zdjecie= film.Zdjecie,
                 Opis = film.Opis,
-                KategoriaId = 6,
+                KategoriaId = film.KategoriaId,
                 Edukacyjny = film.Edukacyjny
             };
             _context.Produkcja.Add(_produkcja);
@@ -89,6 +89,28 @@ namespace PortalFilmowy.Data.Services
             }
             return _film;
         }
+        /*public Film updateFilmById2(int filmId, FilmProdukcjaVM2 film)
+        {
+            
+            var _film = _context.Film.FirstOrDefault(n=>n.FilmId==filmId);
+            var _produkcja =_context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==_film.ProdukcjaId);
+            if(_film!=null)
+            {
+                _film.Oskary = film.Oskary;
+                _context.SaveChanges();
+            }
+            if(_produkcja!=null)
+            {
+                _produkcja.Nazwa= film.Nazwa;
+                _produkcja.Zdjecie= film.Zdjecie;
+                _produkcja.Opis = film.Opis;
+                _produkcja.Edukacyjny = film.Edukacyjny;
+                _produkcja.KategoriaId = film.KategoriaId;
+                _context.SaveChanges();
+            }
+            return _film;
+        }
+        */
         public void deleteFilmById(int filmId)
         {
             var _film = _context.Film.FirstOrDefault(n=>n.FilmId==filmId);

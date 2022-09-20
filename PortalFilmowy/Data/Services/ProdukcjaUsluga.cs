@@ -108,6 +108,8 @@ namespace PortalFilmowy.Data.Services
                 _produkcja.Nazwa=produkcja.Nazwa;
                 _produkcja.Zdjecie=produkcja.Zdjecie;
                 _produkcja.Opis = produkcja.Opis;
+                _produkcja.Edukacyjny = produkcja.Edukacyjny;
+                _produkcja.KategoriaId=produkcja.KategoriaId;
                 _context.SaveChanges();
             }
             return _produkcja;
