@@ -49,10 +49,23 @@ namespace PortalFilmowy.Controllers
             var updatedFilm = _filmUsluga.updateFilmById(id,film);
             return Ok(updatedFilm);
         }
+        [HttpPut("updateFilmById2/{id}")]
+        public IActionResult updateFilmById2(int id, [FromBody]FilmProdukcjaUpdateVM film)
+        {
+            var updatedFilm = _filmUsluga.updateFilmById2(id,film);
+            return Ok(updatedFilm);
+        }
+
          [HttpDelete("deleteFilmById/{id}")]
         public IActionResult deleteFilmById(int id)
         {
             _filmUsluga.deleteFilmById(id);
+            return Ok();
+        }
+        [HttpDelete("deleteFilmById2/{id}")]
+        public IActionResult deleteFilmById2(int id)
+        {
+            _filmUsluga.deleteFilmById2(id);
             return Ok();
         }
         

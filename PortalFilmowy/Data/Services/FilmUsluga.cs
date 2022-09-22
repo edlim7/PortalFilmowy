@@ -89,34 +89,41 @@ namespace PortalFilmowy.Data.Services
             }
             return _film;
         }
-        /*public Film updateFilmById2(int filmId, FilmProdukcjaVM2 film)
+        public Film updateFilmById2(int filmId, FilmProdukcjaUpdateVM film)
         {
             
-            var _film = _context.Film.FirstOrDefault(n=>n.FilmId==filmId);
-            var _produkcja =_context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==_film.ProdukcjaId);
-            if(_film!=null)
-            {
+            var _film = _context.Film
+            .Include(s=>s.produkcja)
+            .FirstOrDefault(n=>n.FilmId==filmId);
                 _film.Oskary = film.Oskary;
+                _film.produkcja.Nazwa=film.Nazwa;
+                _film.produkcja.Zdjecie =film.Zdjecie;
+                _film.produkcja.Opis = film.Opis;
+                _film.produkcja.Edukacyjny = film.Edukacyjny;
+                _film.produkcja.KategoriaId = film.KategoriaId;
                 _context.SaveChanges();
-            }
-            if(_produkcja!=null)
-            {
-                _produkcja.Nazwa= film.Nazwa;
-                _produkcja.Zdjecie= film.Zdjecie;
-                _produkcja.Opis = film.Opis;
-                _produkcja.Edukacyjny = film.Edukacyjny;
-                _produkcja.KategoriaId = film.KategoriaId;
-                _context.SaveChanges();
-            }
+            
+
             return _film;
         }
-        */
+        
         public void deleteFilmById(int filmId)
         {
             var _film = _context.Film.FirstOrDefault(n=>n.FilmId==filmId);
             if(_film!=null)
             {
                 _context.Film.Remove(_film);
+                _context.SaveChanges();
+            }
+        }
+        public void deleteFilmById2(int filmId)
+        {
+            var _film = _context.Film.FirstOrDefault(n=>n.FilmId==filmId);
+            var _produkcja = _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==_film.ProdukcjaId);
+            if(_film!=null)
+            {
+                _context.Film.Remove(_film);
+                _context.Produkcja.Remove(_produkcja);
                 _context.SaveChanges();
             }
         }

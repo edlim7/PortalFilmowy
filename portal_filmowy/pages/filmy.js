@@ -89,7 +89,8 @@ console.log(filmOcena);
 					nazwa : post.nazwa,
 					oskary : post.oskary,
 					komentarze: post.komentarze,
-					produkcjaId:post.produkcjaId
+					produkcjaId:post.produkcjaId,
+					ocena:post.ocena
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa}  />
 				</ul>

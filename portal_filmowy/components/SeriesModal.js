@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { Formik, Form, Field } from 'formik';
 
-const MovieModal = () => {
-  const {showModalMovie, setShowModalMovie, movie} = useContext(ModalContext);
+const SeriesModal = () => {
+  const {showModalSeries, setShowModalSeries, series} = useContext(ModalContext);
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
@@ -17,7 +17,7 @@ const MovieModal = () => {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
-			body: JSON.stringify({ocea: data.ocea, produkcjaId: data.id, uzytkownikID: data.name})
+			body: JSON.stringify({ocena: data.oce, produkcjaId: data.id, uzytkownikID: data.name})
 		});
 		return res.json()
 	}
@@ -27,31 +27,33 @@ const MovieModal = () => {
 	  }
   return (
     <>
-{showModalMovie ? (
-				<Background onClick={() => setShowModalMovie((prevState) => !prevState)}>
+{showModalSeries ? (
+				<Background onClick={() => setShowModalSeries((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
-							<p class="tytul"> {movie.nazwa}</p>
-							<p> Ilość oskarów: {movie.oskary} </p>
-							<p> Ocena: {movie.ocena} </p>
-							<Formik initialValues={{id: movie.produkcjaId, name: 2, ocea: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+							<p class="tytul"> {series.nazwa}</p>
+							<p> Emmy: {series.emmy} </p>
+							<p> Ilość sezonów: {series.sezony} </p>
+							<p> Ilość odcinków: {series.odcinki} </p>
+							<p> Ocena: {series.ocena} </p>
+							<Formik initialValues={{id: series.produkcjaId, name: 2, oce: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
 								<Form>
-									<Field type ='number' name='ocea' min='1' max='10' onChangeText={value => parseAndHandleChange(value, setFieldValue, 'ocea')}>
+									<Field type ='number' name='oce' min='1' max='10' onChangeText={value => parseAndHandleChange(value, setFieldValue, 'oce')}>
 					  				</Field>
 									<button type='submit'></button>
 								</Form>
 							</Formik>
-							<p>Koment:</p>  {movie.komentarze.map((post)=> 
+							<p>Koment:</p>  {series.komentarze.map((post)=> 
 							<ul key={post.id} >
 								<li key={post.id} >
 								{post.nazwaUzytkownika}: {post.tresc}
 								</li>
 							</ul>
 							)} 
-							<Formik initialValues={{id: movie.produkcjaId, name: 1, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+							<Formik initialValues={{id: series.produkcjaId, name: 1, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
@@ -122,4 +124,4 @@ const Content = styled.div`
 	}
 `;
 
-export default MovieModal
+export default SeriesModal
