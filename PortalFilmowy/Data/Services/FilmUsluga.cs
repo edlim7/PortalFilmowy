@@ -65,6 +65,20 @@ namespace PortalFilmowy.Data.Services
             }).FirstOrDefault();
             return _filmProdukcja;
         }
+        public FilmProdukcjaVM getFilmByNazwa(string filmNazwa)
+        {
+            var _filmProdukcja=_context.Film.Where(n=>n.produkcja.Nazwa == filmNazwa).Select(film=>new FilmProdukcjaVM()
+            {
+                Oskary=film.Oskary,
+                Nazwa = film.produkcja.Nazwa,
+                Zdjecie =film.produkcja.Zdjecie,
+                Opis = film.produkcja.Opis,
+                Edukacyjny = film.produkcja.Edukacyjny,
+                ProdukcjaId = film.produkcja.ProdukcjaId,
+                Kategoria = film.produkcja.Kategoria.NazwaKategorii
+            }).FirstOrDefault();
+            return _filmProdukcja;
+        }
         public List<FilmProdukcjaVM> getFilmProdukcja()
         {
             var _filmProdukcja=_context.Film.Select(film=>new FilmProdukcjaVM()

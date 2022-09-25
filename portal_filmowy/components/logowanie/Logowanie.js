@@ -21,6 +21,11 @@ const Logowanie = () => {
 									<label htmlFor="email">Twój email</label>
 									<input type="email" id="email" required />
 								</div>
+								{isLogin ? '': 
+								<div className="control">
+									<label htmlFor="login">Twoje login</label>
+									<input type="login" id="login" required />
+								</div>}
 								<div className="control">
 									<label htmlFor="password">Twoje hasło</label>
 									<input type="password" id="password" required />

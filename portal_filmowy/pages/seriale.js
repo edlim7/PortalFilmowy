@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import SeriesModal from "../components/SeriesModal";
 import { ModalContext } from "../contexts/ModalContext";
 import SingleContent from "../components/SingleContent/SingleContent";
-
 export async function getStaticProps() {
 	// Call an external API endpoint to get posts
 	const res = await fetch("http://localhost:5000/api/SerialKontroler/getAllSerial");
@@ -95,7 +94,7 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 					produkcjaId:post.produkcjaId,
 					ocena:post.ocena
 				})}}>
-				<SingleContent key={post.id} nazwa={post.nazwa}  />
+				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
       ))}
 			<Footer></Footer>

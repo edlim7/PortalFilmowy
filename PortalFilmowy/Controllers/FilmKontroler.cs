@@ -43,6 +43,12 @@ namespace PortalFilmowy.Controllers
             var film = _filmUsluga.getFilmById(id);
             return Ok(film);
         }
+        [HttpGet("getFilmByNazwa/{nazwa}")]
+        public IActionResult getFilmByNazwa(string nazwa)
+        {
+            var film = _filmUsluga.getFilmByNazwa(nazwa);
+            return Ok(film);
+        }
         [HttpPut("updateFilmById/{id}")]
         public IActionResult updateFilmById(int id, [FromBody]FilmVM film)
         {

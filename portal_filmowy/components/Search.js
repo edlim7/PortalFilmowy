@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 const Search = () => (
 	<Container>
 		<center>
-			<h1>Wyszukaj</h1>
+			<h1>Wyszukaj interesującą Ciebie produkcję!</h1>
 			<Formik
 				initialValues={{ search: "" }}
 				validate={(values) => {
@@ -29,7 +29,7 @@ const Search = () => (
 				{({}) => (
 					<Form>
 						<Field type="search" name="search" />
-						<button type="submit">Sprawdz</button>
+						<button type="submit">Wyszukaj</button>
 					</Form>
 				)}
 			</Formik>
@@ -40,5 +40,30 @@ const Search = () => (
 export default Search;
 
 const Container = styled.div`
-	background-color: gray;
+	
+	background-color: #A69595;
+	button{
+	border: 1px solid grey; 
+	cursor: pointer;
+	background: #141414;
+	color: #ffff;
+	border: none;
+	padding: 9px 24px;
+	margin-right: 1px;
+   	border-radius: 5px;
+	}
+	button:hover{
+		transition-duration: 1s;
+   		background-color: darkgrey;
+	}
+	input{
+		font: inherit;
+		background-color: #f1e1fc;
+		color: #38015c;
+		border-radius: 4px;
+		border: 1px solid #DED7DE;
+		text-align: left;
+		padding: 0.25rem;	
+	
+	}
 `;

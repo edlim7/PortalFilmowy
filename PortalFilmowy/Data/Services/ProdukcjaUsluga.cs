@@ -75,6 +75,10 @@ namespace PortalFilmowy.Data.Services
         {
             return _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==produkcjaId);
         }
+        public Produkcja getProdukcjaByName(string produkcjaName)
+        {
+            return _context.Produkcja.FirstOrDefault(n=>n.Nazwa==produkcjaName);
+        }
         public ProdukcjaOcenaVM getProdukcjaOcenaById(int produkcjaId)
         {
             var _produkcjaOcena=_context.Produkcja.Select(produkcja => new ProdukcjaOcenaVM()

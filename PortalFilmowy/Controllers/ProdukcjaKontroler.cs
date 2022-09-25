@@ -47,6 +47,12 @@ namespace PortalFilmowy.Controllers
             var produkcja = _produkcjaUsluga.getProdukcjaById(id);
             return Ok(produkcja);
         }
+        [HttpGet("getProdukcjaByName/{Name}")]
+        public IActionResult getProdukcjaByName(string name)
+        {
+            var produkcja = _produkcjaUsluga.getProdukcjaByName(name);
+            return Ok(produkcja);
+        }
      
         [HttpPut("updateProdukcjaById/{id}")]
         public IActionResult updateProdukcjaById(int id, [FromBody]ProdukcjaVM produkcja)

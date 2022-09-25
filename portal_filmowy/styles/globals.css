@@ -4,15 +4,13 @@ html,
     height: 100%;
 }
 body {
-    background: linear-gradient(90deg, rgba(176,155,113,1) 0%, rgba(237,223,179,1) 34%, rgba(135,128,94,1) 100%);
+    background: #DED7DE;
 }
 .naglowek{
     width: 100%;
     height: 10%;                    /*????????*/  
 }
-.nazwaStrony{                   /*dunno co chjcialek*/ 
-    height:10%;
-}
+
 .zaloguj{  
     position:fixed;
     top:5%;
@@ -20,7 +18,7 @@ body {
     height: 30x;
     width: 100px;
     background-color: #B09B71;
-    border: 1px solid black; 
+   
 }
 .zarejestruj{
     position:fixed;
@@ -31,7 +29,7 @@ body {
     width: 100px;
     float:right;
     background-color: #B09B71;
-    border: 1px solid black; 
+  
 }
 .nawigacja{
     
@@ -40,9 +38,9 @@ body {
 }
 
 button{                                 /*butony początek*/                          
-    cursor: pointer;
+    cursor: pointer; 
     margin-right: 1px;
-    border-radius: 5px;
+   	border-radius: 5px;
 }
 .listaFilmow{   
     height: 75px;
@@ -87,22 +85,12 @@ button{                                 /*butony początek*/
     transition-duration: 1s;
     background-color: white;
 }           
-.wyszukaj{                          /*butony koniec*/
-    height: 30x;
-    width: 100px;
-    background-color: #B09B71;
-    border: 1px solid black; 
-}                                                 
-.wyszukiwarka{  
-    position: fixed;
-    right: 2%;
-    top:14%; 
-}
+                                                
 .bodyy{
     text-align: center;
 }
 .stopka{
-    position:fixed; 
+
     bottom:0;
     height: 7%;
     width:99%;
@@ -126,9 +114,13 @@ padding-left: 33%;
     right: 2%;
     bottom:10%;
     padding-right: 1%;
-    background-color: #B09B71;
+    background-color: #FFDC96;
     border: 1px solid black; 
     height: 30px;
     width: 120px;
     
+}
+img{
+    margin-right: 1px;
+   	border-radius: 5px;
 }
