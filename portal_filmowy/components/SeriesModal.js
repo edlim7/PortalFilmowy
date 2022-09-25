@@ -136,14 +136,14 @@ const Content = styled.div`
 	}
 	button:hover{
 		transition-duration: 1s;
-   		 background-color: grey;
+   		 background-color: rgb(105, 105, 105);
 	}
 	input{
 		font: inherit;
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid white;
+		border: 1px solid #f1e1fc;
 		text-align: left;
 		padding: 0.25rem;	
 	}

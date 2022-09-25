@@ -31,17 +31,18 @@ const MovieModal = () => {
 							<p className="obokTytul"><img src={movie.zdjecie}/>
 							 Ilość oskarów: {movie.oskary} <br /><br />
 							 Kategoria: {movie.kategoria} <br /><br />
-							 Ocena: {movie.ocena} 
+							 Ocena: {movie.ocena} <br />
+							
 							<Formik initialValues={{id: movie.produkcjaId, name: 1, ocea: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
 								<Form>
-									<Field type ='number' name='ocea' min='1' max='10'>
-					  				</Field>
+									<Field type ='number' name='ocea' min='1' max='10' className="ocenienanie"></Field>
 									<button type='submit'>Oceń</button>
 								</Form>
 							</Formik>
+							
 							</p>
 							 
 							<p> Opis:</p>
@@ -50,7 +51,9 @@ const MovieModal = () => {
 							<p>Komentarze:</p>  {movie.komentarze.map((post)=> 
 							<ul key={post.id} >
 								<li key={post.id} >
-								{post.nazwaUzytkownika}: {post.tresc}
+									
+								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b> :  post.nazwaUzytkownika=="Personel" ? 
+								<b className="personel">{post.nazwaUzytkownika} </b> : <b>{post.nazwaUzytkownika} </b>} : <br />  {post.tresc} <hr />
 								</li>
 							</ul>
 							)} 
@@ -109,11 +112,12 @@ const Content = styled.div`
 	color: #141414;
 	
 	p {
+		font-weight: bold;
 		flex: 1 0;
 		font-size: inherit;
 		background-color: transparent;
 		font-size: 1.3rem;
-		color: #ca3063;
+		color: black;
 		transition: 0.5s all ease-out;
 	}
 	.obokTytul{
@@ -141,16 +145,33 @@ const Content = styled.div`
 	}
 	button:hover{
 		transition-duration: 1s;
-   		 background-color: grey;
+   		 background-color: rgb(105, 105, 105);
 	}
 	input{
 		font: inherit;
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid white;
+		border: 1px solid #f1e1fc;
 		text-align: left;
 		padding: 0.25rem;	
+	}
+	.admin{
+		color:#ca3063;
+	}
+	.personel{
+		color:darkblue;
+	}
+	li{
+		list-style-type: none;
+	}
+	hr{
+		position: absolute;
+		left:7%;
+		width:50%;
+	}
+	.ocenienanie{
+		margin-top: 10px;
 	}
 `;
 

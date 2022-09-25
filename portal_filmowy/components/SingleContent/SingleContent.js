@@ -22,7 +22,7 @@ export default SingleContent
 const Wrapper = styled.div`
 .media {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 200px;
   padding: 5px;
   margin: 5px 0;
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   color: black;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 510px) {
   .media {
     width: 46%;
   }
@@ -55,14 +55,12 @@ const Wrapper = styled.div`
 }
 .zdjecie{
   display: block;  
-  height: 480px;  
-  width: 	640px; 
+  height: 80px; //  480px 640px
+  width: 	140px; 
   margin-left: auto;  
   margin-right: auto;
 }
-#center {  
-text-align: center;  
-}  
+
 .subTitle {
   display: flex;
   justify-content: space-between;

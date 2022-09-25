@@ -12,7 +12,7 @@ const Navbar = () => {
 			<Logowanie />
 			
 			<div>
-			<h1><center>Filizone</center>
+			<h1><center><Link href="/" ><a className="glowna">Filizone</a></Link></center>
 			<button 
 					onClick={() => setShowModalLogin((prevState) => !prevState)}
 					className="Login"
@@ -23,10 +23,10 @@ const Navbar = () => {
 			
 			</div>
 			<center>
-			<span className="link"><Link href="/filmy" className="xd">Filmy</Link></span>
-			<span className="link"><Link href="/seriale">Seriale</Link></span>
-			<span className="link"><Link href="/filmyRanking">Ranking Filmów</Link></span>
-			<span className="link"><Link href="/serialeRanking">Ranking Serialii</Link></span>
+			<span className="linki"><Link href="/filmy" ><a className="link1">Filmy</a></Link></span>
+			<span className="linki"><Link href="/seriale"><a className="link1">Seriale</a></Link></span>
+			<span className="linki"><Link href="/filmyRanking"><a className="link1">Ranking Filmów</a></Link></span>
+			<span className="linki"><Link href="/serialeRanking"><a className="link1">Ranking Serialii</a></Link></span>
 			</center>
 			
 		</Container>
@@ -52,16 +52,33 @@ button{
 	}
 button:hover{
 		transition-duration: 1s;
-   		 background-color: darkgrey;
+   		 background-color: rgb(105, 105, 105);
 	}
 .Login{
 	position: absolute;
 	right:0px;
 	top:0px;
 }
-.link{
-	padding-right: 10px;
-	border: 1px solid black; 
+.linki{
+	padding-right: 30px;
+}
+.link1:link, .link1:visited {
+  background-color: black;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 1px;
+  border-radius: 5px;
+}
+.link1:hover, .link1:active {
+	transition-duration: 1s;
+   	background-color: rgb(105, 105, 105);
+}
+.glowna{
+	text-decoration: none;
+	color: black;
 }
 `;
 

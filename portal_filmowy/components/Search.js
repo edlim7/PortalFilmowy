@@ -40,7 +40,7 @@ const Search = () => (
 export default Search;
 
 const Container = styled.div`
-	
+
 	background-color: #A69595;
 	button{
 	border: 1px solid grey; 
@@ -54,7 +54,7 @@ const Container = styled.div`
 	}
 	button:hover{
 		transition-duration: 1s;
-   		background-color: darkgrey;
+   		background-color: rgb(105, 105, 105);
 	}
 	input{
 		font: inherit;

@@ -17,6 +17,7 @@ const Footer = () => {
 
 export default Footer;
 const Container = styled.div`
+	
 	background-color: #A69595;
 	left: 0;
 	bottom: 0;
