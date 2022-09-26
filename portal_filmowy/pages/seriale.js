@@ -92,7 +92,9 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 					sezony : post.sezony,
 					komentarze: post.komentarze,
 					produkcjaId:post.produkcjaId,
-					ocena:post.ocena
+					ocena:post.ocena,
+					zdjecie: post.zdjecie,
+					kategoria: post.kategoria
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>

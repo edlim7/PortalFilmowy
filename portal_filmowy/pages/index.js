@@ -1,9 +1,12 @@
-import React, {useState, useEffect, isValidElement} from "react";
+import React, {useState, useEffect, isValidElement, useContext} from "react";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
 import https from 'https';
 import SingleContent from "../components/SingleContent/SingleContent";
+import SeriesModal from "../components/SeriesModal";
+import { ModalContext } from "../contexts/ModalContext";
+import MovieModal from "../components/MovieModal";
 const agent = new https.Agent({
   rejectUnauthorized: false
 })
@@ -14,11 +17,15 @@ export async function getStaticProps() {
 	const res3 = await fetch("http://localhost:5000/api/KategoriaKontroler/getAllKategoria"); 
 	const res4 = await fetch("http://localhost:5000/api/FilmKontroler/getFilmProdukcja"); 
 	const res5 = await fetch("http://localhost:5000/api/SerialKontroler/getSerialKategoria"); 
+	const res6 = await fetch("http://localhost:5000/api/KomentarzKontroler/getAllKomentarz"); 
+	const res7 = await fetch("http://localhost:5000/api/UzytkownikKontroler/getAllUzytkownik");
 	const posts = await res.json();		//SerialKontroler/getSerialKategoria
 	const posts2 = await res2.json();
 	const posts3 = await res3.json();
 	const posts4 = await res4.json();
 	const posts5 = await res5.json();
+	const posts6 = await res6.json();
+	const posts7 = await res7.json();
 	// By returning { props: { posts } }, the Blog component
 	// will receive `posts` as a prop at build time
 	return {
@@ -28,16 +35,22 @@ export async function getStaticProps() {
 			posts3,
 			posts4,
 			posts5,
+			posts6,
+			posts7,
 		},
 		revalidate: 3,
 	};
 }
-const Home= ({posts,posts2,posts3,posts4,posts5}) => {
+const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
+	const {showModalSeries,setShowModalSeries, series, setSeries} = useContext(ModalContext);
+	const {showModalMovie,setShowModalMovie, movie, setMovie} = useContext(ModalContext)
 	const [dataValues, setDataValues] = useState(posts); //produkcja
 	const [dataValues2, setDataValues2] = useState(posts2); // ocena
 	const [dataValues3, setDataValues3] = useState(posts3); // kategoria
 	const [dataValues4, setDataValues4] = useState(posts4); // film
 	const [dataValues5, setDataValues5] = useState(posts5);  //serial
+	const [dataValues6, setDataValues6] = useState(posts6); // film
+	const [dataValues7, setDataValues7] = useState(posts7);  //serial
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);
 	console.log("POLICE3",dataValues3);
@@ -51,6 +64,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5}) => {
 	var edukacyjnePolecane=dataValues;
 	var sum=0;
 	var counter=0;
+	var komentarz=[];
 	var test=[];
 	var eduOcena=[];
 	var serialFilm=[];
@@ -132,7 +146,26 @@ const Home= ({posts,posts2,posts3,posts4,posts5}) => {
 	const polecaneDesc = [...serialFilm].sort((a,b)=>b.ocena-a.ocena);	//wyswietlanie polecanych od najwyzej ocenianego
 	console.log("posortowane polecanie");
 	console.log(polecaneDesc);
-
+	// przypisanie komentarzy do polecanych:
+	dataValues6.forEach((el)=>{ //komentarze | przypisanie nazwy uzytkownika do uzytkownika
+		dataValues7.forEach((el2)=>{	// uzytkownik
+			if(el2.uzytkownikId==el.uzytkownikID) 
+				{
+					el.nazwaUzytkownika=el2.login;
+				}
+		})
+	})
+	polecaneDesc.forEach((el)=>{ 
+		dataValues6.forEach((el2)=>{
+			if(el2.produkcjaId==el.produkcjaId)
+				{
+					komentarz.push(el2);
+				}
+		})
+		el.komentarze=komentarz;
+		komentarz=[];
+		
+	})
 	// edukacyjne
 	ocenioneProdukcje.forEach((el3)=>{		// polecane produkcje dla uzytkownika
 		edukacyjnePolecane = edukacyjnePolecane.filter(obj => {
@@ -176,23 +209,84 @@ const Home= ({posts,posts2,posts3,posts4,posts5}) => {
 			}
 		})
 	})
-
+	console.log("eduOcena:")
+	console.log(eduOcena);
 	//serialFilmEdu = serialFilmEdu.sort(() => Math.random()-0.5) // losowanie robi te hydrate
 	//console.log("Wymieszane edu");
 	//console.log(serialFilmEdu);
 	return (
 		<>
+		<SeriesModal />
+		<MovieModal />
 			<Navbar></Navbar>
 			<Search></Search>
-			Strona główna<br/>
+
 			Mainstream:
-			{polecaneDesc.map((post3)=>
-			<SingleContent key={post3.id} nazwa={post3.nazwa} ocena={post3.ocena} kategoria={post3.kategoria}/>
-			)} 
+			{polecaneDesc.map((post) => (
+				<ul key={post.id} onClick={() => {{post.sezony ? 
+					setShowModalSeries((prevState) => !prevState);
+					setSeries({
+						id : post.id,
+						nazwa : post.nazwa,
+						emmy: post.emmy,
+						odcinki : post.odcinki,
+						sezony : post.sezony,
+						komentarze: post.komentarze,
+						produkcjaId:post.produkcjaId,
+						ocena:post.ocena,
+						zdjecie: post.zdjecie,
+						kategoria: post.kategoria
+					}) 	:
+					setShowModalMovie((prevState) => !prevState);
+					setMovie({
+						id : post.id,
+						nazwa : post.nazwa,
+						oskary : post.oskary,
+						komentarze: post.komentarze,
+						produkcjaId:post.produkcjaId,
+						ocena:post.ocena,
+						zdjecie: post.zdjecie,
+						opis: post.opis,
+						kategoria:post.kategoria
+					}) }}}>
+				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
+				</ul>
+      		))}
+
+
+
+
 			Edukacyjne:
-			{serialFilmEdu.map((post4)=>
-			<SingleContent key={post4.id} nazwa={post4.nazwa} ocena={post4.ocena} kategoria={post4.kategoria}/>
-			)} 
+			{eduOcena.map((post) => (
+				<ul key={post.id} onClick={() => {{post.sezony ? 
+					setShowModalSeries((prevState) => !prevState);
+					setSeries({
+						id : post.id,
+						nazwa : post.nazwa,
+						emmy: post.emmy,
+						odcinki : post.odcinki,
+						sezony : post.sezony,
+						komentarze: post.komentarze,
+						produkcjaId:post.produkcjaId,
+						ocena:post.ocena,
+						zdjecie: post.zdjecie,
+						kategoria: post.kategoria
+					}) 	:
+					setShowModalMovie((prevState) => !prevState);
+					setMovie({
+						id : post.id,
+						nazwa : post.nazwa,
+						oskary : post.oskary,
+						komentarze: post.komentarze,
+						produkcjaId:post.produkcjaId,
+						ocena:post.ocena,
+						zdjecie: post.zdjecie,
+						opis: post.opis,
+						kategoria:post.kategoria
+					}) }}}>
+				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
+				</ul>
+      		))} 
 			<Footer></Footer>
 		</>
 	);

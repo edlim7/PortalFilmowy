@@ -27,11 +27,14 @@ const SeriesModal = () => {
 				<Background onClick={() => setShowModalSeries((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
-							<p class="tytul"> {series.nazwa}</p>
-							<p> Emmy: {series.emmy} </p>
-							<p> Ilość sezonów: {series.sezony} </p>
-							<p> Ilość odcinków: {series.odcinki} </p>
-							<p> Ocena: {series.ocena} </p>
+							<center><h1>{series.nazwa}</h1></center>
+							<center><p className="obokTytul"><img src={series.zdjecie} />
+							 Ilość sezonów: {series.sezony}<br /><br />
+							 Ilość odcinków: {series.odcinki}<br /><br />
+							 Ilość emmy: {series.emmy} <br /><br /></p>
+
+							<p> Kategoria: {series.kategoria} <br /><br />
+							 	Ocena: {series.ocena} 
 							<Formik initialValues={{id: series.produkcjaId, name: 2, oce: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 							values)
 							.then((data)=> console.log(data))
@@ -39,13 +42,15 @@ const SeriesModal = () => {
 								<Form>
 									<Field type ='number' name='ocea' min='1' max='10'>
 					  				</Field>
-									<button type='submit'></button>
+									<button type='submit'>Oceń</button>
 								</Form>
 							</Formik>
-							<p>Koment:</p>  {series.komentarze.map((post)=> 
+							</p></center>
+							<p>Komentarze:</p>  {series.komentarze.map((post)=> 
 							<ul key={post.id} >
 								<li key={post.id} >
-								{post.nazwaUzytkownika}: {post.tresc}
+								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b> :  post.nazwaUzytkownika=="Personel" ? 
+								<b className="personel">{post.nazwaUzytkownika} </b> : <b>{post.nazwaUzytkownika} </b>} : <br />  {post.tresc} <hr />
 								</li>
 							</ul>
 							)} 
@@ -56,7 +61,7 @@ const SeriesModal = () => {
 		
 								<Form>
 									<Field type='tresc' name='tresc'></Field>
-									<button type='submit'></button>
+									<button type='submit'>Skomentuj</button>
 								</Form>
 							</Formik>
 						</Content>
@@ -86,7 +91,7 @@ const Wrapper = styled.div`
 	width: 700px;
 	height: 700px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background: white;
+	background: #DED7DE;
 	color: #000;
 	position: absolute;
 	z-index: 1000;
@@ -103,15 +108,17 @@ const Content = styled.div`
 	color: #141414;
 	
 	p {
+		font-weight: bold;
 		flex: 1 0;
 		font-size: inherit;
 		background-color: transparent;
 		font-size: 1.3rem;
-		color: #ca3063;
+		color: black;
 		transition: 0.5s all ease-out;
 	}
 	.obokTytul{
-		text-align: center;
+		position: relative;
+		left:0px;
 	}
 	span.opis{
 		float:right;
@@ -131,8 +138,7 @@ const Content = styled.div`
 		background: #141414;
 		color: #ffff;
 		border: none;
-		padding: 9px 24px;
-		
+		padding: 9px 24px;	
 	}
 	button:hover{
 		transition-duration: 1s;
@@ -146,6 +152,23 @@ const Content = styled.div`
 		border: 1px solid #f1e1fc;
 		text-align: left;
 		padding: 0.25rem;	
+	}
+	.admin{
+		color:#ca3063;
+	}
+	.personel{
+		color:darkblue;
+	}
+	li{
+		list-style-type: none;
+	}
+	hr{
+		position: absolute;
+		left:7%;
+		width:50%;
+	}
+	.ocenienanie{
+		margin-top: 10px;
 	}
 `;
 
