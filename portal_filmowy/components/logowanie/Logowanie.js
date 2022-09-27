@@ -14,6 +14,7 @@ const Logowanie = () => {
 			{showModalLogin ? (
 				<Background onClick={() => setShowModalLogin((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
+						
 						<section className="auth">
 							<h1>{isLogin ? "Logowanie" : "Rejestracja"}</h1>
 							<form>

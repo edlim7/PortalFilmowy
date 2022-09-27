@@ -1,8 +1,8 @@
 import React, { createContext, useState } from "react";
 export const AppContext = createContext();
 export const AppContextProvider = ({ children }) => {
-	const [Menu, setMenu] = useState("listaFilmow");
+const [Kategoria, setKategoria] = useState("")
 
-	const value = { Menu, setMenu };
+	const value = { Kategoria, setKategoria };
 	return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

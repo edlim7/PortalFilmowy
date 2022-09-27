@@ -2,10 +2,12 @@ import React, {useState, useEffect, isValidElement, useContext} from "react";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
+import styled from "styled-components";
 import https from 'https';
 import SingleContent from "../components/SingleContent/SingleContent";
 import SeriesModal from "../components/SeriesModal";
 import { ModalContext } from "../contexts/ModalContext";
+
 import MovieModal from "../components/MovieModal";
 const agent = new https.Agent({
   rejectUnauthorized: false
@@ -211,6 +213,25 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	})
 	console.log("eduOcena:")
 	console.log(eduOcena);
+	dataValues6.forEach((el)=>{ //komentarze | przypisanie nazwy uzytkownika do uzytkownika
+		dataValues7.forEach((el2)=>{	// uzytkownik
+			if(el2.uzytkownikId==el.uzytkownikID) 
+				{
+					el.nazwaUzytkownika=el2.login;
+				}
+		})
+	})
+	eduOcena.forEach((el)=>{ 
+		dataValues6.forEach((el2)=>{
+			if(el2.produkcjaId==el.produkcjaId)
+				{
+					komentarz.push(el2);
+				}
+		})
+		el.komentarze=komentarz;
+		komentarz=[];
+		
+	})
 	//serialFilmEdu = serialFilmEdu.sort(() => Math.random()-0.5) // losowanie robi te hydrate
 	//console.log("Wymieszane edu");
 	//console.log(serialFilmEdu);
@@ -221,10 +242,13 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			<Navbar></Navbar>
 			<Search></Search>
 
+
 			Mainstream:
+<Container>
 			{polecaneDesc.map((post) => (
-				<ul key={post.id} onClick={() => {{post.sezony ? 
-					setShowModalSeries((prevState) => !prevState);
+			post.sezony > 0 ? 				
+			<ul key={post.id} onClick={()=>{
+				setShowModalSeries((prevState) => !prevState);
 					setSeries({
 						id : post.id,
 						nazwa : post.nazwa,
@@ -236,8 +260,10 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 						ocena:post.ocena,
 						zdjecie: post.zdjecie,
 						kategoria: post.kategoria
-					}) 	:
-					setShowModalMovie((prevState) => !prevState);
+					})}}>
+				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
+				</ul> : 
+				<ul key={post.id} onClick={()=>{setShowModalMovie((prevState) => !prevState);
 					setMovie({
 						id : post.id,
 						nazwa : post.nazwa,
@@ -248,18 +274,18 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 						zdjecie: post.zdjecie,
 						opis: post.opis,
 						kategoria:post.kategoria
-					}) }}}>
+					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
-      		))}
+			))}
+			</Container>
 
 
-
-
-			Edukacyjne:
+Edukacyjne:
 			{eduOcena.map((post) => (
-				<ul key={post.id} onClick={() => {{post.sezony ? 
-					setShowModalSeries((prevState) => !prevState);
+			post.sezony > 0 ? 				
+			<ul key={post.id} onClick={()=>{
+				setShowModalSeries((prevState) => !prevState);
 					setSeries({
 						id : post.id,
 						nazwa : post.nazwa,
@@ -271,8 +297,10 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 						ocena:post.ocena,
 						zdjecie: post.zdjecie,
 						kategoria: post.kategoria
-					}) 	:
-					setShowModalMovie((prevState) => !prevState);
+					})}}>
+				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
+				</ul> : 
+				<ul key={post.id} onClick={()=>{setShowModalMovie((prevState) => !prevState);
 					setMovie({
 						id : post.id,
 						nazwa : post.nazwa,
@@ -283,12 +311,21 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 						zdjecie: post.zdjecie,
 						opis: post.opis,
 						kategoria:post.kategoria
-					}) }}}>
+					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
-      		))} 
+			))}
 			<Footer></Footer>
+			
 		</>
 	);
 }
 export default Home;
+
+
+const Container = styled.div`
+		display: grid;
+		margin: auto;
+		grid-template-columns: repeat(auto-fit, 550px);
+		grid-template-rows: min-content;
+`

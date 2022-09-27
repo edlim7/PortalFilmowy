@@ -55,8 +55,8 @@ const Wrapper = styled.div`
 }
 .zdjecie{
   display: block;  
-  height: 80px; //  480px 640px
-  width: 	140px; 
+  height: 360px; //  480px 640px
+  width: 	480px; 
   margin-left: auto;  
   margin-right: auto;
 }

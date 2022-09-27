@@ -35,7 +35,7 @@ const SeriesModal = () => {
 
 							<p> Kategoria: {series.kategoria} <br /><br />
 							 	Ocena: {series.ocena} 
-							<Formik initialValues={{id: series.produkcjaId, name: 2, oce: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+							<Formik initialValues={{id: series.produkcjaId, name: 3, oce: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
