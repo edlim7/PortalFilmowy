@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import SeriesModal from "../components/SeriesModal";
 import { ModalContext } from "../contexts/ModalContext";
 import SingleContent from "../components/SingleContent/SingleContent";
+import styled from "styled-components";
 export async function getStaticProps() {
 	// Call an external API endpoint to get posts
 	const res = await fetch("http://localhost:5000/api/SerialKontroler/getAllSerial");
@@ -79,9 +80,11 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 	
 	return (
 		<>
+		
 		<SeriesModal />
 			<Navbar></Navbar>
 			<Search></Search>
+			<Container>
 			{serialOcena.map((post) => (
 				<ul key={post.id} onClick={() => {setShowModalSeries((prevState) => !prevState);
 				setSeries({
@@ -98,10 +101,18 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
-      ))}
+      ))}</Container>
 			<Footer></Footer>
+			
 		</>
 	);
 };
 
 export default Seriale;
+
+const Container = styled.div`
+		display: grid;
+		margin: auto;
+		grid-template-columns: repeat(auto-fit, 550px);
+		grid-template-rows: min-content;
+`

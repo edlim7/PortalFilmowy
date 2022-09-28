@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import SingleContent from "../components/SingleContent/SingleContent";
 import MovieModal from "../components/MovieModal";
 import { ModalContext } from "../contexts/ModalContext";
+import styled from "styled-components";
 
 export async function getStaticProps() {
 	// Call an external API endpoint to get posts

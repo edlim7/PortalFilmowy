@@ -282,6 +282,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 
 
 Edukacyjne:
+<Container>
 			{eduOcena.map((post) => (
 			post.sezony > 0 ? 				
 			<ul key={post.id} onClick={()=>{
@@ -314,7 +315,7 @@ Edukacyjne:
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
-			))}
+			))}</Container>
 			<Footer></Footer>
 			
 		</>

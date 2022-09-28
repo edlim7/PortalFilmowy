@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import SeriesModal from "../components/SeriesModal";
 import { ModalContext } from "../contexts/ModalContext";
 import SingleContent from "../components/SingleContent/SingleContent";
+import styled from "styled-components";
 export async function getStaticProps() {
 	// Call an external API endpoint to get posts
 	const res = await fetch("http://localhost:5000/api/SerialKontroler/getSerialKategoria"); 

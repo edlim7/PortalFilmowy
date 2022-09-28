@@ -55,6 +55,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _filmProdukcja=_context.Film.Where(n=>n.FilmId == filmId).Select(film=>new FilmProdukcjaVM()
             {
+                FilmId=film.FilmId,
                 Oskary=film.Oskary,
                 Nazwa = film.produkcja.Nazwa,
                 Zdjecie =film.produkcja.Zdjecie,
@@ -69,6 +70,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _filmProdukcja=_context.Film.Where(n=>n.produkcja.Nazwa == filmNazwa).Select(film=>new FilmProdukcjaVM()
             {
+                FilmId=film.FilmId,
                 Oskary=film.Oskary,
                 Nazwa = film.produkcja.Nazwa,
                 Zdjecie =film.produkcja.Zdjecie,
@@ -83,6 +85,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _filmProdukcja=_context.Film.Select(film=>new FilmProdukcjaVM()
             {
+                FilmId=film.FilmId,
                 Oskary=film.Oskary,
                 Nazwa = film.produkcja.Nazwa,
                 Zdjecie =film.produkcja.Zdjecie,

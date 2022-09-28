@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { Formik, Form, Field } from 'formik';
-
+import UpdateMovieModal from "../components/UpdateMovieModal";
 const MovieModal = () => {
-  const {showModalMovie, setShowModalMovie, movie} = useContext(ModalContext);
+ 	const {showModalMovie, setShowModalMovie, movie} = useContext(ModalContext);
+	const {setShowUpdateModalMovie,setUpdateMovie,} = useContext(ModalContext);
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
@@ -21,13 +22,38 @@ const MovieModal = () => {
 		});
 		return res.json()
 	}
+	async function deleteFilm(url) {
+		const res = await fetch(url, {
+			method:'DELETE',
+		});
+	}
+	console.log(movie);
+	const filmid=movie.filmId;
   return (
     <>
+	<UpdateMovieModal />
 {showModalMovie ? (
 				<Background onClick={() => setShowModalMovie((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<center><h1>{movie.nazwa}</h1></center>
+							<button 
+							onClick={() => {setShowUpdateModalMovie((prevState) => !prevState); 
+							setUpdateMovie(movie);
+							setShowModalMovie((prevState) => !prevState)}}
+							className="EdytujFilm"
+							>
+							Edytuj film
+							</button>
+							<button 
+							onClick={() => {
+								setShowModalMovie((prevState) => !prevState)
+								deleteFilm('https://localhost:5001/api/FilmKontroler/deleteFilmById2/'+filmid);
+							}}
+							className="usunFilm"
+							>
+							Usuń film
+							</button>
 							<p className="obokTytul"><img src={movie.zdjecie}/>
 							 Ilość oskarów: {movie.oskary} <br /><br />
 							 Kategoria: {movie.kategoria} <br /><br />
@@ -172,6 +198,20 @@ const Content = styled.div`
 	}
 	.ocenienanie{
 		margin-top: 10px;
+	}
+	.EdytujFilm{
+		position:absolute;
+		top:10px;
+		right: 10px;
+		height: 45px;
+		width: 145px;
+	}
+	.usunFilm{
+		position:absolute;
+		top:10px;
+		left: 10px;
+		height: 45px;
+		width: 145px;
 	}
 `;
 

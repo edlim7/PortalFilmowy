@@ -3,20 +3,19 @@ import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { AppContext } from "../contexts/AppContext";
 import { Formik, Form, Field } from 'formik';
-const AddMovieModal = () => {
-  const {showAddModalMovie, setShowAddModalMovie, addMovie} = useContext(ModalContext);
-	const {Kategoria} = useContext(AppContext);
+import MovieModal from "./MovieModal";
+const UpdateMovieModal = () => {
+  const {showUpdateModalMovie, setShowUpdateModalMovie, updateMovie} = useContext(ModalContext);
 	const [eduBool, setEduBool] = useState('');
-	console.log("zz",Kategoria);
-	async function postKom(url, data) {
+	
+	async function putFilm(url, data) {
 		const res = await fetch(url, {
-			method:'POST',
+			method:'PUT',
 			headers:{'Content-type':'application/json'},
 			body: JSON.stringify({nazwa:data.nazw, opis: data.opi, zdjecie: data.zdjeci, kategoriaId: data.kategori, edukacyjny: data.edukacyjn, oskary: data.oskar})
 		});
 		return res.json()
 	}
-	
 	var str2bool = (value) => {
 		if (value && typeof value === "string") {
 			 if (value.toLowerCase() === "true") return true;
@@ -27,36 +26,37 @@ const AddMovieModal = () => {
 	 var str2int = (value) => {
 		return parseInt(value,10);
 	 }
-
+	 const filmid=updateMovie.filmId;
   return (
     <>
-{showAddModalMovie ? (
-				<Background onClick={() => setShowAddModalMovie((prevState) => !prevState)}>
+{showUpdateModalMovie ? (
+				<Background onClick={() => setShowUpdateModalMovie((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
-							<h1>Dodaj nowy film</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) => postKom('https://localhost:5001/api/FilmKontroler/addFilm2', 
+							<h1>Edytuj film</h1>
+							<Formik initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) => putFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
 				{({}) => (
 								<Form>
-									Nazwa filmu: <Field type ='nazwa' name='nazw' ></Field><br /><br />
-									Opis: <Field type ='opis' name='opi'  ></Field><br /><br />
-									Zdjęcie: <Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field><br /><br />
-
+									<h3 className="stare">Stare wartości</h3>
+									<h3 className="nowe">Nowe wartości</h3><br /><br /><br />
+									<label className="stareWartosci">Nazwa: {updateMovie.nazwa}</label><label className="field"><Field type ='nazwa' name='nazw' ></Field></label><br /><br /><br />
+									<label className="stareWartosci">Opis: {updateMovie.opis}</label><label className="field"><Field type ='opis' name='opi'  ></Field></label><br /><br /><br />
+									<label className="stareWartosci">Zdjęcie: {updateMovie.zdjecie}</label><label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
+								{/*}
 									Kategoria:    <Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
 									<option value={post.kategoriaId} onChange={parseInt(post.kategoriaId,10)}>{post.nazwaKategorii}</option>
 									))}
 									
            							</Field><br /><br />
-								{/*}
+								
 									Edukacyjny: Tak<Field type ='radio' name='edukacyjn' value='true' onChange={str2bool()}></Field> 	
 									Nie 		   <Field type ='radio' name='edukacyjn' value='false' onChange={str2bool()}></Field><br /><br /> {*/}
-
-									Ilość oskarów: <Field type ='number' name='oskar' min='0' max='100' ></Field><br />									
-									<center><button type='submit'>Dodaj!</button></center>
+									<label className="stareWartosci">Ilość oskarów: {updateMovie.oskary}</label><label className="field"><Field type ='number' name='oskar' min='0' max='100' ></Field></label><br /><br /><br />								
+									<center><button type='submit'>Edytuj!</button></center>
 								</Form>
 								 )}
 							</Formik>
@@ -112,9 +112,7 @@ const Content = styled.div`
 		color: black;
 		transition: 0.5s all ease-out;
 	}
-	.obokTytul{
-		text-align: center;
-	}
+
 	span.opis{
 		float:right;
 	}
@@ -164,6 +162,23 @@ const Content = styled.div`
 	}
 	.ocenienanie{
 	}
+	.stare{
+		float:left;
+		padding-left: 100px;
+	}
+	.nowe{
+		float:right;
+		padding-right: 100px;
+	}
+	.field{
+		float:right;
+		padding-right: 60px;
+	}
+	.stareWartosci{
+		float:left;
+		padding-left: 50px;
+		
+	}
 `;
 
-export default AddMovieModal
+export default UpdateMovieModal

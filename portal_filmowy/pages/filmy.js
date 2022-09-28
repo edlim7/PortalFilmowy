@@ -89,11 +89,12 @@ console.log("filmOcena z kom");
 console.log(filmOcena);
 
 	return (
-		<Container>
+		<>
 			<AddMovieModal />
 			<MovieModal />
 			<Navbar></Navbar>
 			<Search></Search>
+			<Container>
 			<button 
 					onClick={() => setShowAddModalMovie((prevState) => !prevState)}
 					className="DodajFilm"
@@ -111,20 +112,27 @@ console.log(filmOcena);
 					ocena:post.ocena,
 					zdjecie: post.zdjecie,
 					opis: post.opis,
-					kategoria:post.kategoria
+					kategoria:post.kategoria,
+					filmId:post.filmId,
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
       ))}
-			
-			<Footer></Footer>
 			</Container>
+			<Footer></Footer>
+			</>	
 	);
 };
 
 export default Filmy;
 const Container = styled.div`
 position: relative;
+
+		display: grid;
+		margin: auto;
+		grid-template-columns: repeat(auto-fit, 550px);
+		grid-template-rows: min-content;
+
 .DodajFilm{
 	cursor: pointer;
 	position: absolute;

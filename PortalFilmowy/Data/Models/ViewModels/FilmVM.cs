@@ -11,6 +11,7 @@ namespace PortalFilmowy.Models
     }
     public class FilmProdukcjaVM
     {
+        public int FilmId { get; set; }
         public int Oskary { get; set; }
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
