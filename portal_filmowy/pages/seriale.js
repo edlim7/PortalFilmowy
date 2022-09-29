@@ -2,20 +2,25 @@ import React, {useState, useEffect, useContext} from "react";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
-import SeriesModal from "../components/SeriesModal";
-import { ModalContext } from "../contexts/ModalContext";
-import SingleContent from "../components/SingleContent/SingleContent";
 import styled from "styled-components";
+import SeriesModal from "../components/SeriesModal";
+import AddSeriesModal from "../components/AddSeriesModal";
+import { ModalContext } from "../contexts/ModalContext";
+import { AppContext } from "../contexts/AppContext";
+import SingleContent from "../components/SingleContent/SingleContent";
+
 export async function getStaticProps() {
 	// Call an external API endpoint to get posts
 	const res = await fetch("http://localhost:5000/api/SerialKontroler/getAllSerial");
 	const res2 = await fetch("http://localhost:5000/api/OcenaKontroler/getAllOcena"); 
 	const res3 = await fetch("http://localhost:5000/api/KomentarzKontroler/getAllKomentarz"); 
 	const res4 = await fetch("http://localhost:5000/api/UzytkownikKontroler/getAllUzytkownik");
+	const res5 = await fetch("http://localhost:5000/api/KategoriaKontroler/getAllKategoria")
 	const posts = await res.json();
 	const posts2 = await res2.json();
 	const posts3 = await res3.json();
 	const posts4 = await res4.json();
+	const posts5 = await res5.json();
 	// By returning { props: { posts } }, the Blog component
 	// will receive `posts` as a prop at build time
 	return {
@@ -24,12 +29,14 @@ export async function getStaticProps() {
 			posts2,
 			posts3,
 			posts4,
+			posts5,
 		},
 		revalidate: 3,
 	};
 }
 const Seriale = ({posts,posts2,posts3,posts4}) => {
 	const {showModalSeries,setShowModalSeries, series, setSeries} = useContext(ModalContext)
+	const {setShowAddModalSeries} = useContext(ModalContext);
 	const [dataValues, setDataValues] = useState(posts);
 	const [dataValues2, setDataValues2] = useState(posts2);
 	const [dataValues3, setDataValues3] = useState(posts3);
@@ -80,11 +87,17 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 	
 	return (
 		<>
-		
+		<AddSeriesModal />
 		<SeriesModal />
 			<Navbar></Navbar>
 			<Search></Search>
 			<Container>
+			<button 
+					onClick={() => setShowAddModalSeries((prevState) => !prevState)}
+					className="DodajFilm"
+				>
+					Dodaj Serial
+				</button>
 			{serialOcena.map((post) => (
 				<ul key={post.id} onClick={() => {setShowModalSeries((prevState) => !prevState);
 				setSeries({
@@ -97,7 +110,8 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 					produkcjaId:post.produkcjaId,
 					ocena:post.ocena,
 					zdjecie: post.zdjecie,
-					kategoria: post.kategoria
+					kategoria: post.kategoria,
+					serialId:post.serialId
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
@@ -111,8 +125,25 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 export default Seriale;
 
 const Container = styled.div`
+position: relative;
+
 		display: grid;
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);
 		grid-template-rows: min-content;
-`
+
+.DodajFilm{
+	cursor: pointer;
+	position: absolute;
+	right:0px;
+	margin-top: 10px;
+	background: #141414;
+	color: #ffff;
+	border: none;
+	padding: 9px 24px;
+}
+.DodajFilm:hover{
+		transition-duration: 1s;
+   		 background-color: rgb(105, 105, 105);
+	}
+`;

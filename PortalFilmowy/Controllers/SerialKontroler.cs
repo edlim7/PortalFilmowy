@@ -50,17 +50,28 @@ namespace PortalFilmowy.Controllers
             return Ok(serial);
         }
 
-
         [HttpPut("updateSerialById/{id}")]
         public IActionResult updateSerialById(int id, [FromBody]SerialVM serial)
         {
             var updatedSerial = _serialUsluga.updateSerialById(id,serial);
             return Ok(updatedSerial);
         }
+        [HttpPut("updateSerialById2/{id}")]
+        public IActionResult updateSerialById2(int id, [FromBody]SerialProdukcjaVM serial)
+        {
+            var updatedSerial = _serialUsluga.updateSerialById2(id,serial);
+            return Ok(updatedSerial);
+        }
          [HttpDelete("deleteSerialById/{id}")]
         public IActionResult deleteSerialById(int id)
         {
             _serialUsluga.deleteSerialById(id);
+            return Ok();
+        }
+        [HttpDelete("deleteSerialById2/{id}")]
+        public IActionResult deleteSerialById2(int id)
+        {
+            _serialUsluga.deleteSerialById2(id);
             return Ok();
         }
         

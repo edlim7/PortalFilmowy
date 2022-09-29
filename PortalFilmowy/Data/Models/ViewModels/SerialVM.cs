@@ -13,6 +13,7 @@ namespace PortalFilmowy.Models
     }
     public class SerialZProdukcjaKategoriaVM
     {
+        public int serialId{ get; set; }
         public int Emmy { get; set; }
         public int Sezony { get; set; }
         public int Odcinki { get; set; }
@@ -25,6 +26,7 @@ namespace PortalFilmowy.Models
     }
 public class SerialProdukcjaVM
     {
+        public int serialId{ get; set; }
         public int Emmy { get; set; }
         public int Sezony { get; set; }
         public int Odcinki { get; set; }
@@ -34,9 +36,11 @@ public class SerialProdukcjaVM
         public bool Edukacyjny { get; set; }
         public int ProdukcjaId { get; set; }
         public string Kategoria { get; set; }
+        public int KategoriaId{ get; set; }
     }
     public class SerialProdukcjaVM2
     {
+        
         public int Emmy { get; set; }
         public int Sezony { get; set; }
         public int Odcinki { get; set; }

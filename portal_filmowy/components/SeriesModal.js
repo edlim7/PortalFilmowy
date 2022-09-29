@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { Formik, Form, Field } from 'formik';
-
+import UpdateSeriesModal from "../components/UpdateSeriesModal";
 const SeriesModal = () => {
   const {showModalSeries, setShowModalSeries, series} = useContext(ModalContext);
+  const {setShowUpdateModalSeries,setUpdateSeries,} = useContext(ModalContext);
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
@@ -21,13 +22,38 @@ const SeriesModal = () => {
 		});
 		return res.json()
 	}
+	async function deleteSeries(url) {
+		const res = await fetch(url, {
+			method:'DELETE',
+		});
+	}
+	console.log("series: "+ series);
+	const serialid=series.serialId;
   return (
     <>
+	<UpdateSeriesModal />
 {showModalSeries ? (
 				<Background onClick={() => setShowModalSeries((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<center><h1>{series.nazwa}</h1></center>
+							<button 
+							onClick={() => {setShowUpdateModalSeries((prevState) => !prevState); 
+							setUpdateSeries(series);
+							setShowModalSeries((prevState) => !prevState)}}
+							className="EdytujFilm"
+							>
+							Edytuj film
+							</button>
+							<button 
+							onClick={() => {
+								setShowModalSeries((prevState) => !prevState)
+								deleteSeries('https://localhost:5001/api/SerialKontroler/deleteSerialById2/'+series.serialId);
+							}}
+							className="usunFilm"
+							>
+							Usuń film
+							</button>
 							<center><p className="obokTytul"><img src={series.zdjecie} />
 							 Ilość sezonów: {series.sezony}<br /><br />
 							 Ilość odcinków: {series.odcinki}<br /><br />
@@ -117,8 +143,7 @@ const Content = styled.div`
 		transition: 0.5s all ease-out;
 	}
 	.obokTytul{
-		position: relative;
-		left:0px;
+		text-align: center;
 	}
 	span.opis{
 		float:right;
@@ -170,6 +195,19 @@ const Content = styled.div`
 	.ocenienanie{
 		margin-top: 10px;
 	}
+	.EdytujFilm{
+		position:absolute;
+		top:10px;
+		right: 10px;
+		height: 45px;
+		width: 145px;
+	}
+	.usunFilm{
+		position:absolute;
+		top:10px;
+		left: 10px;
+		height: 45px;
+		width: 145px;
+	}
 `;
-
 export default SeriesModal

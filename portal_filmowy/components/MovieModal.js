@@ -27,7 +27,7 @@ const MovieModal = () => {
 			method:'DELETE',
 		});
 	}
-	console.log(movie);
+	console.log("movoe"+movie.filmId);
 	const filmid=movie.filmId;
   return (
     <>

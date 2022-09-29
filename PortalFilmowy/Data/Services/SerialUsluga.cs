@@ -59,6 +59,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _serialProdukcja=_context.Serial.Select(serial=>new SerialProdukcjaVM()
             {
+                serialId=serial.SerialId,
                 Emmy=serial.Emmy,
                 Sezony = serial.Sezony,
                 Odcinki=serial.Odcinki,
@@ -74,6 +75,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _serialProdukcja=_context.Serial.Where(n=>n.SerialId == serialId).Select(serial=>new SerialProdukcjaVM()
             {
+                serialId=serial.SerialId,
                 Emmy=serial.Emmy,
                 Sezony = serial.Sezony,
                 Odcinki=serial.Odcinki,
@@ -90,6 +92,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _serialProdukcja=_context.Serial.Where(n=>n.produkcja.Nazwa == serialName).Select(serial=>new SerialProdukcjaVM()
             {
+                serialId=serial.SerialId,
                 Emmy=serial.Emmy,
                 Sezony = serial.Sezony,
                 Odcinki=serial.Odcinki,
@@ -106,6 +109,7 @@ namespace PortalFilmowy.Data.Services
         {
             var _serialKategoria=_context.Serial.Select(serial=>new SerialZProdukcjaKategoriaVM()
             {
+                serialId=serial.SerialId,
                 Emmy=serial.Emmy,
                 Sezony = serial.Sezony,
                 Odcinki=serial.Odcinki,
@@ -131,12 +135,41 @@ namespace PortalFilmowy.Data.Services
             }
             return _serial;
         }
+        public Serial updateSerialById2(int serialId, SerialProdukcjaVM serial)
+        {
+            var _serial = _context.Serial
+            .Include(s=>s.produkcja)
+            .FirstOrDefault(n=>n.SerialId==serialId);
+            _serial.Emmy=serial.Emmy;
+            _serial.Sezony = serial.Sezony;
+            _serial.Odcinki=serial.Odcinki;
+            _serial.produkcja.Nazwa=serial.Nazwa;
+            _serial.produkcja.Zdjecie =serial.Zdjecie;
+            _serial.produkcja.Opis = serial.Opis;
+            _serial.produkcja.Edukacyjny = serial.Edukacyjny;
+            _serial.produkcja.KategoriaId = serial.KategoriaId;
+            _context.SaveChanges();
+            
+            return _serial;
+        }
+
         public void deleteSerialById(int serialId)
         {
             var _serial = _context.Serial.FirstOrDefault(n=>n.SerialId==serialId);
             if(_serial!=null)
             {
                 _context.Serial.Remove(_serial);
+                _context.SaveChanges();
+            }
+        }
+        public void deleteSerialById2(int serialId)
+        {
+            var _serial = _context.Serial.FirstOrDefault(n=>n.SerialId==serialId);
+            var _produkcja = _context.Produkcja.FirstOrDefault(n=>n.ProdukcjaId==_serial.ProdukcjaId);
+            if(_serial!=null)
+            {
+                _context.Serial.Remove(_serial);
+                _context.Produkcja.Remove(_produkcja);
                 _context.SaveChanges();
             }
         }
