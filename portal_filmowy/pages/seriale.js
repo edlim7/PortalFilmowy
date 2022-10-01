@@ -34,7 +34,7 @@ export async function getStaticProps() {
 		revalidate: 3,
 	};
 }
-const Seriale = ({posts,posts2,posts3,posts4}) => {
+const Seriale = ({posts,posts2,posts3,posts4,posts5}) => {
 	const {showModalSeries,setShowModalSeries, series, setSeries} = useContext(ModalContext)
 	const {setShowAddModalSeries} = useContext(ModalContext);
 	const [dataValues, setDataValues] = useState(posts);
@@ -42,6 +42,16 @@ const Seriale = ({posts,posts2,posts3,posts4}) => {
 	const [dataValues3, setDataValues3] = useState(posts3);
 	const [dataValues4, setDataValues4] = useState(posts4);
 	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+	const {setUzytkownicy, Uzyytkownicy} = useContext(AppContext);
+
+	const {setKategoria, Kategoria} = useContext(AppContext);
+	useEffect(() => {
+		setKategoria(posts5);
+	}, [])
+	useEffect(() => {
+		setUzytkownicy(posts4);
+	}, [])
+
 	console.log("uzytkownik123123123:SERIAL "+ ZalogowanyUzytkownik.log);
 	console.log("nowe"); 
 	console.log(dataValues);

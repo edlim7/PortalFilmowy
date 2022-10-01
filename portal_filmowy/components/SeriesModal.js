@@ -29,6 +29,11 @@ const SeriesModal = () => {
 			method:'DELETE',
 		});
 	}
+	async function deleteKom(url) {
+		const res = await fetch(url, {
+			method:'DELETE',
+		});
+	}
 	console.log("series: "+ series);
 	const serialid=series.serialId;
   return (
@@ -77,8 +82,9 @@ const SeriesModal = () => {
 							<p>Komentarze:</p>  {series.komentarze.map((post)=> 
 							<ul key={post.id} >
 								<li key={post.id} >
-								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b> :  post.nazwaUzytkownika=="Personel" ? 
-								<b className="personel">{post.nazwaUzytkownika} </b> : <b>{post.nazwaUzytkownika} </b>} : <br />  {post.tresc} <hr />
+								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b>:  post.nazwaUzytkownika=="Personel" ? 
+								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
+								: {ZalogowanyUzytkownik.typKont==1 || ZalogowanyUzytkownik.typKont==2 ? <button className="usunKom" onClick={() =>{ deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)}}>X</button>: ""} <br />  {post.tresc} <hr />
 								</li>
 							</ul>
 							)} 
@@ -210,6 +216,12 @@ const Content = styled.div`
 		left: 10px;
 		height: 45px;
 		width: 145px;
+	}
+	.usunKom{
+		background-color: red;
+		padding: 0px;
+		width:22px;
+		height: 22px;
 	}
 `;
 export default SeriesModal

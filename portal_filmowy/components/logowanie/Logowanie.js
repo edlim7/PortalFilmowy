@@ -6,7 +6,6 @@ const Logowanie = () => {
 	const { showModalLogin, setShowModalLogin} = useContext(ModalContext);
 	const {Uzytkownicy,ZalogowanyUzytkownik, setZalogowanyUzytkownik,zalogowany, setZalogowany} = useContext(AppContext);
 	const [isLogin, setIsLogin] = useState(true);
-	console.log(Uzytkownicy);
 	var zal=false;
 	const passRef = useRef(null);
 	const loginRef = useRef(null);

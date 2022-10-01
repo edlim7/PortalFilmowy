@@ -101,12 +101,13 @@ console.log(filmOcena);
 			<Navbar></Navbar>
 			<Search></Search>
 			<Container>
+			{ZalogowanyUzytkownik.typKont==1 || ZalogowanyUzytkownik.typKont==2 ? "":""}
 			<button 
 					onClick={() => setShowAddModalMovie((prevState) => !prevState)}
 					className="DodajFilm"
 				>
 					Dodaj Film
-				</button>
+				</button> 
 			{filmOcena.map((post) => (
 				<ul key={post.id} onClick={() => {setShowModalMovie((prevState) => !prevState);
 				setMovie({
