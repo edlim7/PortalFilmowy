@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import SingleContent from "../components/SingleContent/SingleContent";
 import MovieModal from "../components/MovieModal";
 import { ModalContext } from "../contexts/ModalContext";
+import { AppContext } from "../contexts/AppContext";
 import styled from "styled-components";
 
 export async function getStaticProps() {
@@ -35,6 +36,8 @@ const FilmyRanking = ({posts,posts2,posts3,posts4}) => {
 	const [dataValues2, setDataValues2] = useState(posts2); 
 	const [dataValues3, setDataValues3] = useState(posts3);
 	const [dataValues4, setDataValues4] = useState(posts4);
+	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+	console.log("uzytkownikRANKING FILM: "+ ZalogowanyUzytkownik.log); 
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);
 	var komentarz=[];

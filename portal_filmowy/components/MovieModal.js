@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { Formik, Form, Field } from 'formik';
+import { AppContext } from "../contexts/AppContext";
 import UpdateMovieModal from "../components/UpdateMovieModal";
 const MovieModal = () => {
  	const {showModalMovie, setShowModalMovie, movie} = useContext(ModalContext);
 	const {setShowUpdateModalMovie,setUpdateMovie,} = useContext(ModalContext);
+	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
@@ -27,7 +29,6 @@ const MovieModal = () => {
 			method:'DELETE',
 		});
 	}
-	console.log("movoe"+movie.filmId);
 	const filmid=movie.filmId;
   return (
     <>
@@ -59,7 +60,7 @@ const MovieModal = () => {
 							 Kategoria: {movie.kategoria} <br /><br />
 							 Ocena: {movie.ocena} <br />
 							
-							<Formik initialValues={{id: movie.produkcjaId, name: 1, ocea: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.id, ocea: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
@@ -72,7 +73,7 @@ const MovieModal = () => {
 							</p>
 							 
 							<p> Opis:</p>
-							<span class="opis">{movie.opis}</span>
+							<span className="opis">{movie.opis}</span>
 							
 							<p>Komentarze:</p>  {movie.komentarze.map((post)=> 
 							<ul key={post.id} >
@@ -84,7 +85,7 @@ const MovieModal = () => {
 							</ul>
 							)} 
 							<p>Dodaj komentarz:</p>
-							<Formik initialValues={{id: movie.produkcjaId, name: 3, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.id, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>

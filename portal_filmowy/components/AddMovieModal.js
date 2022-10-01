@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useRef } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { AppContext } from "../contexts/AppContext";
@@ -6,6 +6,8 @@ import { Formik, Form, Field } from 'formik';
 const AddMovieModal = () => {
   const {showAddModalMovie, setShowAddModalMovie, addMovie} = useContext(ModalContext);
 	const {Kategoria} = useContext(AppContext);
+	const radioRef = useRef(null);
+	const selectRef = useRef(null);
 	const [eduBool, setEduBool] = useState('');
 	console.log("zz",Kategoria);
 	async function postKom(url, data) {
@@ -47,7 +49,7 @@ const AddMovieModal = () => {
 
 									Kategoria:    <Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
-									<option value={post.kategoriaId} onChange={parseInt(post.kategoriaId,10)}>{post.nazwaKategorii}</option>
+									<option value={post.kategoriaId} onChange={str2int}>{post.nazwaKategorii}</option>
 									))}
 									
            							</Field><br /><br />

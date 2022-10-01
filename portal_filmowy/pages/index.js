@@ -7,6 +7,7 @@ import https from 'https';
 import SingleContent from "../components/SingleContent/SingleContent";
 import SeriesModal from "../components/SeriesModal";
 import { ModalContext } from "../contexts/ModalContext";
+import { AppContext } from "../contexts/AppContext";
 
 import MovieModal from "../components/MovieModal";
 const agent = new https.Agent({
@@ -53,6 +54,8 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	const [dataValues5, setDataValues5] = useState(posts5);  //serial
 	const [dataValues6, setDataValues6] = useState(posts6); // film
 	const [dataValues7, setDataValues7] = useState(posts7);  //serial
+	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+	console.log("uzytkownik123123123 INDEX: "+ ZalogowanyUzytkownik.log);
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);
 	console.log("POLICE3",dataValues3);

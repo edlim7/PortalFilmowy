@@ -1,12 +1,11 @@
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
+import { AppContext } from "../contexts/AppContext";
 import Logowanie from "./logowanie/Logowanie";
-
 const Navbar = () => {
 	const { setShowModalLogin } = useContext(ModalContext);
-
 	return (
 		<Container>
 			<Logowanie />
@@ -14,11 +13,19 @@ const Navbar = () => {
 			<div>
 			<h1><center><Link href="/" ><a className="glowna">Filizone</a></Link></center>
 			<button 
-					onClick={() => setShowModalLogin((prevState) => !prevState)}
+					onClick={() => {
+					setShowModalLogin((prevState) => !prevState);
+					}}
 					className="Login"
 				>
 					Zaloguj się
 				</button>
+			<button 
+					onClick={() => setShowModalPanel((prevState) => !prevState)}
+					className="Panel"
+				>
+					Panel admina
+			</button>
 			</h1>
 			
 			</div>
@@ -57,7 +64,12 @@ button:hover{
 .Login{
 	position: absolute;
 	right:0px;
-	top:0px;
+	top:10px;
+}
+.Panel{
+	position: absolute;
+	right:0px;
+	top:50px;
 }
 .linki{
 	padding-right: 30px;

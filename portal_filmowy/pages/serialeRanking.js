@@ -4,6 +4,7 @@ import Search from "../components/Search";
 import Footer from "../components/Footer";
 import SeriesModal from "../components/SeriesModal";
 import { ModalContext } from "../contexts/ModalContext";
+import { AppContext } from "../contexts/AppContext";
 import SingleContent from "../components/SingleContent/SingleContent";
 import styled from "styled-components";
 export async function getStaticProps() {
@@ -33,7 +34,9 @@ const SerialeRanking = ({posts,posts2,posts3,posts4}) => {
 	const [dataValues, setDataValues] = useState(posts); 
 	const [dataValues2, setDataValues2] = useState(posts2);
 	const [dataValues3, setDataValues3] = useState(posts3);
-	const [dataValues4, setDataValues4] = useState(posts4); 
+	const [dataValues4, setDataValues4] = useState(posts4);
+	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+	console.log("uzytkownik123123123 RANKING SERIAL: "+ ZalogowanyUzytkownik.log); 
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);
 	const test=[];

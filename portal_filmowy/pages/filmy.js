@@ -41,9 +41,15 @@ const {setShowAddModalMovie} = useContext(ModalContext);
 const [dataValues, setDataValues] = useState(posts);
 const [dataValues2, setDataValues2] = useState(posts2);
 const [dataValues3, setDataValues3] = useState(posts3);
+const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+console.log("uzytkownik123123123 FILM: "+ ZalogowanyUzytkownik.log);
 	const {setKategoria, Kategoria} = useContext(AppContext);
 	useEffect(() => {
 		setKategoria(posts5);
+	}, [])
+	const {setUzytkownicy, Uzyytkownicy} = useContext(AppContext);
+	useEffect(() => {
+		setUzytkownicy(posts4);
 	}, [])
 const [dataValues4, setDataValues4] = useState(posts4);
 const filmOcena=[];

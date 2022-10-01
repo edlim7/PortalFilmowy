@@ -1,13 +1,48 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useRef } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../../contexts/ModalContext";
-
+import { AppContext } from "../../contexts/AppContext";
 const Logowanie = () => {
-	const { showModalLogin, setShowModalLogin } = useContext(ModalContext);
+	const { showModalLogin, setShowModalLogin} = useContext(ModalContext);
+	const {Uzytkownicy,ZalogowanyUzytkownik, setZalogowanyUzytkownik,zalogowany, setZalogowany} = useContext(AppContext);
 	const [isLogin, setIsLogin] = useState(true);
-
+	console.log(Uzytkownicy);
+	var zal=false;
+	const passRef = useRef(null);
+	const loginRef = useRef(null);
+	const emailRef = useRef(null);
 	function switchAuthModeHandler() {
 		setIsLogin((prevState) => !prevState);
+	}
+	function zalogujUzytkownika() {
+		
+			Uzytkownicy.forEach((el)=>{
+				if(passRef.current.value===el.haslo && emailRef.current.value===el.email)
+				{
+					setZalogowanyUzytkownik({
+						id: el.uzytkownikId, 
+						log: el.login, 
+						hasl: el.haslo, 
+						emai: el.email, 
+						typKont: el.typKonta,
+					});
+					console.log("Udało sie zalogować!");
+					zal=true;
+					setZalogowany({zal:true});
+				}
+			})
+			if(zal===false)
+			console.log("Błędny login lub hasło!");
+	}
+	function wylogujUzytkownika() {
+		setZalogowanyUzytkownik({
+				id: "", 
+				log: "", 
+				hasl: "", 
+				emai: "", 
+				typKont: 0
+			});
+			setZalogowany({zal:false});
 	}
 	return (
 		<>
@@ -20,19 +55,25 @@ const Logowanie = () => {
 							<form>
 								<div className="control">
 									<label htmlFor="email">Twój email</label>
-									<input type="email" id="email" required />
+									<input type="email" ref={emailRef} id="email" required />
 								</div>
 								{isLogin ? '': 
 								<div className="control">
 									<label htmlFor="login">Twoje login</label>
-									<input type="login" id="login" required />
+									<input type="login" ref={loginRef} id="login" required />
 								</div>}
 								<div className="control">
 									<label htmlFor="password">Twoje hasło</label>
-									<input type="password" id="password" required />
+									<input type="password" ref={passRef} id="password" required />
 								</div>
 								<div className="control">
-									<button>{isLogin ? "Zaloguj" : "Zarejestruj"}</button>
+
+									<button type="button"
+										className="toggle"
+										onClick={zalogujUzytkownika}
+										>{isLogin ? "Zaloguj" : "Zarejestruj"}
+										</button>
+
 									<button
 										type="button"
 										className="toggle"

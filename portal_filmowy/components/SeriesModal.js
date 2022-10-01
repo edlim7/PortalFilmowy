@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
+import { AppContext } from "../contexts/AppContext";
 import { Formik, Form, Field } from 'formik';
 import UpdateSeriesModal from "../components/UpdateSeriesModal";
 const SeriesModal = () => {
   const {showModalSeries, setShowModalSeries, series} = useContext(ModalContext);
   const {setShowUpdateModalSeries,setUpdateSeries,} = useContext(ModalContext);
+  const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
@@ -61,7 +63,7 @@ const SeriesModal = () => {
 
 							<p> Kategoria: {series.kategoria} <br /><br />
 							 	Ocena: {series.ocena} 
-							<Formik initialValues={{id: series.produkcjaId, name: 3, oce: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.id, oce: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
@@ -80,7 +82,7 @@ const SeriesModal = () => {
 								</li>
 							</ul>
 							)} 
-							<Formik initialValues={{id: series.produkcjaId, name: 1, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.id, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
