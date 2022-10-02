@@ -14,10 +14,12 @@ export async function getStaticProps() {
 	const res2 = await fetch("http://localhost:5000/api/OcenaKontroler/getAllOcena"); 
 	const res3 = await fetch("http://localhost:5000/api/KomentarzKontroler/getAllKomentarz"); 
 	const res4 = await fetch("http://localhost:5000/api/UzytkownikKontroler/getAllUzytkownik");
+	const res5 = await fetch("http://localhost:5000/api/KategoriaKontroler/getAllKategoria")
 	const posts = await res.json();		
 	const posts2 = await res2.json();
 	const posts3 = await res3.json();
 	const posts4 = await res4.json();
+	const posts5 = await res5.json();
 	// By returning { props: { posts } }, the Blog component
 	// will receive `posts` as a prop at build time
 	return {
@@ -26,17 +28,36 @@ export async function getStaticProps() {
 			posts2,
 			posts3,
 			posts4,
+			posts5,
 		},
 		revalidate: 2,
 	};
 }
-const FilmyRanking = ({posts,posts2,posts3,posts4}) => {
+const FilmyRanking = ({posts,posts2,posts3,posts4,posts5}) => {
 	const {showModalMovie,setShowModalMovie, movie, setMovie} = useContext(ModalContext)
 	const [dataValues, setDataValues] = useState(posts); 
 	const [dataValues2, setDataValues2] = useState(posts2); 
 	const [dataValues3, setDataValues3] = useState(posts3);
 	const [dataValues4, setDataValues4] = useState(posts4);
-	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+useEffect(() => {
+	const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
+	if (ZalogowanyUzytkownik) {
+		setZalogowanyUzytkownik(ZalogowanyUzytkownik);
+	}
+  }, []);
+  const {setKategoria, Kategoria} = useContext(AppContext);
+	useEffect(() => {
+		setKategoria(posts5);
+	}, [])
+	const {setUzytkownicy, Uzytkownicy} = useContext(AppContext);
+	useEffect(() => {
+		setUzytkownicy(posts4);
+	}, [])
+	const {Oceny, setOceny} = useContext(AppContext);
+	useEffect(() => {
+		setOceny(posts2);
+	}, [])
 	console.log("uzytkownikRANKING FILM: "+ ZalogowanyUzytkownik.log); 
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);
@@ -97,7 +118,9 @@ const FilmyRanking = ({posts,posts2,posts3,posts4}) => {
 					ocena:post.ocena,
 					zdjecie: post.zdjecie,
 					opis: post.opis,
-					kategoria:post.kategoria
+					kategoria:post.kategoria,
+					filmId:post.filmId,
+					edukacyjny:post.edukacyjny,
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>

@@ -31,6 +31,18 @@ namespace PortalFilmowy.Data.Services
             _context.Uzytkownik.Add(_uzytkownik);
             _context.SaveChanges();
         }
+        public void AddUzytkownik2(UzytkownikVM uzytkownik) // rejestracja
+        {
+            var _uzytkownik= new Uzytkownik()
+            {
+                Login = uzytkownik.Login,
+                Haslo =uzytkownik.Haslo,
+                Email = uzytkownik.Email,
+                TypKonta = 3
+            };
+            _context.Uzytkownik.Add(_uzytkownik);
+            _context.SaveChanges();
+        }
         public List<Uzytkownik> getAllUzytkownik() => _context.Uzytkownik.ToList();
         public Uzytkownik getUzytkownikById(int uzytkownikId)
         {

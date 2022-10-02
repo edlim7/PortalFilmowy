@@ -6,6 +6,7 @@ import { Formik, Form, Field } from 'formik';
 import SeriesModal from "./SeriesModal";
 const UpdateSeriesModal = () => {
   const {showUpdateModalSeries, setShowUpdateModalSeries, updateSeries} = useContext(ModalContext);
+  const {Kategoria} = useContext(AppContext);
 	const [eduBool, setEduBool] = useState('');
 	async function putSerial(url, data) {
 		const res = await fetch(url, {
@@ -25,7 +26,7 @@ const UpdateSeriesModal = () => {
 	 var str2int = (value) => {
 		return parseInt(value,10);
 	 }
-	 console.log("update"+updateSeries);
+	 console.log("update "+updateSeries.kategoria);
 	 const serialid=updateSeries.serialId;
   return (
     <>
@@ -38,23 +39,19 @@ const UpdateSeriesModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
-				{({}) => (
+							{({ values }) => (
 								<Form>
 									<h3 className="stare">Stare wartości</h3>
 									<h3 className="nowe">Nowe wartości</h3><br /><br /><br />
-									<label className="stareWartosci">Nazwa: {updateSeries.nazwa}</label><label className="field"><Field type ='nazwa' name='nazw' ></Field></label><br /><br /><br />
+									<label className="stareWartosci">Nazwa: {updateSeries.nazwa}</label><label className="field"><Field type ='nazwa' name='nazw' value={updateSeries.nazwa}></Field></label><br /><br /><br />
 									<label className="stareWartosci">Opis: {updateSeries.opis}</label><label className="field"><Field type ='opis' name='opi'  ></Field></label><br /><br /><br />
 									<label className="stareWartosci">Zdjęcie: {updateSeries.zdjecie}</label><label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
-								{/*}
-									Kategoria:    <Field as="select" name="kategori">
+									<label className="stareWartosci">Kategoria: {updateSeries.kategoria}</label><label className="field"><Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
-									<option value={post.kategoriaId} onChange={parseInt(post.kategoriaId,10)}>{post.nazwaKategorii}</option>
+									<option value={post.kategoriaId}>{post.nazwaKategorii}</option>
 									))}
-									
-           							</Field><br /><br />
-								
-									Edukacyjny: Tak<Field type ='radio' name='edukacyjn' value='true' onChange={str2bool()}></Field> 	
-									Nie 		   <Field type ='radio' name='edukacyjn' value='false' onChange={str2bool()}></Field><br /><br /> {*/}
+           							</Field></label><br /><br />
+									<label className="stareWartosci">Edukacyjny: {updateSeries.edukacyjny==true?"tak":"nie"}</label><label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label> <br /><br />
 									<label className="stareWartosci">Emmy: {updateSeries.emmy}</label><label className="field"><Field type ='number' name='emm' min='0' max='100' ></Field></label><br /><br /><br />	
 									<label className="stareWartosci">Ilość sezonów: {updateSeries.sezony}</label><label className="field"><Field type ='number' name='sezon' min='0' max='100' ></Field></label><br /><br /><br />	
 									<label className="stareWartosci">Ilość odcinków: {updateSeries.odcinki}</label><label className="field"><Field type ='number' name='odcink' min='0' max='100' ></Field></label><br /><br /><br />								

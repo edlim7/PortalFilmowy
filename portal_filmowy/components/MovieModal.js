@@ -7,7 +7,16 @@ import UpdateMovieModal from "../components/UpdateMovieModal";
 const MovieModal = () => {
  	const {showModalMovie, setShowModalMovie, movie} = useContext(ModalContext);
 	const {setShowUpdateModalMovie,setUpdateMovie,} = useContext(ModalContext);
-	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+	const {Oceny} = useContext(AppContext);
+	var czyOcenil=0;
+	var ocenaid=0;
+	useEffect(() => {
+		const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
+		if (ZalogowanyUzytkownik) {
+			setZalogowanyUzytkownik(ZalogowanyUzytkownik);
+		}
+	  }, []);
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
@@ -21,6 +30,14 @@ const MovieModal = () => {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
 			body: JSON.stringify({liczba: data.ocea, produkcjaId: data.id, uzytkownikID: data.name})
+		});
+		return res.json()
+	}
+	async function putOcena(url, data) {
+		const res = await fetch(url, {
+			method:'PUT',
+			headers:{'Content-type':'application/json'},
+			body: JSON.stringify({liczba: data.ocea})
 		});
 		return res.json()
 	}
@@ -43,6 +60,8 @@ const MovieModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<center><h1>{movie.nazwa}</h1></center>
+							{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
+							<label>
 							<button 
 							onClick={() => {setShowUpdateModalMovie((prevState) => !prevState); 
 							setUpdateMovie(movie);
@@ -60,16 +79,36 @@ const MovieModal = () => {
 							>
 							Usuń film
 							</button>
+							</label>
+							:  <></>}
 							<p className="obokTytul"><img src={movie.zdjecie}/>
 							 Ilość oskarów: {movie.oskary} <br /><br />
 							 Kategoria: {movie.kategoria} <br /><br />
 							 Ocena: {movie.ocena} <br />
 							
-							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.id, ocea: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
-							values)
-							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) }>
-								<Form>
+							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, ocea: 1}} onSubmit={(values) =>{ 
+							Oceny.forEach((el)=>{
+								czyOcenil=0;
+								if(el.uzytkownikID===ZalogowanyUzytkownik.uzytkownikId && el.produkcjaId===movie.produkcjaId)
+									{
+										czyOcenil=czyOcenil+1;
+										ocenaid=el.ocenaId;
+									}
+							     });
+								if(czyOcenil===0)
+								{
+									postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+									values)
+									.then((data)=> console.log(data))
+									.catch((error)=>console.log(error))
+								}else{
+									putOcena('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
+									values)
+									.then((data)=> console.log(data))
+									.catch((error)=>console.log(error))
+								}
+								 }}>
+									<Form>
 									<Field type ='number' name='ocea' min='1' max='10' className="ocenienanie"></Field>
 									<button type='submit'>Oceń</button>
 								</Form>
@@ -85,13 +124,13 @@ const MovieModal = () => {
 								<li key={post.id} >
 								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b>:  post.nazwaUzytkownika=="Personel" ? 
 								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
-								: {ZalogowanyUzytkownik.typKont==1 || ZalogowanyUzytkownik.typKont==2 ? <button className="usunKom" onClick={() =>{ deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)}}>X</button>: ""}  <br/>{post.tresc} <hr />
+								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)}}>X</button>: ""}  <br/>{post.tresc} <hr />
 								
 								</li>
 							</ul>
 							)} 
 							<p>Dodaj komentarz:</p>
-							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.id, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>

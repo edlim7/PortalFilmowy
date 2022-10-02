@@ -15,9 +15,15 @@ namespace PortalFilmowy.Controllers
             _uzytkownikUsluga = uzytkownikUsluga;
         }
         [HttpPost("addUzytkownik")]
-        public IActionResult AddProdukcja([FromBody]UzytkownikVM uzytkownik)
+        public IActionResult AddUzytkownik([FromBody]UzytkownikVM uzytkownik)
         {
             _uzytkownikUsluga.AddUzytkownik(uzytkownik);
+            return Ok();
+        }
+        [HttpPost("addUzytkownik2")]
+        public IActionResult AddUzytkownik2([FromBody]UzytkownikVM uzytkownik)
+        {
+            _uzytkownikUsluga.AddUzytkownik2(uzytkownik);
             return Ok();
         }
         [HttpGet("getAllUzytkownik")]

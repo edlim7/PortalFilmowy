@@ -7,7 +7,7 @@ import MovieModal from "./MovieModal";
 const UpdateMovieModal = () => {
   const {showUpdateModalMovie, setShowUpdateModalMovie, updateMovie} = useContext(ModalContext);
 	const [eduBool, setEduBool] = useState('');
-	
+	const {Kategoria} = useContext(AppContext);
 	async function putFilm(url, data) {
 		const res = await fetch(url, {
 			method:'PUT',
@@ -38,27 +38,23 @@ const UpdateMovieModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
-				{({}) => (
+								{({ values }) => (
 								<Form>
 									<h3 className="stare">Stare wartości</h3>
 									<h3 className="nowe">Nowe wartości</h3><br /><br /><br />
 									<label className="stareWartosci">Nazwa: {updateMovie.nazwa}</label><label className="field"><Field type ='nazwa' name='nazw' ></Field></label><br /><br /><br />
 									<label className="stareWartosci">Opis: {updateMovie.opis}</label><label className="field"><Field type ='opis' name='opi'  ></Field></label><br /><br /><br />
 									<label className="stareWartosci">Zdjęcie: {updateMovie.zdjecie}</label><label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
-								{/*}
-									Kategoria:    <Field as="select" name="kategori">
+									<label className="stareWartosci">Kategoria: {updateMovie.kategoria}</label><label className="field"><Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
-									<option value={post.kategoriaId} onChange={parseInt(post.kategoriaId,10)}>{post.nazwaKategorii}</option>
+									<option value={post.kategoriaId}>{post.nazwaKategorii}</option>
 									))}
-									
-           							</Field><br /><br />
-								
-									Edukacyjny: Tak<Field type ='radio' name='edukacyjn' value='true' onChange={str2bool()}></Field> 	
-									Nie 		   <Field type ='radio' name='edukacyjn' value='false' onChange={str2bool()}></Field><br /><br /> {*/}
+           							</Field></label><br /><br />
+									<label className="stareWartosci">Edukacyjny:{updateMovie.edukacyjny==true?"tak":"nie"}</label><label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label><br /><br /> 
 									<label className="stareWartosci">Ilość oskarów: {updateMovie.oskary}</label><label className="field"><Field type ='number' name='oskar' min='0' max='100' ></Field></label><br /><br /><br />								
 									<center><button type='submit'>Edytuj!</button></center>
 								</Form>
-								 )}
+								)}
 							</Formik>
 						</Content>
           </Wrapper>

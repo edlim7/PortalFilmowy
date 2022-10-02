@@ -3,9 +3,9 @@ export const AppContext = createContext();
 export const AppContextProvider = ({ children }) => {
 const [Kategoria, setKategoria] = useState("")
 const [Uzytkownicy, setUzytkownicy] = useState("")
+const [Oceny, setOceny] = useState("")
 const [zalogowany, setZalogowany] = useState({zal:false})
-const [ZalogowanyUzytkownik, setZalogowanyUzytkownik] = useState({ id: "", log: "", hasl: "", emai: "", typKont: 0});
 
-	const value = { Kategoria, setKategoria,Uzytkownicy,setUzytkownicy,ZalogowanyUzytkownik, setZalogowanyUzytkownik, zalogowany, setZalogowany };
+	const value = { Kategoria, setKategoria,Uzytkownicy,setUzytkownicy, zalogowany, setZalogowany,Oceny, setOceny };
 	return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

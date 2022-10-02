@@ -67,6 +67,7 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
+                Kategoria = serial.produkcja.Kategoria.NazwaKategorii,
                 ProdukcjaId = serial.produkcja.ProdukcjaId
             });
             return _serialProdukcja.ToList();
@@ -83,7 +84,8 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
-                ProdukcjaId = serial.produkcja.ProdukcjaId
+                ProdukcjaId = serial.produkcja.ProdukcjaId,
+                Kategoria = serial.produkcja.Kategoria.NazwaKategorii,
 
             }).FirstOrDefault();
             return _serialProdukcja;
@@ -100,7 +102,8 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
-                ProdukcjaId = serial.produkcja.ProdukcjaId
+                ProdukcjaId = serial.produkcja.ProdukcjaId,
+                Kategoria = serial.produkcja.Kategoria.NazwaKategorii,
 
             }).FirstOrDefault();
             return _serialProdukcja;

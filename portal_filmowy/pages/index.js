@@ -54,14 +54,32 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	const [dataValues5, setDataValues5] = useState(posts5);  //serial
 	const [dataValues6, setDataValues6] = useState(posts6); // film
 	const [dataValues7, setDataValues7] = useState(posts7);  //serial
-	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
-	console.log("uzytkownik123123123 INDEX: "+ ZalogowanyUzytkownik.log);
+	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+	useEffect(() => {
+		const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
+		if (ZalogowanyUzytkownik) {
+			setZalogowanyUzytkownik(ZalogowanyUzytkownik);
+		}
+	  }, []);
+	const {setKategoria, Kategoria} = useContext(AppContext);
+	useEffect(() => {
+		setKategoria(posts3);
+	}, [])
+	const {setUzytkownicy, Uzyytkownicy} = useContext(AppContext);
+	useEffect(() => {
+		setUzytkownicy(posts7);
+	}, [])
+	const {Oceny, setOceny} = useContext(AppContext);
+	useEffect(() => {
+		setOceny(posts2);
+	}, [])
+	console.log("uzytkownik123123123 INDEX: "+ ZalogowanyUzytkownik.uzytkownikId);
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);
 	console.log("POLICE3",dataValues3);
 	console.log("POLICE4",dataValues4);
 	console.log("POLICE5",dataValues5);
-	var userid=4;										// tu bedzie uzytkownik
+	var userid=ZalogowanyUzytkownik.uzytkownikId;										// tu bedzie uzytkownik
 	var licznikKategorii=0;
 	const ocenioneProdukcje=[];
 	const policzoneKategorie=[];
@@ -244,39 +262,41 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		<MovieModal />
 			<Navbar></Navbar>
 			<Search></Search>
-
-
-			Mainstream:
+			<center><h1>Ze względu na to co oglądasz polecamy:</h1></center>
 <Container>
 			{polecaneDesc.map((post) => (
 			post.sezony > 0 ? 				
 			<ul key={post.id} onClick={()=>{
 				setShowModalSeries((prevState) => !prevState);
 					setSeries({
-						id : post.id,
-						nazwa : post.nazwa,
-						emmy: post.emmy,
-						odcinki : post.odcinki,
-						sezony : post.sezony,
-						komentarze: post.komentarze,
-						produkcjaId:post.produkcjaId,
-						ocena:post.ocena,
-						zdjecie: post.zdjecie,
-						kategoria: post.kategoria
+					id : post.id,
+					nazwa : post.nazwa,
+					emmy: post.emmy,
+					odcinki : post.odcinki,
+					sezony : post.sezony,
+					komentarze: post.komentarze,
+					produkcjaId:post.produkcjaId,
+					ocena:post.ocena,
+					zdjecie: post.zdjecie,
+					kategoria: post.kategoria,
+					serialId:post.serialId,
+					edukacyjny:post.edukacyjny,
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul> : 
 				<ul key={post.id} onClick={()=>{setShowModalMovie((prevState) => !prevState);
 					setMovie({
 						id : post.id,
-						nazwa : post.nazwa,
-						oskary : post.oskary,
-						komentarze: post.komentarze,
-						produkcjaId:post.produkcjaId,
-						ocena:post.ocena,
-						zdjecie: post.zdjecie,
-						opis: post.opis,
-						kategoria:post.kategoria
+					nazwa : post.nazwa,
+					oskary : post.oskary,
+					komentarze: post.komentarze,
+					produkcjaId:post.produkcjaId,
+					ocena:post.ocena,
+					zdjecie: post.zdjecie,
+					opis: post.opis,
+					kategoria:post.kategoria,
+					filmId:post.filmId,
+					edukacyjny:post.edukacyjny,
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
@@ -284,7 +304,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			</Container>
 
 
-Edukacyjne:
+			<center><h1>Polecamy również zapoznać się z mniej popularnymi produkcjami:</h1></center>
 <Container>
 			{eduOcena.map((post) => (
 			post.sezony > 0 ? 				
@@ -292,29 +312,33 @@ Edukacyjne:
 				setShowModalSeries((prevState) => !prevState);
 					setSeries({
 						id : post.id,
-						nazwa : post.nazwa,
-						emmy: post.emmy,
-						odcinki : post.odcinki,
-						sezony : post.sezony,
-						komentarze: post.komentarze,
-						produkcjaId:post.produkcjaId,
-						ocena:post.ocena,
-						zdjecie: post.zdjecie,
-						kategoria: post.kategoria
+					nazwa : post.nazwa,
+					emmy: post.emmy,
+					odcinki : post.odcinki,
+					sezony : post.sezony,
+					komentarze: post.komentarze,
+					produkcjaId:post.produkcjaId,
+					ocena:post.ocena,
+					zdjecie: post.zdjecie,
+					kategoria: post.kategoria,
+					serialId:post.serialId,
+					edukacyjny:post.edukacyjny,
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul> : 
 				<ul key={post.id} onClick={()=>{setShowModalMovie((prevState) => !prevState);
 					setMovie({
 						id : post.id,
-						nazwa : post.nazwa,
-						oskary : post.oskary,
-						komentarze: post.komentarze,
-						produkcjaId:post.produkcjaId,
-						ocena:post.ocena,
-						zdjecie: post.zdjecie,
-						opis: post.opis,
-						kategoria:post.kategoria
+					nazwa : post.nazwa,
+					oskary : post.oskary,
+					komentarze: post.komentarze,
+					produkcjaId:post.produkcjaId,
+					ocena:post.ocena,
+					zdjecie: post.zdjecie,
+					opis: post.opis,
+					kategoria:post.kategoria,
+					filmId:post.filmId,
+					edukacyjny:post.edukacyjny,
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
@@ -332,4 +356,5 @@ const Container = styled.div`
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);
 		grid-template-rows: min-content;
+
 `

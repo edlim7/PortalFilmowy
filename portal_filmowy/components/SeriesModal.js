@@ -7,12 +7,29 @@ import UpdateSeriesModal from "../components/UpdateSeriesModal";
 const SeriesModal = () => {
   const {showModalSeries, setShowModalSeries, series} = useContext(ModalContext);
   const {setShowUpdateModalSeries,setUpdateSeries,} = useContext(ModalContext);
-  const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
+  const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+useEffect(() => {
+	const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
+	if (ZalogowanyUzytkownik) {
+		setZalogowanyUzytkownik(ZalogowanyUzytkownik);
+	}
+  }, []);
+  const {Oceny} = useContext(AppContext);
+  var czyOcenil=0;
+	var ocenaid=0;
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
 			body: JSON.stringify({tresc:data.tresc, produkcjaId: data.id, uzytkownikID: data.name})
+		});
+		return res.json()
+	}
+	async function putOcena(url, data) {
+		const res = await fetch(url, {
+			method:'PUT',
+			headers:{'Content-type':'application/json'},
+			body: JSON.stringify({liczba: data.ocea})
 		});
 		return res.json()
 	}
@@ -44,6 +61,8 @@ const SeriesModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<center><h1>{series.nazwa}</h1></center>
+							{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
+							<label>
 							<button 
 							onClick={() => {setShowUpdateModalSeries((prevState) => !prevState); 
 							setUpdateSeries(series);
@@ -60,18 +79,38 @@ const SeriesModal = () => {
 							className="usunFilm"
 							>
 							Usuń film
-							</button>
+							</button></label>
+							:<></>}
 							<center><p className="obokTytul"><img src={series.zdjecie} />
 							 Ilość sezonów: {series.sezony}<br /><br />
 							 Ilość odcinków: {series.odcinki}<br /><br />
-							 Ilość emmy: {series.emmy} <br /><br /></p>
-
-							<p> Kategoria: {series.kategoria} <br /><br />
+							 Ilość emmy: {series.emmy} <br /><br />
+							 Kategoria: {series.kategoria} <br /><br />
 							 	Ocena: {series.ocena} 
-							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.id, oce: 1}} onSubmit={(values) => postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
-							values)
-							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) }>
+							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, oce: 1}} onSubmit={(values) =>{ 
+							Oceny.forEach((el)=>{
+							czyOcenil=0;
+							if(el.uzytkownikID===ZalogowanyUzytkownik.uzytkownikId && el.produkcjaId===series.produkcjaId)
+								{
+									czyOcenil=czyOcenil+1;
+									ocenaid=el.ocenaId;
+								}
+							    });
+							if(czyOcenil===0)
+							{
+								postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+								values)
+								.then((data)=> console.log(data))
+								.catch((error)=>console.log(error))
+							}
+							else
+							{
+								putOcena('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
+								values)
+								.then((data)=> console.log(data))
+								.catch((error)=>console.log(error))
+							}
+							 }}>
 								<Form>
 									<Field type ='number' name='ocea' min='1' max='10'>
 					  				</Field>
@@ -84,11 +123,11 @@ const SeriesModal = () => {
 								<li key={post.id} >
 								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b>:  post.nazwaUzytkownika=="Personel" ? 
 								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
-								: {ZalogowanyUzytkownik.typKont==1 || ZalogowanyUzytkownik.typKont==2 ? <button className="usunKom" onClick={() =>{ deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)}}>X</button>: ""} <br />  {post.tresc} <hr />
+								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)}}>X</button>: ""} <br />  {post.tresc} <hr />
 								</li>
 							</ul>
 							)} 
-							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.id, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>

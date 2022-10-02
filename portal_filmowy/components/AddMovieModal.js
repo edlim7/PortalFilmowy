@@ -9,7 +9,6 @@ const AddMovieModal = () => {
 	const radioRef = useRef(null);
 	const selectRef = useRef(null);
 	const [eduBool, setEduBool] = useState('');
-	console.log("zz",Kategoria);
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
@@ -41,8 +40,8 @@ const AddMovieModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
-				{({}) => (
-								<Form>
+									{({ values }) => (
+									<Form>
 									Nazwa filmu: <Field type ='nazwa' name='nazw' ></Field><br /><br />
 									Opis: <Field type ='opis' name='opi'  ></Field><br /><br />
 									Zdjęcie: <Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field><br /><br />
@@ -51,16 +50,12 @@ const AddMovieModal = () => {
 			 						{Kategoria.map((post) => (
 									<option value={post.kategoriaId} onChange={str2int}>{post.nazwaKategorii}</option>
 									))}
-									
            							</Field><br /><br />
-								{/*}
-									Edukacyjny: Tak<Field type ='radio' name='edukacyjn' value='true' onChange={str2bool()}></Field> 	
-									Nie 		   <Field type ='radio' name='edukacyjn' value='false' onChange={str2bool()}></Field><br /><br /> {*/}
-
+									<label>Edukacyjny: <Field type ='checkbox' name='edukacyjn'></Field> <br /><br /></label>
 									Ilość oskarów: <Field type ='number' name='oskar' min='0' max='100' ></Field><br />									
 									<center><button type='submit'>Dodaj!</button></center>
 								</Form>
-								 )}
+									)}
 							</Formik>
 						</Content>
           </Wrapper>

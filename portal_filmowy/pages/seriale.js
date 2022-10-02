@@ -41,15 +41,24 @@ const Seriale = ({posts,posts2,posts3,posts4,posts5}) => {
 	const [dataValues2, setDataValues2] = useState(posts2);
 	const [dataValues3, setDataValues3] = useState(posts3);
 	const [dataValues4, setDataValues4] = useState(posts4);
-	const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
 	const {setUzytkownicy, Uzyytkownicy} = useContext(AppContext);
-
+	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+useEffect(() => {
+	const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
+	if (ZalogowanyUzytkownik) {
+		setZalogowanyUzytkownik(ZalogowanyUzytkownik);
+	}
+  }, []);
 	const {setKategoria, Kategoria} = useContext(AppContext);
 	useEffect(() => {
 		setKategoria(posts5);
 	}, [])
 	useEffect(() => {
 		setUzytkownicy(posts4);
+	}, [])
+	const {Oceny, setOceny} = useContext(AppContext);
+	useEffect(() => {
+		setOceny(posts2);
 	}, [])
 
 	console.log("uzytkownik123123123:SERIAL "+ ZalogowanyUzytkownik.log);
@@ -104,12 +113,14 @@ const Seriale = ({posts,posts2,posts3,posts4,posts5}) => {
 			<Navbar></Navbar>
 			<Search></Search>
 			<Container>
+			{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
 			<button 
 					onClick={() => setShowAddModalSeries((prevState) => !prevState)}
 					className="DodajFilm"
 				>
 					Dodaj Serial
 				</button>
+			:<></>}
 			{serialOcena.map((post) => (
 				<ul key={post.id} onClick={() => {setShowModalSeries((prevState) => !prevState);
 				setSeries({
@@ -123,7 +134,8 @@ const Seriale = ({posts,posts2,posts3,posts4,posts5}) => {
 					ocena:post.ocena,
 					zdjecie: post.zdjecie,
 					kategoria: post.kategoria,
-					serialId:post.serialId
+					serialId:post.serialId,
+					edukacyjny:post.edukacyjny,
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>

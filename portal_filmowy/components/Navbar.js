@@ -3,29 +3,53 @@ import React, {useState, useEffect, useContext} from "react";
 import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { AppContext } from "../contexts/AppContext";
+import PanelAdminaModal from "./PanelAdminaModal";
 import Logowanie from "./logowanie/Logowanie";
 const Navbar = () => {
+	const {showPanelAdminaModal, setShowPanelAdminaModal, PanelAdmina, setPanelAdmina} = useContext(ModalContext)
 	const { setShowModalLogin } = useContext(ModalContext);
+	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+	useEffect(() => {
+		const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
+		if (ZalogowanyUzytkownik) {
+			setZalogowanyUzytkownik(ZalogowanyUzytkownik);
+		}
+	  }, []);
+	function wylogujUzytkownika() {
+		localStorage.removeItem('uzytkownik',JSON.stringify());
+		window.location.reload(false);
+	}
 	return (
 		<Container>
+			<PanelAdminaModal />
 			<Logowanie />
 			
 			<div>
 			<h1><center><Link href="/" ><a className="glowna">Filizone</a></Link></center>
-			<button 
-					onClick={() => {
-					setShowModalLogin((prevState) => !prevState);
-					}}
-					className="Login"
+			{ZalogowanyUzytkownik.typKonta===undefined ? 
+				<button 
+				onClick={() => {
+				setShowModalLogin((prevState) => !prevState);
+				}}
+				className="Login"
 				>
-					Zaloguj się
+				Zaloguj się
 				</button>
+			: 	
+				<label><span className="zalogowanyLogin">Zalogowany jako:<br/> {ZalogowanyUzytkownik.login}</span>
+				<button onClick={() => {wylogujUzytkownika();}} className="Login">
+				Wyloguj się
+				</button>
+				</label>
+			}
+			{ZalogowanyUzytkownik.typKonta===1 ?
 			<button 
-					onClick={() => setShowModalPanel((prevState) => !prevState)}
+					onClick={() => setShowPanelAdminaModal((prevState) => !prevState)}
 					className="Panel"
 				>
 					Panel admina
 			</button>
+			:<></>}
 			</h1>
 			
 			</div>
@@ -43,6 +67,8 @@ const Navbar = () => {
 export default Navbar;
 const Container = styled.div`
 	background-color: #A69595;
+	
+
 h1{
 	position:relative ;
 }
@@ -63,12 +89,12 @@ button:hover{
 	}
 .Login{
 	position: absolute;
-	right:0px;
+	right:5px;
 	top:10px;
 }
 .Panel{
 	position: absolute;
-	right:0px;
+	right:5px;
 	top:50px;
 }
 .linki{
@@ -91,6 +117,14 @@ button:hover{
 .glowna{
 	text-decoration: none;
 	color: black;
+}
+.zalogowanyLogin
+{
+	position: absolute;
+	top: 10px;
+	left:5px;
+	float:left;
+	font-size: 18px;
 }
 `;
 

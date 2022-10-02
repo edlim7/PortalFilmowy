@@ -2,9 +2,10 @@ import React, { useContext, useState,useRef } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../../contexts/ModalContext";
 import { AppContext } from "../../contexts/AppContext";
+import RejestracjaModal from "../RejestracjaModal";
 const Logowanie = () => {
-	const { showModalLogin, setShowModalLogin} = useContext(ModalContext);
-	const {Uzytkownicy,ZalogowanyUzytkownik, setZalogowanyUzytkownik,zalogowany, setZalogowany} = useContext(AppContext);
+	const { showModalLogin, setShowModalLogin,setShowRejestracjaModal} = useContext(ModalContext);
+	const {Uzytkownicy,ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
 	const [isLogin, setIsLogin] = useState(true);
 	var zal=false;
 	const passRef = useRef(null);
@@ -18,39 +19,24 @@ const Logowanie = () => {
 			Uzytkownicy.forEach((el)=>{
 				if(passRef.current.value===el.haslo && emailRef.current.value===el.email)
 				{
-					setZalogowanyUzytkownik({
-						id: el.uzytkownikId, 
-						log: el.login, 
-						hasl: el.haslo, 
-						emai: el.email, 
-						typKont: el.typKonta,
-					});
+					localStorage.setItem('uzytkownik',JSON.stringify(el));
 					console.log("Udało sie zalogować!");
 					zal=true;
-					setZalogowany({zal:true});
+					window.location.reload(false);
 				}
 			})
 			if(zal===false)
-			console.log("Błędny login lub hasło!");
-	}
-	function wylogujUzytkownika() {
-		setZalogowanyUzytkownik({
-				id: "", 
-				log: "", 
-				hasl: "", 
-				emai: "", 
-				typKont: 0
-			});
-			setZalogowany({zal:false});
+			alert("Zły login lub hasło!");
 	}
 	return (
 		<>
+		<RejestracjaModal/>
 			{showModalLogin ? (
 				<Background onClick={() => setShowModalLogin((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						
 						<section className="auth">
-							<h1>{isLogin ? "Logowanie" : "Rejestracja"}</h1>
+							<h1>Logowanie</h1>
 							<form>
 								<div className="control">
 									<label htmlFor="email">Twój email</label>
@@ -70,15 +56,16 @@ const Logowanie = () => {
 									<button type="button"
 										className="toggle"
 										onClick={zalogujUzytkownika}
-										>{isLogin ? "Zaloguj" : "Zarejestruj"}
+										> Zaloguj
 										</button>
 
 									<button
 										type="button"
 										className="toggle"
-										onClick={switchAuthModeHandler}
-									>
-										{isLogin ? "Stwórz konto" : "Zaloguj się"}
+										onClick={() => {setShowRejestracjaModal((prevState) => !prevState);
+											setShowModalLogin((prevState) => !prevState);
+										}}>
+								   Stwórz konto
 									</button>
 								</div>
 							</form>

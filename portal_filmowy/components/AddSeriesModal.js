@@ -39,21 +39,17 @@ const AddSeriesModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
-				{({}) => (
+							{({ values }) => (
 								<Form>
 									Nazwa serialu <Field type ='nazwa' name='nazw' ></Field><br /><br />
 									Opis: <Field type ='opis' name='opi'  ></Field><br /><br />
 									Zdjęcie: <Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field><br /><br />
-{/*}
 									Kategoria:    <Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
 									<option value={post.kategoriaId} onChange={parseInt(post.kategoriaId,10)}>{post.nazwaKategorii}</option>
 									))}
-									
            							</Field><br /><br />
-								
-									Edukacyjny: Tak<Field type ='radio' name='edukacyjn' value='true' onChange={str2bool()}></Field> 	
-									Nie 		   <Field type ='radio' name='edukacyjn' value='false' onChange={str2bool()}></Field><br /><br /> {*/}
+									<label>Edukacyjny: <Field type ='checkbox' name='edukacyjn'></Field> <br /><br /></label>
 									Emmy: <Field type ='number' name='emm' min='0' max='100' ></Field><br />	<br />	
 									Ilość sezonów: <Field type ='number' name='odcink' min='0' max='100' ></Field><br />	<br />	
 									Ilość odcinków: <Field type ='number' name='sezon' min='0' max='100' ></Field><br />									

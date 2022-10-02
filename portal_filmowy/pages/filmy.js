@@ -41,16 +41,26 @@ const {setShowAddModalMovie} = useContext(ModalContext);
 const [dataValues, setDataValues] = useState(posts);
 const [dataValues2, setDataValues2] = useState(posts2);
 const [dataValues3, setDataValues3] = useState(posts3);
-const {ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
-console.log("uzytkownik123123123 FILM: "+ ZalogowanyUzytkownik.log);
+const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+useEffect(() => {
+	const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
+	if (ZalogowanyUzytkownik) {
+		setZalogowanyUzytkownik(ZalogowanyUzytkownik);
+	}
+  }, []);
 	const {setKategoria, Kategoria} = useContext(AppContext);
 	useEffect(() => {
 		setKategoria(posts5);
 	}, [])
-	const {setUzytkownicy, Uzyytkownicy} = useContext(AppContext);
+	const {setUzytkownicy, Uzytkownicy} = useContext(AppContext);
 	useEffect(() => {
 		setUzytkownicy(posts4);
 	}, [])
+	const {Oceny, setOceny} = useContext(AppContext);
+	useEffect(() => {
+		setOceny(posts2);
+	}, [])
+	
 const [dataValues4, setDataValues4] = useState(posts4);
 const filmOcena=[];
 var komentarz=[];
@@ -93,7 +103,6 @@ filmOcena.forEach((el)=>{
 })
 console.log("filmOcena z kom");
 console.log(filmOcena);
-
 	return (
 		<>
 			<AddMovieModal />
@@ -101,13 +110,15 @@ console.log(filmOcena);
 			<Navbar></Navbar>
 			<Search></Search>
 			<Container>
-			{ZalogowanyUzytkownik.typKont==1 || ZalogowanyUzytkownik.typKont==2 ? "":""}
+			{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
 			<button 
-					onClick={() => setShowAddModalMovie((prevState) => !prevState)}
-					className="DodajFilm"
-				>
-					Dodaj Film
-				</button> 
+			onClick={() => setShowAddModalMovie((prevState) => !prevState)}
+			className="DodajFilm"
+		>
+			Dodaj Film
+		</button> 
+			:<></>}
+
 			{filmOcena.map((post) => (
 				<ul key={post.id} onClick={() => {setShowModalMovie((prevState) => !prevState);
 				setMovie({
@@ -121,6 +132,7 @@ console.log(filmOcena);
 					opis: post.opis,
 					kategoria:post.kategoria,
 					filmId:post.filmId,
+					edukacyjny:post.edukacyjny,
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
