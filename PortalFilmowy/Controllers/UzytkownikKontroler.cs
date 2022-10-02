@@ -44,6 +44,12 @@ namespace PortalFilmowy.Controllers
             var updatedUzytkownik = _uzytkownikUsluga.updateUzytkownikById(id,uzytkownik);
             return Ok(updatedUzytkownik);
         }
+         [HttpPut("updateUzytkownikById2/{id}")]
+        public IActionResult updateUzytkownikById2(int id, [FromBody]UzytkownikVM uzytkownik)
+        {
+            var updatedUzytkownik = _uzytkownikUsluga.updateUzytkownikById2(id,uzytkownik);
+            return Ok(updatedUzytkownik);
+        }
          [HttpDelete("deleteUzytkownikById/{id}")]
         public IActionResult deleteUzytkownikById(int id)
         {

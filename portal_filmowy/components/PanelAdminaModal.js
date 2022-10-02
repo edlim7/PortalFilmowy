@@ -26,9 +26,9 @@ const PanelAdminaModal = () => {
 							<Formik initialValues={{id: 3, typKont: 1, log:""}}>
 						{({}) => (
 								<Form>
-									<label><b>Nazwa konta:</b> </label><br /><br />
+									<label><b>Nazwa konta:</b><b className="typKonta">Typ konta:</b>  </label><br /><br />
 			 						{Uzytkownicy.map((post) => (
-										<label className="selec">{post.login}: {post.typKonta==1? "Admin": post.typKonta==2? "Personel":"Użytkownik" }
+										<label className="selec">{post.login}: <span className="postTypKonta">{post.typKonta==1? "Admin": post.typKonta==2? "Personel":"Użytkownik" }</span>
 										<button type='submit' onClick={() => {
 										setShowModalUser((prevState) => !prevState);
 										setUser(post);
@@ -167,11 +167,24 @@ const Content = styled.div`
 		
 	}
 	.selec{
-		font-size:20px;
-		word-spacing: 10px;
+		margin: 3rem auto;
+		width: 95%;
+		max-width: 25rem;
+		border-radius: 6px;
+		padding: 1rem;
+		text-align: center;
 	}
 	b{
-		font-size:30px;
+		text-align: center;
+		color: Black;
+		font-size:24px;
+	}
+	.typKonta{
+		position: relative;
+		left:50px;
+	}
+	.postTypKonta{
+		text-align: center;
 	}
 `;
 

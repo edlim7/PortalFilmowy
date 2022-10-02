@@ -37,7 +37,7 @@ namespace PortalFilmowy.Data.Services
                 Nazwa = film.Nazwa,
                 Zdjecie= film.Zdjecie,
                 Opis = film.Opis,
-                KategoriaId = film.KategoriaId,
+                KategoriaId = (int)film.KategoriaId,
                 Edukacyjny = film.Edukacyjny
             };
             _context.Produkcja.Add(_produkcja);

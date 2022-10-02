@@ -38,19 +38,18 @@ const UzytkownikModal = () => {
 						<Content>
 							<h1>Zmień typ konta: {uzytkownikLog}</h1><br />
 
-							<Formik initialValues={{typKont: 3}} onSubmit={(values) => putTyp('https://localhost:5001/api/UzytkownikKontroler/updateUzytkownikById'+uzytkownikid, 
+							<Formik initialValues={{typKont: 3}} onSubmit={(values) => putTyp('https://localhost:5001/api/UzytkownikKontroler/updateUzytkownikById2/'+uzytkownikid, 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error)) }>
 								<Form>
-								
 								<center>
-								<label className="labelSpacing">Administrator:<Field type ='radio' name='typKont' value="jeden" ></Field> </label>
-								<label className="labelSpacing2">Personel:<Field type ='radio' name='typKont' value="dwa"></Field> </label>
-								<label className="labelSpacing3">Użytkownik:<Field type ='radio' name='typKont' value="trzy"></Field> </label>
+								<Field as="select" name="typKont">
+									<option value="1">Administrator</option>
+									<option value="2">Personel</option>
+									<option value="3">Uzytkownik</option>
+           						</Field><br /><br />
 								</center>
-								
-									<br /><br />
 									<center><button type='submit'>Edytuj!</button></center>
 								</Form>
 							</Formik>

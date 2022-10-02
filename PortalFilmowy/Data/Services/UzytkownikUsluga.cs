@@ -61,6 +61,16 @@ namespace PortalFilmowy.Data.Services
             }
             return _uzytkownik;
         }
+        public Uzytkownik updateUzytkownikById2(int uzytkownikId, UzytkownikVM uzytkownik)
+        {
+            var _uzytkownik = _context.Uzytkownik.FirstOrDefault(n=>n.UzytkownikId==uzytkownikId);
+            if(_uzytkownik!=null)
+            {
+                _uzytkownik.TypKonta = uzytkownik.TypKonta;
+                _context.SaveChanges();
+            }
+            return _uzytkownik;
+        }
         public void deleteUzytkownikById(int uzytkownikId)
         {
             var _uzytkownik = _context.Uzytkownik.FirstOrDefault(n=>n.UzytkownikId==uzytkownikId);
