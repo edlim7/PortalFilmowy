@@ -69,7 +69,7 @@ useEffect(() => {
 							setShowModalSeries((prevState) => !prevState)}}
 							className="EdytujFilm"
 							>
-							Edytuj film
+							Edytuj serial
 							</button>
 							<button 
 							onClick={() => {
@@ -78,7 +78,7 @@ useEffect(() => {
 							}}
 							className="usunFilm"
 							>
-							Usuń film
+							Usuń serial
 							</button></label>
 							:<></>}
 							<center><p className="obokTytul"><img src={series.zdjecie} />
@@ -112,12 +112,13 @@ useEffect(() => {
 							}
 							 }}>
 								<Form>
-									<Field type ='number' name='ocea' min='1' max='10'>
-					  				</Field>
+									<Field type ='number' name='ocea' min='1' max='10'></Field>
 									<button type='submit'>Oceń</button>
 								</Form>
 							</Formik>
 							</p></center>
+							<p> Opis:</p>
+							<span className="opis">{series.opis}</span>
 							<p>Komentarze:</p>  {series.komentarze.map((post)=> 
 							<ul key={post.id} >
 								<li key={post.id} >
@@ -200,8 +201,8 @@ const Content = styled.div`
 		//display: block;  
 		//margin-left: auto;  
 		//margin-right: auto;
-		height: 144px;
-		width: 	176px; 
+		height: 288px;
+		width: 	320px;
 		margin-right: 1px;
    		border-radius: 5px;
 	}

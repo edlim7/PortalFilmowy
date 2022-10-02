@@ -36,10 +36,11 @@ const AddMovieModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Dodaj nowy film</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) => postKom('https://localhost:5001/api/FilmKontroler/addFilm2', 
+							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) =>{ postKom('https://localhost:5001/api/FilmKontroler/addFilm2', 
 							values)
 							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) }>
+							.catch((error)=>console.log(error)) 
+							window.location.reload();}}>
 									{({ values }) => (
 									<Form>
 									Nazwa filmu: <Field type ='nazwa' name='nazw' ></Field><br /><br />

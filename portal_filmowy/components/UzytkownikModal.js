@@ -23,13 +23,6 @@ const UzytkownikModal = () => {
 	  }, []);
 	  const uzytkownikid=user.uzytkownikId;
 	  const uzytkownikLog=user.login;
-
-	  const selectOptions = [
-		{ id: 1, text: "Jeden" },
-		{ id: 2, text: "Dwa" },
-		{ id: 3, text: "Trzy" }
-	  ];
-
   return (
     <>
 {showModalUser ? (
@@ -37,20 +30,22 @@ const UzytkownikModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Zmień typ konta: {uzytkownikLog}</h1><br />
-
-							<Formik initialValues={{typKont: 3}} onSubmit={(values) => putTyp('https://localhost:5001/api/UzytkownikKontroler/updateUzytkownikById2/'+uzytkownikid, 
+							<Formik initialValues={{typKont: 3}} onSubmit={(values) =>{ putTyp('https://localhost:5001/api/UzytkownikKontroler/updateUzytkownikById2/'+uzytkownikid, 
 							values)
 							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) }>
+							.catch((error)=>console.log(error))
+							setShowModalUser((prevState) => !prevState)
+							window.location.reload()} 
+							}>
 								<Form>
 								<center>
-								<Field as="select" name="typKont">
-									<option value="1">Administrator</option>
-									<option value="2">Personel</option>
-									<option value="3">Uzytkownik</option>
-           						</Field><br /><br />
-								</center>
-									<center><button type='submit'>Edytuj!</button></center>
+								<label className="selec">
+								<label className="labelSpacing">Administrator:<Field type="radio" name="typKont" value="1"></Field> </label> 
+								<label className="labelSpacing2">Personel:<Field type="radio" name="typKont" value="2"></Field> </label> 
+								<label className="labelSpacing3">Uzytkownik:<Field type="radio" name="typKont" value="3"></Field> </label> 
+								</label>
+								</center><br /><br />
+								<center><button type='submit'>Edytuj!</button></center>
 								</Form>
 							</Formik>
 

@@ -35,10 +35,11 @@ const AddSeriesModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Dodaj nowy serial</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, odcink: 0,sezon: 0, emm:0}} onSubmit={(values) => postKom('https://localhost:5001/api/SerialKontroler/addSerial2', 
+							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, odcink: 0,sezon: 0, emm:0}} onSubmit={(values) =>{ postKom('https://localhost:5001/api/SerialKontroler/addSerial2', 
 							values)
 							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) }>
+							.catch((error)=>console.log(error))
+							window.location.reload()} }>
 							{({ values }) => (
 								<Form>
 									Nazwa serialu <Field type ='nazwa' name='nazw' ></Field><br /><br />

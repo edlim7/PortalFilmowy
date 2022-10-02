@@ -121,6 +121,7 @@ useEffect(() => {
 					kategoria: post.kategoria,
 					serialId:post.serialId,
 					edukacyjny:post.edukacyjny,
+					opis:post.opis
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>

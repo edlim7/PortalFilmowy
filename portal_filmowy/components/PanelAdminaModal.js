@@ -24,23 +24,20 @@ const PanelAdminaModal = () => {
 						<Content>
 							<h1>Zmień typ konta użytkowników</h1>
 							<Formik initialValues={{id: 3, typKont: 1, log:""}}>
-						{({}) => (
 								<Form>
 									<label><b>Nazwa konta:</b><b className="typKonta">Typ konta:</b>  </label><br /><br />
 			 						{Uzytkownicy.map((post) => (
 										<label className="selec">{post.login}: <span className="postTypKonta">{post.typKonta==1? "Admin": post.typKonta==2? "Personel":"Użytkownik" }</span>
-										<button type='submit' onClick={() => {
+										<button type='button' onClick={() => {
 										setShowModalUser((prevState) => !prevState);
+										setShowPanelAdminaModal((prevState) => !prevState);
 										setUser(post);
 										}}className="edytuj">
 										Edytuj!
 										</button><br/>
 										</label>
 									))}
-           															
-									
 								</Form>
-								 )}
 							</Formik>
 						</Content>
           </Wrapper>

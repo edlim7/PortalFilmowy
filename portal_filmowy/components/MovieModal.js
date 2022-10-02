@@ -203,8 +203,8 @@ const Content = styled.div`
 		//display: block;  
 		//margin-left: auto;  
 		//margin-right: auto;
-		height: 144px;
-		width: 	176px; 
+		height: 288px;
+		width: 	320px; 
 		margin-right: 1px;
    		border-radius: 5px;
 	}
@@ -259,11 +259,12 @@ const Content = styled.div`
 		height: 45px;
 		width: 145px;
 	}
+
 	.usunKom{
-		background-color: red;
 		padding: 0px;
 		width:22px;
 		height: 22px;
+		border-Radius: 100,
 	}
 `;
 

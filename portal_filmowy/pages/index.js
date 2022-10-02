@@ -269,18 +269,19 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			<ul key={post.id} onClick={()=>{
 				setShowModalSeries((prevState) => !prevState);
 					setSeries({
-					id : post.id,
-					nazwa : post.nazwa,
-					emmy: post.emmy,
-					odcinki : post.odcinki,
-					sezony : post.sezony,
-					komentarze: post.komentarze,
-					produkcjaId:post.produkcjaId,
-					ocena:post.ocena,
-					zdjecie: post.zdjecie,
-					kategoria: post.kategoria,
-					serialId:post.serialId,
-					edukacyjny:post.edukacyjny,
+						id : post.id,
+						nazwa : post.nazwa,
+						emmy: post.emmy,
+						odcinki : post.odcinki,
+						sezony : post.sezony,
+						komentarze: post.komentarze,
+						produkcjaId:post.produkcjaId,
+						ocena:post.ocena,
+						zdjecie: post.zdjecie,
+						kategoria: post.kategoria,
+						serialId:post.serialId,
+						edukacyjny:post.edukacyjny,
+						opis:post.opis
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul> : 
@@ -312,17 +313,18 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 				setShowModalSeries((prevState) => !prevState);
 					setSeries({
 						id : post.id,
-					nazwa : post.nazwa,
-					emmy: post.emmy,
-					odcinki : post.odcinki,
-					sezony : post.sezony,
-					komentarze: post.komentarze,
-					produkcjaId:post.produkcjaId,
-					ocena:post.ocena,
-					zdjecie: post.zdjecie,
-					kategoria: post.kategoria,
-					serialId:post.serialId,
-					edukacyjny:post.edukacyjny,
+						nazwa : post.nazwa,
+						emmy: post.emmy,
+						odcinki : post.odcinki,
+						sezony : post.sezony,
+						komentarze: post.komentarze,
+						produkcjaId:post.produkcjaId,
+						ocena:post.ocena,
+						zdjecie: post.zdjecie,
+						kategoria: post.kategoria,
+						serialId:post.serialId,
+						edukacyjny:post.edukacyjny,
+						opis:post.opis
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul> : 
