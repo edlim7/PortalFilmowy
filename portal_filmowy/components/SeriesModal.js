@@ -179,6 +179,7 @@ const Content = styled.div`
 	justify-content: center;
 	align-items: left;
 	padding-left: 5px;
+	padding-bottom: 10px;
 	color: #141414;
 	
 	p {
@@ -262,6 +263,9 @@ const Content = styled.div`
 		padding: 0px;
 		width:22px;
 		height: 22px;
+	}
+	input:focus{
+		outline: 3px solid black;
 	}
 `;
 export default SeriesModal

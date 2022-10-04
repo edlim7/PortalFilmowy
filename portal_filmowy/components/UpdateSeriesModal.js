@@ -178,6 +178,9 @@ const Content = styled.div`
 		padding-left: 50px;
 		
 	}
+	input:focus{
+		outline: 3px solid black;
+	}
 `;
 
 export default UpdateSeriesModal

@@ -142,6 +142,9 @@ const Content = styled.div`
 		text-align: left;
 		padding: 0.25rem;	
 	}
+	input:focus{
+		outline: 3px solid black;
+	}
 	.admin{
 		color:#ca3063;
 	}
@@ -174,6 +177,9 @@ const Content = styled.div`
 		float:left;
 		padding-left: 50px;
 		
+	}
+	input:focus{
+		outline: 3px solid black;
 	}
 `;
 

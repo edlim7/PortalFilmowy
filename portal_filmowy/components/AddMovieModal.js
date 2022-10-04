@@ -162,6 +162,9 @@ const Content = styled.div`
 	}
 	.ocenienanie{
 	}
+	input:focus{
+		outline: 3px solid black;
+	}
 `;
 
 export default AddMovieModal

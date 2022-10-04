@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
 import Navbar from "../components/Navbar";
-import Search from "../components/Search";
 import Footer from "../components/Footer";
 import styled from "styled-components";
 import SeriesModal from "../components/SeriesModal";
@@ -35,6 +34,10 @@ export async function getStaticProps() {
 	};
 }
 const Seriale = ({posts,posts2,posts3,posts4,posts5}) => {
+	const {searchTerm, setSearchTerm} = useContext(AppContext);
+	useEffect(() => {
+		setSearchTerm('');
+	}, [])
 	const {showModalSeries,setShowModalSeries, series, setSeries} = useContext(ModalContext)
 	const {setShowAddModalSeries} = useContext(ModalContext);
 	const [dataValues, setDataValues] = useState(posts);
@@ -111,7 +114,6 @@ useEffect(() => {
 		<AddSeriesModal />
 		<SeriesModal />
 			<Navbar></Navbar>
-			<Search></Search>
 			<Container>
 			{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
 			<button 
@@ -121,7 +123,13 @@ useEffect(() => {
 					Dodaj Serial
 				</button>
 			:<></>}
-			{serialOcena.map((post) => (
+			{serialOcena.filter((val)=>{
+				if(searchTerm==""){
+					return val;
+				}else if(val.nazwa.toLowerCase().includes(searchTerm.toLowerCase())){
+					return val;
+				}
+			}).map((post) => (
 				<ul key={post.id} onClick={() => {setShowModalSeries((prevState) => !prevState);
 				setSeries({
 					id : post.id,

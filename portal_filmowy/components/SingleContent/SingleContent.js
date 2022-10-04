@@ -10,8 +10,11 @@ const SingleContent = ({id,
     <b className='kategoria'>{kategoria}</b>
     <b className='liczba'>{liczba}</b>
     <b className='produkcjaid'>{produkcjaid}</b>
-    <b className='ocena'>{ocena}</b>
+    
     <img className='zdjecie' src={zdjecie} />
+    <b className='ocena'>{ocena ? "★ "+ocena: ocena }</b>
+    
+    
     </Wrapper>
 
   )
@@ -51,7 +54,6 @@ const Wrapper = styled.div`
   text-align: center;
   font-size: 17px;
   padding: 8px 0;
-  
 }
 .zdjecie{
   display: block;  
@@ -59,6 +61,7 @@ const Wrapper = styled.div`
   width: 	480px; 
   margin-left: auto;  
   margin-right: auto;
+
 }
 
 .subTitle {
@@ -67,4 +70,11 @@ const Wrapper = styled.div`
   padding-bottom: 3px;
   padding: 0 2px;
   padding-bottom: 3px;
-}`;
+}
+.ocenaZdjecie{
+position: relative;
+}
+.ocena{
+
+}
+`;

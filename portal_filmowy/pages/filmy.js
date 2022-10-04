@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
 import Navbar from "../components/Navbar";
-import Search from "../components/Search";
 import Footer from "../components/Footer";
 import styled from "styled-components";
 import MovieModal from "../components/MovieModal";
@@ -36,6 +35,10 @@ export async function getStaticProps() {
 }
 
 const Filmy = ({posts,posts2,posts3,posts4,posts5}) => {
+const {searchTerm, setSearchTerm} = useContext(AppContext);
+useEffect(() => {
+	setSearchTerm('');
+}, [])
 const {showModalMovie,setShowModalMovie, movie, setMovie} = useContext(ModalContext)
 const {setShowAddModalMovie} = useContext(ModalContext);
 const [dataValues, setDataValues] = useState(posts);
@@ -108,7 +111,6 @@ console.log(filmOcena);
 			<AddMovieModal />
 			<MovieModal />
 			<Navbar></Navbar>
-			<Search></Search>
 			<Container>
 			{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
 			<button 
@@ -118,8 +120,13 @@ console.log(filmOcena);
 			Dodaj Film
 		</button> 
 			:<></>}
-
-			{filmOcena.map((post) => (
+			{filmOcena.filter((val)=>{
+				if(searchTerm==""){
+					return val;
+				}else if(val.nazwa.toLowerCase().includes(searchTerm.toLowerCase())){
+					return val;
+				}
+			}).map((post) => (
 				<ul key={post.id} onClick={() => {setShowModalMovie((prevState) => !prevState);
 				setMovie({
 					id : post.id,

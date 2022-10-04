@@ -1,6 +1,5 @@
 import React, {useState, useEffect, isValidElement, useContext} from "react";
 import Navbar from "../components/Navbar";
-import Search from "../components/Search";
 import Footer from "../components/Footer";
 import styled from "styled-components";
 import https from 'https';
@@ -45,6 +44,10 @@ export async function getStaticProps() {
 	};
 }
 const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
+	const {searchTerm, setSearchTerm} = useContext(AppContext);
+	useEffect(() => {
+		setSearchTerm('');
+	}, [])
 	const {showModalSeries,setShowModalSeries, series, setSeries} = useContext(ModalContext);
 	const {showModalMovie,setShowModalMovie, movie, setMovie} = useContext(ModalContext)
 	const [dataValues, setDataValues] = useState(posts); //produkcja
@@ -73,12 +76,6 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	useEffect(() => {
 		setOceny(posts2);
 	}, [])
-	console.log("uzytkownik123123123 INDEX: "+ ZalogowanyUzytkownik.uzytkownikId);
-	console.log("POLICE",dataValues);
-	console.log("POLICE2",dataValues2);
-	console.log("POLICE3",dataValues3);
-	console.log("POLICE4",dataValues4);
-	console.log("POLICE5",dataValues5);
 	var userid=ZalogowanyUzytkownik.uzytkownikId;										// tu bedzie uzytkownik
 	var licznikKategorii=0;
 	const ocenioneProdukcje=[];
@@ -118,16 +115,11 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		licznikKategorii=0;
 	})
 	const sortPoliczoneKategorie = [...policzoneKategorie].sort((a,b)=>b.Ilosc-a.Ilosc);	// sortowanie podliczonych kategorii
-	console.log("ocenioneProdukcje:")
-	console.log(ocenioneProdukcje);
-
 	ocenioneProdukcje.forEach((el3)=>{		// polecane produkcje dla uzytkownika
 		polecane = polecane.filter(obj => {
 			return obj.produkcjaId !== el3.produkcjaId && obj.kategoriaId==sortPoliczoneKategorie[0].kategoriaId;
 		})
 	})
-	console.log("polecane:")
-	console.log(polecane);
 	polecane.forEach((el)=>{		// liczenie oceny
 		dataValues2.forEach((el2)=>{
 			if(el2.produkcjaId==el.produkcjaId)
@@ -163,12 +155,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			}
 		})
 	})
-	console.log("serialFilm:")
-	console.log(serialFilm);
-
 	const polecaneDesc = [...serialFilm].sort((a,b)=>b.ocena-a.ocena);	//wyswietlanie polecanych od najwyzej ocenianego
-	console.log("posortowane polecanie");
-	console.log(polecaneDesc);
 	// przypisanie komentarzy do polecanych:
 	dataValues6.forEach((el)=>{ //komentarze | przypisanie nazwy uzytkownika do uzytkownika
 		dataValues7.forEach((el2)=>{	// uzytkownik
@@ -195,8 +182,6 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			return obj.produkcjaId !== el3.produkcjaId && obj.edukacyjny==true;			
 		})
 	})
-	console.log("Edukacujne:")
-	console.log(edukacyjnePolecane);
 	edukacyjnePolecane.forEach((el)=>{		// liczenie oceny
 		dataValues2.forEach((el2)=>{
 			if(el2.produkcjaId==el.produkcjaId)
@@ -261,10 +246,15 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		<SeriesModal />
 		<MovieModal />
 			<Navbar></Navbar>
-			<Search></Search>
 			<center><h1>Ze względu na to co oglądasz polecamy:</h1></center>
 <Container>
-			{polecaneDesc.map((post) => (
+			{polecaneDesc.filter((val)=>{
+				if(searchTerm==""){
+					return val;
+				}else if(val.nazwa.toLowerCase().includes(searchTerm.toLowerCase())){
+					return val;
+				}
+			}).map((post) => (
 			post.sezony > 0 ? 				
 			<ul key={post.id} onClick={()=>{
 				setShowModalSeries((prevState) => !prevState);
@@ -307,7 +297,13 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 
 			<center><h1>Polecamy również zapoznać się z mniej popularnymi produkcjami:</h1></center>
 <Container>
-			{eduOcena.map((post) => (
+			{eduOcena.filter((val)=>{
+				if(searchTerm==""){
+					return val;
+				}else if(val.nazwa.toLowerCase().includes(searchTerm.toLowerCase())){
+					return val;
+				}
+			}).map((post) => (
 			post.sezony > 0 ? 				
 			<ul key={post.id} onClick={()=>{
 				setShowModalSeries((prevState) => !prevState);
@@ -346,7 +342,6 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 				</ul>
 			))}</Container>
 			<Footer></Footer>
-			
 		</>
 	);
 }
@@ -358,5 +353,4 @@ const Container = styled.div`
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);
 		grid-template-rows: min-content;
-
 `

@@ -181,6 +181,7 @@ const Content = styled.div`
 	justify-content: center;
 	align-items: left;
 	padding-left: 5px;
+	padding-bottom: 10px;
 	color: #141414;
 	
 	p {
@@ -261,10 +262,10 @@ const Content = styled.div`
 	}
 
 	.usunKom{
+		background-color: red;
 		padding: 0px;
 		width:22px;
 		height: 22px;
-		border-Radius: 100,
 	}
 `;
 

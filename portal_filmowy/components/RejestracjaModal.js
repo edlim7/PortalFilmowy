@@ -177,6 +177,9 @@ const Wrapper = styled.div`
 		background-color: transparent;
 		color: #ae82cc;
 	}
+	input:focus{
+		outline: 3px solid black;
+	}
 `;
 
 export default RejestracjaModal;

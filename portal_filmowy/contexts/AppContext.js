@@ -5,7 +5,8 @@ const [Kategoria, setKategoria] = useState("")
 const [Uzytkownicy, setUzytkownicy] = useState("")
 const [Oceny, setOceny] = useState("")
 const [zalogowany, setZalogowany] = useState({zal:false})
+const [searchTerm, setSearchTerm] = useState('');
 
-	const value = { Kategoria, setKategoria,Uzytkownicy,setUzytkownicy, zalogowany, setZalogowany,Oceny, setOceny };
+	const value = { Kategoria, setKategoria,Uzytkownicy,setUzytkownicy, zalogowany, setZalogowany,Oceny, setOceny,searchTerm, setSearchTerm };
 	return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

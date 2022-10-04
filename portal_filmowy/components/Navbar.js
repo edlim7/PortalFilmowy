@@ -6,6 +6,7 @@ import { AppContext } from "../contexts/AppContext";
 import PanelAdminaModal from "./PanelAdminaModal";
 import Logowanie from "./logowanie/Logowanie";
 const Navbar = () => {
+	const {searchTerm, setSearchTerm} = useContext(AppContext);
 	const {showPanelAdminaModal, setShowPanelAdminaModal, PanelAdmina, setPanelAdmina} = useContext(ModalContext)
 	const { setShowModalLogin } = useContext(ModalContext);
 	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
@@ -36,7 +37,7 @@ const Navbar = () => {
 				Zaloguj się
 				</button>
 			: 	
-				<label><span className="zalogowanyLogin">Zalogowany jako:<br/> {ZalogowanyUzytkownik.login}</span>
+				<label><span className="zalogowanyLogin">Zalogowany jako:<br/><i>{ZalogowanyUzytkownik.login}</i></span>
 				<button onClick={() => {wylogujUzytkownika();}} className="Login">
 				Wyloguj się
 				</button>
@@ -59,7 +60,14 @@ const Navbar = () => {
 			<span className="linki"><Link href="/filmyRanking"><a className="link1">Ranking Filmów</a></Link></span>
 			<span className="linki"><Link href="/serialeRanking"><a className="link1">Ranking Serialii</a></Link></span>
 			</center>
-			
+			<center>
+			<h1>Wyszukaj interesującą Ciebie produkcję!</h1>
+			<input 
+			type="text" 
+			placeholder="Wyszukaj..." 
+			onChange={event => {setSearchTerm(event.target.value)
+			}}/>	
+		</center>
 		</Container>
 	);
 };
@@ -120,11 +128,31 @@ button:hover{
 }
 .zalogowanyLogin
 {
+	
 	position: absolute;
 	top: 10px;
-	left:5px;
+	left:10px;
 	float:left;
 	font-size: 18px;
 }
+input{
+		font: inherit;
+		background-color: #f1e1fc;
+		color: #38015c;
+		border-radius: 4px;
+		border: 1px solid #DED7DE;
+		text-align: left;
+		padding: 0.25rem;
+		margin-bottom:10px;
+		height: 40px;
+		width:300px;
+		font-size: 20px;
+	}
+	input:focus{
+		outline: 3px solid black;
+	}
+	.glowna{
+		font-family: cursive;
+	}
 `;
 
