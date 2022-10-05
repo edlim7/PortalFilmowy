@@ -74,6 +74,7 @@ const MovieModal = () => {
 							onClick={() => {
 								setShowModalMovie((prevState) => !prevState)
 								deleteFilm('https://localhost:5001/api/FilmKontroler/deleteFilmById2/'+filmid);
+								window.location.reload(false);
 							}}
 							className="usunFilm"
 							>
@@ -95,17 +96,20 @@ const MovieModal = () => {
 										ocenaid=el.ocenaId;
 									}
 							     });
-								if(czyOcenil===0)
+								if(czyOcenil===0 && ZalogowanyUzytkownik.typKonta!=undefined)
 								{
 									postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 									values)
 									.then((data)=> console.log(data))
 									.catch((error)=>console.log(error))
-								}else{
+								}else if(czyOcenil>0){
 									putOcena('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
 									values)
 									.then((data)=> console.log(data))
 									.catch((error)=>console.log(error))
+								}
+								else{
+									alert("Musisz być zalogowany, aby ocenić film!");
 								}
 								 }}>
 									<Form>
@@ -130,10 +134,19 @@ const MovieModal = () => {
 							</ul>
 							)} 
 							<p>Dodaj komentarz:</p>
-							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, tresc:''}} onSubmit={(values) => postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
-							values)
-							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) }>
+							<Formik initialValues={{id: movie.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, tresc:''}} onSubmit={(values) =>{ 
+							if(ZalogowanyUzytkownik.typKonta===undefined)
+							{
+								alert("Musisz być zalogowany, aby skomentować film!");
+							}
+							else
+							{
+								postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+								values)
+								.then((data)=> console.log(data))
+								.catch((error)=>console.log(error))
+							}
+							 }}>
 		
 								<Form>
 									<Field type='tresc' name='tresc'></Field>

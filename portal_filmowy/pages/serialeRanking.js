@@ -60,6 +60,10 @@ useEffect(() => {
   useEffect(() => {
 	  setOceny(posts2);
   }, [])
+  const {NazwyProdukcji, setNazwyProdukcji} = useContext(AppContext);
+	useEffect(() => {
+		setNazwyProdukcji(posts);
+	}, [])
 	console.log("uzytkownik123123123 RANKING SERIAL: "+ ZalogowanyUzytkownik.log); 
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);

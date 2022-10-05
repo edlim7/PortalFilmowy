@@ -14,14 +14,7 @@ namespace PortalFilmowy.Controllers
         {
             _produkcjaUsluga = produkcjaUsluga;
             _filmUsluga=filmUsluga;
-        }
-        [HttpPost("addProdukcjaUzytkownik")]
-        public IActionResult AddProdukcjaUzytkownik([FromBody]ProdukcjaVM produkcja)
-        {
-            _produkcjaUsluga.AddProdukcjaUzytkownik(produkcja);
-            return Ok();
-        }
-        
+        }  
         [HttpPost("addProdukcja")]
         public IActionResult AddProdukcja([FromBody]ProdukcjaVM produkcja)
         {

@@ -35,7 +35,7 @@ const UzytkownikModal = () => {
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error))
 							setShowModalUser((prevState) => !prevState)
-							window.location.reload()} 
+							window.location.reload(false);} 
 							}>
 								<Form>
 								<center>

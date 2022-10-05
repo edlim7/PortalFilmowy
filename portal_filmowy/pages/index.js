@@ -76,6 +76,10 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	useEffect(() => {
 		setOceny(posts2);
 	}, [])
+	const {NazwyProdukcji, setNazwyProdukcji} = useContext(AppContext);
+	useEffect(() => {
+		setNazwyProdukcji(posts);
+	}, [])
 	var userid=ZalogowanyUzytkownik.uzytkownikId;										// tu bedzie uzytkownik
 	var licznikKategorii=0;
 	const ocenioneProdukcje=[];

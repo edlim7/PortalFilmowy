@@ -5,7 +5,8 @@ import { AppContext } from "../contexts/AppContext";
 import { Formik, Form, Field } from 'formik';
 const AddMovieModal = () => {
   const {showAddModalMovie, setShowAddModalMovie, addMovie} = useContext(ModalContext);
-	const {Kategoria} = useContext(AppContext);
+	const {Kategoria, NazwyProdukcji} = useContext(AppContext);
+	var czyWystepujeNazwa=0;
 	const radioRef = useRef(null);
 	const selectRef = useRef(null);
 	const [eduBool, setEduBool] = useState('');
@@ -17,17 +18,10 @@ const AddMovieModal = () => {
 		});
 		return res.json()
 	}
-	
-	var str2bool = (value) => {
-		if (value && typeof value === "string") {
-			 if (value.toLowerCase() === "true") return true;
-			 if (value.toLowerCase() === "false") return false;
-		}
-		return value;
-	 }
-	 var str2int = (value) => {
-		return parseInt(value,10);
-	 }
+	const textArea = (props) => (
+		<textArea  {...props}>
+		</textArea>
+	  );
 
   return (
     <>
@@ -36,24 +30,34 @@ const AddMovieModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Dodaj nowy film</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) =>{ postKom('https://localhost:5001/api/FilmKontroler/addFilm2', 
+							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) =>{ 
+							czyWystepujeNazwa=0;
+							NazwyProdukcji.forEach((el)=>{
+								if(el.nazwa===values.nazw)
+								{
+									czyWystepujeNazwa=czyWystepujeNazwa+1;
+									alert("Ten nazwa jest zajęta!");	
+								}});
+							if(czyWystepujeNazwa==0)
+							{
+							postKom('https://localhost:5001/api/FilmKontroler/addFilm2', 
 							values)
 							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) 
-							window.location.reload();}}>
+							.catch((error)=>console.log(error));
+							window.location.reload(false);
+							}}}>
 									{({ values }) => (
-									<Form>
-									Nazwa filmu: <Field type ='nazwa' name='nazw' ></Field><br /><br />
-									Opis: <Field type ='opis' name='opi'  ></Field><br /><br />
-									Zdjęcie: <Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field><br /><br />
-
-									Kategoria:    <Field as="select" name="kategori">
+									<Form className="form">
+									Nazwa filmu: <Field type ='nazwa' name='nazw' className="field" required ></Field><br /><br />
+									Zdjęcie: <Field type ='zdjecie' name='zdjeci' placeholder="obrazki/" className="field" required></Field><br /><br />
+									Kategoria:    <Field as="select" name="kategori" className="field">
 			 						{Kategoria.map((post) => (
-									<option value={post.kategoriaId} onChange={str2int}>{post.nazwaKategorii}</option>
+									<option value={post.kategoriaId}>{post.nazwaKategorii}</option>
 									))}
            							</Field><br /><br />
-									<label>Edukacyjny: <Field type ='checkbox' name='edukacyjn'></Field> <br /><br /></label>
-									Ilość oskarów: <Field type ='number' name='oskar' min='0' max='100' ></Field><br />									
+									<label>Edukacyjny: <Field type ='checkbox' name='edukacyjn' className="field"></Field> <br /><br /></label>
+									Ilość oskarów: <Field type ='number' name='oskar' min='0' max='100' className="field"  required></Field><br />	<br />
+									Opis: <Field type ='opis' name='opi' className="nowyOpis" as={textArea} required ></Field><br /><br />								
 									<center><button type='submit'>Dodaj!</button></center>
 								</Form>
 									)}
@@ -132,6 +136,9 @@ const Content = styled.div`
 		color: #ffff;
 		border: none;
 		padding: 15px 40px;	
+		position: absolute;
+		left:285px;
+		bottom:100px;
 	}
 	button:hover{
 		transition-duration: 1s;
@@ -160,9 +167,23 @@ const Content = styled.div`
 		left:7%;
 		width:50%;
 	}
-	.ocenienanie{
-	}
 	input:focus{
+		outline: 3px solid black;
+	}
+	.field{
+		position: absolute;
+		left:400px;
+	}
+	.form{
+		padding-left: 100px;
+	}
+	.nowyOpis{
+		height: 100px;
+		width: 250px;
+		position: absolute;
+		left:400px;
+	}
+	.nowyOpis:focus{
 		outline: 3px solid black;
 	}
 `;

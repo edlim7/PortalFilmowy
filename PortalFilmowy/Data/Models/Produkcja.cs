@@ -17,7 +17,6 @@ namespace PortalFilmowy.Models
         public Kategoria Kategoria { get; set; }
         public List<Film> film { get; set; }
         public List<Serial> serial { get; set; }
-        public List<WybranaProdukcja> WybranaProdukcja { get; set; }
         public List<Ocena> Ocena { get; set; }
         public List<Komentarz> Komentarz { get; set; }
     }

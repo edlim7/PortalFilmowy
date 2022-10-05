@@ -19,29 +19,6 @@ namespace PortalFilmowy.Data.Services
         {
             _context = context;
         }
-        public void AddProdukcjaUzytkownik(ProdukcjaVM produkcja)   //Delete mby
-        {
-            var _produkcja= new Produkcja()
-            {
-                Nazwa = produkcja.Nazwa,
-                Zdjecie=produkcja.Zdjecie,
-                Opis = produkcja.Opis,
-                Edukacyjny = produkcja.Edukacyjny,
-
-            };
-            _context.Produkcja.Add(_produkcja);
-            _context.SaveChanges();
-            foreach(var id in produkcja.UzytkownikId)
-            {
-                var _produkcja_uzytkownik = new WybranaProdukcja()
-                {
-                    ProdukcjaId=_produkcja.ProdukcjaId,
-                    UzytkownikID=id
-                };
-                _context.WybranaProdukcja.Add(_produkcja_uzytkownik);
-                _context.SaveChanges();
-            }
-        }
         public void AddProdukcja(ProdukcjaVM produkcja)
         {
             var _produkcja= new Produkcja()

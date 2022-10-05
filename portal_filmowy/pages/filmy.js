@@ -63,7 +63,10 @@ useEffect(() => {
 	useEffect(() => {
 		setOceny(posts2);
 	}, [])
-	
+	const {NazwyProdukcji, setNazwyProdukcji} = useContext(AppContext);
+	useEffect(() => {
+		setNazwyProdukcji(posts);
+	}, [])
 const [dataValues4, setDataValues4] = useState(posts4);
 const filmOcena=[];
 var komentarz=[];

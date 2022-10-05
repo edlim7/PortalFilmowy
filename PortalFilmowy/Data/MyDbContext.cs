@@ -15,15 +15,6 @@ namespace PortalFilmowy.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<WybranaProdukcja>()
-                .HasOne(b => b.uzytkownik)
-                .WithMany(ba => ba.WybranaProdukcja)
-                .HasForeignKey(bi => bi.UzytkownikID);
-            modelBuilder.Entity<WybranaProdukcja>()
-                .HasOne(b => b.produkcja)
-                .WithMany(ba => ba.WybranaProdukcja)
-                .HasForeignKey(bi => bi.ProdukcjaId);
-
             modelBuilder.Entity<Ocena>()
                 .HasOne(b => b.uzytkownik)
                 .WithMany(ba => ba.Ocena)
@@ -47,7 +38,6 @@ namespace PortalFilmowy.Data
         public DbSet<Film> Film{get; set;}
         public DbSet<Serial> Serial{get; set;}
         public DbSet<Kategoria> Kategoria{get; set;}
-        public DbSet<WybranaProdukcja> WybranaProdukcja{get; set;}
         public DbSet<Ocena> Ocena{get; set;}
         public DbSet<Komentarz> Komentarz{get; set;}
         public DbSet<Uzytkownik> Uzytkownik{get; set;}

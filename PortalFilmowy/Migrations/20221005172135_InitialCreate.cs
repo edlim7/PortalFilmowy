@@ -156,32 +156,6 @@ namespace PortalFilmowy.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "WybranaProdukcja",
-                columns: table => new
-                {
-                    WybranaProdukcjaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProdukcjaId = table.Column<int>(type: "int", nullable: false),
-                    UzytkownikID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WybranaProdukcja", x => x.WybranaProdukcjaId);
-                    table.ForeignKey(
-                        name: "FK_WybranaProdukcja_Produkcja_ProdukcjaId",
-                        column: x => x.ProdukcjaId,
-                        principalTable: "Produkcja",
-                        principalColumn: "ProdukcjaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_WybranaProdukcja_Uzytkownik_UzytkownikID",
-                        column: x => x.UzytkownikID,
-                        principalTable: "Uzytkownik",
-                        principalColumn: "UzytkownikId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Film_ProdukcjaId",
                 table: "Film",
@@ -216,16 +190,6 @@ namespace PortalFilmowy.Migrations
                 name: "IX_Serial_ProdukcjaId",
                 table: "Serial",
                 column: "ProdukcjaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WybranaProdukcja_ProdukcjaId",
-                table: "WybranaProdukcja",
-                column: "ProdukcjaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WybranaProdukcja_UzytkownikID",
-                table: "WybranaProdukcja",
-                column: "UzytkownikID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -243,13 +207,10 @@ namespace PortalFilmowy.Migrations
                 name: "Serial");
 
             migrationBuilder.DropTable(
-                name: "WybranaProdukcja");
+                name: "Uzytkownik");
 
             migrationBuilder.DropTable(
                 name: "Produkcja");
-
-            migrationBuilder.DropTable(
-                name: "Uzytkownik");
 
             migrationBuilder.DropTable(
                 name: "Kategoria");

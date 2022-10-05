@@ -22,19 +22,21 @@ const PanelAdminaModal = () => {
 				<Background onClick={() => setShowPanelAdminaModal((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
-							<h1>Zmień typ konta użytkowników</h1>
+							<h1>Zmień typ konta użytkowników</h1><br/>
 							<Formik initialValues={{id: 3, typKont: 1, log:""}}>
 								<Form>
-									<label><b>Nazwa konta:</b><b className="typKonta">Typ konta:</b>  </label><br /><br />
+									<center><label className="kont"><b>Nazwa konta:</b><b className="typKonta">Typ konta:</b>  </label></center><br /><br />
 			 						{Uzytkownicy.map((post) => (
-										<label className="selec">{post.login}: <span className="postTypKonta">{post.typKonta==1? "Admin": post.typKonta==2? "Personel":"Użytkownik" }</span>
+										<label className="selec">
 										<button type='button' onClick={() => {
 										setShowModalUser((prevState) => !prevState);
 										setShowPanelAdminaModal((prevState) => !prevState);
-										setUser(post);
+										setUser(post);										
 										}}className="edytuj">
 										Edytuj!
-										</button><br/>
+										</button>
+										<span className="logi">{post.login}: </span><span className="postTypKonta">{post.typKonta==1? "Admin": post.typKonta==2? "Personel":"Użytkownik" }</span>
+										<br/><br/>
 										</label>
 									))}
 								</Form>
@@ -106,8 +108,8 @@ const Content = styled.div`
    		border-radius: 5px;
 	}
 	.edytuj {
-		position: relative;
-		left: 30px;
+		position: absolute;
+		right:55px;
 		cursor: pointer;
 		background: #141414;
 		color: #ffff;
@@ -178,10 +180,19 @@ const Content = styled.div`
 	}
 	.typKonta{
 		position: relative;
-		left:50px;
+		left:150px;
+	}
+	.kont{
+		float: left;
+		padding-left: 100px;
+	}
+	.logi{
+		float: left;
+		padding-left: 100px;
 	}
 	.postTypKonta{
-		text-align: center;
+		float:right;
+		padding-right: 200px;
 	}
 `;
 

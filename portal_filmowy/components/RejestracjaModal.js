@@ -47,7 +47,8 @@ const RejestracjaModal = () => {
 								postUzytkownik('https://localhost:5001/api/UzytkownikKontroler/addUzytkownik2', 
 								values)
 								.then((data)=> console.log(data))
-								.catch((error)=>console.log(error))
+								.catch((error)=>console.log(error));
+								window.location.reload(false)
 							}
 							 }}>
 									<Form>

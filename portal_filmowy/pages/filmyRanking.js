@@ -61,6 +61,10 @@ useEffect(() => {
 	useEffect(() => {
 		setOceny(posts2);
 	}, [])
+	const {NazwyProdukcji, setNazwyProdukcji} = useContext(AppContext);
+	useEffect(() => {
+		setNazwyProdukcji(posts);
+	}, [])
 	console.log("uzytkownikRANKING FILM: "+ ZalogowanyUzytkownik.log); 
 	console.log("POLICE",dataValues);
 	console.log("POLICE2",dataValues2);

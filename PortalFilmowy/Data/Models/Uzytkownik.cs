@@ -13,7 +13,6 @@ namespace PortalFilmowy.Models
         public int TypKonta{ get; set; }
 
         //navigation properties
-        public List<WybranaProdukcja> WybranaProdukcja { get; set; }
         public List<Ocena> Ocena { get; set; }
         public List<Komentarz> Komentarz { get; set; }
         

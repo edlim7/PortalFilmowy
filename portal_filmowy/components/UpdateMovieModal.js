@@ -38,10 +38,11 @@ const UpdateMovieModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Edytuj film</h1>
-							<Formik initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) => putFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
+							<Formik initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) =>{ putFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
 							values)
 							.then((data)=> console.log(data))
-							.catch((error)=>console.log(error)) }>
+							.catch((error)=>console.log(error));
+							window.location.reload(false) }}>
 								{({ values }) => (
 								<Form>
 									<center><button type='submit' className="edytujButton">Edytuj!</button></center>
@@ -56,8 +57,8 @@ const UpdateMovieModal = () => {
 									</div>
 									<div className="prawo">
 									<h3 className="nowe">Nowe wartości</h3><br />
-									<label className="field"><Field type ='nazwa' name='nazw' ></Field></label><br /><br /><br />
-									<label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
+									<label className="field"><Field type ='nazwa' name='nazw' required></Field></label><br /><br /><br />
+									<label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/" required></Field></label><br /><br /><br />
 									<label className="field"><Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
 									<option value={post.kategoriaId}>{post.nazwaKategorii}</option>
@@ -65,7 +66,7 @@ const UpdateMovieModal = () => {
            							</Field></label><br /><br /><br/>
 									<label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label><br /><br /> <br/>
 									<label className="field"><Field type ='number' name='oskar' min='0' max='100' ></Field></label><br /><br /><br />
-									<label className="field"><Field as={textArea} name='opi' className="nowyOpis"></Field></label><br /><br /><br />
+									<label className="field"><Field as={textArea} name='opi' className="nowyOpis" required></Field></label><br /><br /><br />
 									</div>													
 								</Form>
 								)}

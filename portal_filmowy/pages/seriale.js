@@ -63,6 +63,10 @@ useEffect(() => {
 	useEffect(() => {
 		setOceny(posts2);
 	}, [])
+	const {NazwyProdukcji, setNazwyProdukcji} = useContext(AppContext);
+	useEffect(() => {
+		setNazwyProdukcji(posts);
+	}, [])
 
 	console.log("uzytkownik123123123:SERIAL "+ ZalogowanyUzytkownik.log);
 	console.log("nowe"); 

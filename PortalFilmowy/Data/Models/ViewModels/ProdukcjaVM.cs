@@ -12,7 +12,6 @@ namespace PortalFilmowy.Models
         public bool Edukacyjny { get; set; }
         public int KategoriaId{ get; set; }
         public List<int> OcenaId{ get; set; }
-        public List<int> UzytkownikId{ get; set; }
         public List<int> KomentarzId{ get; set; }
     }
     public class ProdukcjaOcenaVM

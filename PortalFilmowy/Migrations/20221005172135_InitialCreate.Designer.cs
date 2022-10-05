@@ -11,7 +11,7 @@ using PortalFilmowy.Data;
 namespace PortalFilmowy.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220904153710_InitialCreate")]
+    [Migration("20221005172135_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,29 +194,6 @@ namespace PortalFilmowy.Migrations
                     b.ToTable("Uzytkownik");
                 });
 
-            modelBuilder.Entity("PortalFilmowy.Models.WybranaProdukcja", b =>
-                {
-                    b.Property<int>("WybranaProdukcjaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WybranaProdukcjaId"), 1L, 1);
-
-                    b.Property<int>("ProdukcjaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UzytkownikID")
-                        .HasColumnType("int");
-
-                    b.HasKey("WybranaProdukcjaId");
-
-                    b.HasIndex("ProdukcjaId");
-
-                    b.HasIndex("UzytkownikID");
-
-                    b.ToTable("WybranaProdukcja");
-                });
-
             modelBuilder.Entity("PortalFilmowy.Models.Film", b =>
                 {
                     b.HasOne("PortalFilmowy.Models.Produkcja", "produkcja")
@@ -288,25 +265,6 @@ namespace PortalFilmowy.Migrations
                     b.Navigation("produkcja");
                 });
 
-            modelBuilder.Entity("PortalFilmowy.Models.WybranaProdukcja", b =>
-                {
-                    b.HasOne("PortalFilmowy.Models.Produkcja", "produkcja")
-                        .WithMany("WybranaProdukcja")
-                        .HasForeignKey("ProdukcjaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PortalFilmowy.Models.Uzytkownik", "uzytkownik")
-                        .WithMany("WybranaProdukcja")
-                        .HasForeignKey("UzytkownikID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("produkcja");
-
-                    b.Navigation("uzytkownik");
-                });
-
             modelBuilder.Entity("PortalFilmowy.Models.Kategoria", b =>
                 {
                     b.Navigation("Produkcje");
@@ -318,8 +276,6 @@ namespace PortalFilmowy.Migrations
 
                     b.Navigation("Ocena");
 
-                    b.Navigation("WybranaProdukcja");
-
                     b.Navigation("film");
 
                     b.Navigation("serial");
@@ -330,8 +286,6 @@ namespace PortalFilmowy.Migrations
                     b.Navigation("Komentarz");
 
                     b.Navigation("Ocena");
-
-                    b.Navigation("WybranaProdukcja");
                 });
 #pragma warning restore 612, 618
         }
