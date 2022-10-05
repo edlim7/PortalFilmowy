@@ -82,6 +82,7 @@ dataValues.forEach((el)=>{
 	el.ocena=0;
 	else
 	el.ocena=sum/counter;
+	el.ocena=el.ocena.toFixed(2);
 	sum=0;
 	counter=0;
 })
@@ -108,6 +109,7 @@ console.log("filmOcena z kom");
 console.log(filmOcena);
 	return (
 		<>
+		<div style={{minHeight:"784px"}}>
 			<AddMovieModal />
 			<MovieModal />
 			<Navbar></Navbar>
@@ -145,7 +147,7 @@ console.log(filmOcena);
 				</ul>
       ))}
 			</Container>
-			<Footer></Footer>
+			</div><Footer></Footer>
 			</>	
 	);
 };

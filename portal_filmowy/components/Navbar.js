@@ -62,7 +62,7 @@ const Navbar = () => {
 			</center>
 			<center>
 			<h1>Wyszukaj interesującą Ciebie produkcję!</h1>
-			<input 
+			<input className="szukaj"
 			type="text" 
 			placeholder="Wyszukaj..." 
 			onChange={event => {setSearchTerm(event.target.value)
@@ -135,7 +135,7 @@ button:hover{
 	float:left;
 	font-size: 18px;
 }
-input{
+.szukaj{
 		font: inherit;
 		background-color: #f1e1fc;
 		color: #38015c;
@@ -148,7 +148,7 @@ input{
 		width:300px;
 		font-size: 20px;
 	}
-	input:focus{
+	.szukaj:focus{
 		outline: 3px solid black;
 	}
 	.glowna{

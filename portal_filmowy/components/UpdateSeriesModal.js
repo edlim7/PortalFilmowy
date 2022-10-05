@@ -28,6 +28,10 @@ const UpdateSeriesModal = () => {
 	 }
 	 console.log("update "+updateSeries.kategoria);
 	 const serialid=updateSeries.serialId;
+	 const textArea = (props) => (
+		<textArea  {...props}>
+		</textArea>
+	  );
   return (
     <>
 {showUpdateModalSeries ? (
@@ -41,21 +45,34 @@ const UpdateSeriesModal = () => {
 							.catch((error)=>console.log(error)) }>
 							{({ values }) => (
 								<Form>
-									<h3 className="stare">Stare wartości</h3>
-									<h3 className="nowe">Nowe wartości</h3><br /><br /><br />
-									<label className="stareWartosci">Nazwa: {updateSeries.nazwa}</label><label className="field"><Field type ='nazwa' name='nazw' value={updateSeries.nazwa}></Field></label><br /><br /><br />
-									<label className="stareWartosci">Opis: {updateSeries.opis}</label><label className="field"><Field type ='opis' name='opi'  ></Field></label><br /><br /><br />
-									<label className="stareWartosci">Zdjęcie: {updateSeries.zdjecie}</label><label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
-									<label className="stareWartosci">Kategoria: {updateSeries.kategoria}</label><label className="field"><Field as="select" name="kategori">
+									<center><button type='submit'>Edytuj!</button></center>
+									<div className="lewo">
+									<h3 className="stare">Stare wartości</h3><br/>
+									<label className="stareWartosci">Nazwa:{updateSeries.nazwa}</label><br /><br /><br />
+									<label className="stareWartosci">Zdjęcie: {updateSeries.zdjecie}</label><br /><br /><br />
+									<label className="stareWartosci">Kategoria: {updateSeries.kategoria}</label><br /><br /><br />
+									<label className="stareWartosci">Edukacyjny: {updateSeries.edukacyjny==true?"tak":"nie"}</label><br /><br /><br />
+									<label className="stareWartosci">Emmy: {updateSeries.emmy}</label><br /><br /><br />
+									<label className="stareWartosci">Ilość sezonów: {updateSeries.sezony}</label><br /><br /><br />
+									<label className="stareWartosci">Ilość odcinków: {updateSeries.odcinki}</label><br /><br /><br />
+									<label className="stareWartosci">Opis: {updateSeries.opis}</label><br /><br /><br />
+									</div>
+									<div className="prawo">
+									<h3 className="nowe">Nowe wartości</h3><br/>
+									<label className="field"><Field type ='nazwa' name='nazw' value={updateSeries.nazwa}></Field></label><br /><br /><br />
+									<label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
+									<label className="field"><Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
 									<option value={post.kategoriaId}>{post.nazwaKategorii}</option>
 									))}
-           							</Field></label><br /><br />
-									<label className="stareWartosci">Edukacyjny: {updateSeries.edukacyjny==true?"tak":"nie"}</label><label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label> <br /><br />
-									<label className="stareWartosci">Emmy: {updateSeries.emmy}</label><label className="field"><Field type ='number' name='emm' min='0' max='100' ></Field></label><br /><br /><br />	
-									<label className="stareWartosci">Ilość sezonów: {updateSeries.sezony}</label><label className="field"><Field type ='number' name='sezon' min='0' max='100' ></Field></label><br /><br /><br />	
-									<label className="stareWartosci">Ilość odcinków: {updateSeries.odcinki}</label><label className="field"><Field type ='number' name='odcink' min='0' max='100' ></Field></label><br /><br /><br />								
-									<center><button type='submit'>Edytuj!</button></center>
+           							</Field></label><br /><br /><br />
+									<label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label> <br /><br /><br />
+									<label className="field"><Field type ='number' name='emm' min='0' max='100' ></Field></label><br /><br /><br />	
+									<label className="field"><Field type ='number' name='sezon' min='0' max='100' ></Field></label><br /><br /><br />	
+									<label className="field"><Field type ='number' name='odcink' min='0' max='100' ></Field></label><br /><br /><br />	
+									<label className="field"><Field as={textArea} name='opi'  className="nowyOpis"></Field></label><br /><br /><br />
+									</div>							
+									
 								</Form>
 								 )}
 							</Formik>
@@ -90,6 +107,7 @@ const Wrapper = styled.div`
 	position: absolute;
 	z-index: 1000;
 	border-radius: 10px;
+	overflow-y: scroll;
 `
 
 const Content = styled.div`
@@ -145,6 +163,9 @@ const Content = styled.div`
 		text-align: left;
 		padding: 0.25rem;	
 	}
+	input:focus{
+		outline: 3px solid black;
+	}
 	.admin{
 		color:#ca3063;
 	}
@@ -159,26 +180,48 @@ const Content = styled.div`
 		left:7%;
 		width:50%;
 	}
-	.ocenienanie{
-	}
-	.stare{
-		float:left;
-		padding-left: 100px;
-	}
-	.nowe{
+	.field{
 		float:right;
-		padding-right: 100px;
+		padding-right: 60px;
 	}
 	.field{
 		float:right;
 		padding-right: 60px;
 	}
-	.stareWartosci{
-		float:left;
-		padding-left: 50px;
-		
-	}
 	input:focus{
+		outline: 3px solid black;
+	}
+	.lewo{
+		float: left;
+		width:270px;
+		padding-left: 50px;
+	}
+	.prawo{
+		float:right;
+		width:270px;
+	}
+	.opiss{
+		width:270px;
+	}
+	.nazwaFilmu{
+		width:270px;
+		word-wrap: break-word;
+	}
+	.stare{
+	}
+	.nowe{
+		text-align: center;
+		padding-left: 30px;
+	}
+	.edytujButton{
+		position:absolute;
+		left:286px;
+	}
+	.nowyOpis{
+		height: 100px;
+		width: 250px;
+	}
+	.nowyOpis:focus{
 		outline: 3px solid black;
 	}
 `;

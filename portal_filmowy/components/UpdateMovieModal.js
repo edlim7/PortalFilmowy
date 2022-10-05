@@ -27,6 +27,10 @@ const UpdateMovieModal = () => {
 		return parseInt(value,10);
 	 }
 	 const filmid=updateMovie.filmId;
+	 const textArea = (props) => (
+		<textArea  {...props}>
+		</textArea>
+	  );
   return (
     <>
 {showUpdateModalMovie ? (
@@ -40,19 +44,29 @@ const UpdateMovieModal = () => {
 							.catch((error)=>console.log(error)) }>
 								{({ values }) => (
 								<Form>
-									<h3 className="stare">Stare wartości</h3>
-									<h3 className="nowe">Nowe wartości</h3><br /><br /><br />
-									<label className="stareWartosci">Nazwa: {updateMovie.nazwa}</label><label className="field"><Field type ='nazwa' name='nazw' ></Field></label><br /><br /><br />
-									<label className="stareWartosci">Opis: {updateMovie.opis}</label><label className="field"><Field type ='opis' name='opi'  ></Field></label><br /><br /><br />
-									<label className="stareWartosci">Zdjęcie: {updateMovie.zdjecie}</label><label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
-									<label className="stareWartosci">Kategoria: {updateMovie.kategoria}</label><label className="field"><Field as="select" name="kategori">
+									<center><button type='submit' className="edytujButton">Edytuj!</button></center>
+									<div className="lewo">
+									<h3 className="stare">Stare wartości</h3><br/>
+									<label className="nazwaFilmu">Nazwa: {updateMovie.nazwa}</label><br/><br/><br/>
+									<label className="stareWartosci">Zdjęcie: {updateMovie.zdjecie}</label><br/><br/><br/>
+									<label className="stareWartosci">Kategoria: {updateMovie.kategoria}</label><br/><br/><br/>
+									<label className="stareWartosci">Edukacyjny:{updateMovie.edukacyjny==true?" tak":" nie"}</label><br/><br/><br/>
+									<label className="stareWartosci">Ilość oskarów: {updateMovie.oskary}</label><br/><br/><br/>
+									<label className="opiss">Opis: {updateMovie.opis}</label><br/><br/><br/>
+									</div>
+									<div className="prawo">
+									<h3 className="nowe">Nowe wartości</h3><br />
+									<label className="field"><Field type ='nazwa' name='nazw' ></Field></label><br /><br /><br />
+									<label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/"></Field></label><br /><br /><br />
+									<label className="field"><Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
 									<option value={post.kategoriaId}>{post.nazwaKategorii}</option>
 									))}
-           							</Field></label><br /><br />
-									<label className="stareWartosci">Edukacyjny:{updateMovie.edukacyjny==true?"tak":"nie"}</label><label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label><br /><br /> 
-									<label className="stareWartosci">Ilość oskarów: {updateMovie.oskary}</label><label className="field"><Field type ='number' name='oskar' min='0' max='100' ></Field></label><br /><br /><br />								
-									<center><button type='submit'>Edytuj!</button></center>
+           							</Field></label><br /><br /><br/>
+									<label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label><br /><br /> <br/>
+									<label className="field"><Field type ='number' name='oskar' min='0' max='100' ></Field></label><br /><br /><br />
+									<label className="field"><Field as={textArea} name='opi' className="nowyOpis"></Field></label><br /><br /><br />
+									</div>													
 								</Form>
 								)}
 							</Formik>
@@ -87,6 +101,7 @@ const Wrapper = styled.div`
 	position: absolute;
 	z-index: 1000;
 	border-radius: 10px;
+	overflow-y: scroll;
 `
 
 const Content = styled.div`
@@ -96,6 +111,7 @@ const Content = styled.div`
 	align-items: left;
 	padding-left: 5px;
 	color: #141414;
+	
 	h1{
 		text-align: center;
 	}
@@ -159,28 +175,45 @@ const Content = styled.div`
 		left:7%;
 		width:50%;
 	}
-	.ocenienanie{
-	}
-	.stare{
-		float:left;
-		padding-left: 100px;
-	}
-	.nowe{
-		float:right;
-		padding-right: 100px;
-	}
 	.field{
 		float:right;
 		padding-right: 60px;
 	}
-	.stareWartosci{
-		float:left;
-		padding-left: 50px;
-		
-	}
 	input:focus{
 		outline: 3px solid black;
 	}
+	.lewo{
+		float: left;
+		width:270px;
+		padding-left: 50px;
+	}
+	.prawo{
+		float:right;
+		width:270px;
+	}
+	.opiss{
+		width:270px;
+	}
+	.nazwaFilmu{
+		width:270px;
+		word-wrap: break-word;
+	}
+	.nowe{
+		text-align: center;
+		padding-left: 30px;
+	}
+	.edytujButton{
+		position:absolute;
+		left:286px;
+	}
+	.nowyOpis{
+		height: 100px;
+		width: 250px;
+	}
+	.nowyOpis:focus{
+		outline: 3px solid black;
+	}
+
 `;
 
 export default UpdateMovieModal

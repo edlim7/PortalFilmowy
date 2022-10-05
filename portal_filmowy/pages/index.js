@@ -195,6 +195,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		el.ocena=0;
 		else
 		el.ocena=sum/counter;
+		el.ocena=el.ocena.toFixed(2);
 		sum=0;
 		counter=0;
 	})
@@ -243,6 +244,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	//console.log(serialFilmEdu);
 	return (
 		<>
+		<div style={{minHeight:"784px"}}>
 		<SeriesModal />
 		<MovieModal />
 			<Navbar></Navbar>
@@ -341,7 +343,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
 			))}</Container>
-			<Footer></Footer>
+			</div><Footer></Footer>
 		</>
 	);
 }

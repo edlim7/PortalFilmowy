@@ -59,7 +59,7 @@ const MovieModal = () => {
 				<Background onClick={() => setShowModalMovie((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
-							<center><h1>{movie.nazwa}</h1></center>
+							<center><h1 className="tytulFilm">{movie.nazwa}</h1></center>
 							{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
 							<label>
 							<button 
@@ -109,8 +109,8 @@ const MovieModal = () => {
 								}
 								 }}>
 									<Form>
-									<Field type ='number' name='ocea' min='1' max='10' className="ocenienanie"></Field>
-									<button type='submit'>Oceń</button>
+									<br/><Field type ='number' name='ocea' min='1' max='10' className="ocenienanie"></Field>
+									<button type='submit' className="oc">Oceń</button>
 								</Form>
 							</Formik>
 							
@@ -176,6 +176,7 @@ const Wrapper = styled.div`
 `
 
 const Content = styled.div`
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -260,12 +261,22 @@ const Content = styled.div`
 		height: 45px;
 		width: 145px;
 	}
-
+	input:focus{
+		outline: 3px solid black;
+	}
 	.usunKom{
 		background-color: red;
 		padding: 0px;
 		width:22px;
 		height: 22px;
+	}
+	.tytulFilm{
+		width:350px;
+		word-wrap: break-word;
+	}
+	.oc{
+		position: relative;
+		bottom: 3px;
 	}
 `;
 

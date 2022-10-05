@@ -81,6 +81,7 @@ useEffect(() => {
 		el.ocena=0;
 		else
 		el.ocena=sum/counter;
+		el.ocena=el.ocena.toFixed(2);
 		sum=0;
 		counter=0;
 	})
@@ -107,6 +108,7 @@ useEffect(() => {
 
 	return (
 		<>
+		<div style={{minHeight:"784px"}}>
 		<MovieModal />
 			<Navbar></Navbar>
 			{testDesc.filter((val)=>{
@@ -134,8 +136,8 @@ useEffect(() => {
 				</ul>
       ))}
 
-			<Footer></Footer>
-		</>
+			</div><Footer></Footer>
+			</>
 	);
 };
 

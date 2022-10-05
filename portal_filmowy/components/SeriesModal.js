@@ -60,7 +60,7 @@ useEffect(() => {
 				<Background onClick={() => setShowModalSeries((prevState) => !prevState)}>
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
-							<center><h1>{series.nazwa}</h1></center>
+							<center><h1 className="tytulSerial">{series.nazwa}</h1></center>
 							{ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? 
 							<label>
 							<button 
@@ -112,8 +112,8 @@ useEffect(() => {
 							}
 							 }}>
 								<Form>
-									<Field type ='number' name='ocea' min='1' max='10'></Field>
-									<button type='submit'>Oceń</button>
+								<br/><Field type ='number' name='ocea' min='1' max='10'></Field>
+									<button type='submit' className="oc">Oceń</button>
 								</Form>
 							</Formik>
 							</p></center>
@@ -266,6 +266,14 @@ const Content = styled.div`
 	}
 	input:focus{
 		outline: 3px solid black;
+	}
+	.tytulSerial{
+		width:350px;
+		word-wrap: break-word;
+	}
+	.oc{
+		position: relative;
+		bottom: 3px;
 	}
 `;
 export default SeriesModal

@@ -5,14 +5,15 @@ const SingleContent = ({id,
   return (
   
     <Wrapper className='media'>
-    <center><b className='title'>{nazwa}</b></center>
+    
+    <center><b className='title'>{nazwa}<b className='ocena'>{ocena ? <label>: <span className='gwiazdka'> ★ </span>{ocena}</label> : ocena }</b></b></center>
     <b className='emmy'>{odcinki}</b>
     <b className='kategoria'>{kategoria}</b>
     <b className='liczba'>{liczba}</b>
     <b className='produkcjaid'>{produkcjaid}</b>
     
     <img className='zdjecie' src={zdjecie} />
-    <b className='ocena'>{ocena ? "★ "+ocena: ocena }</b>
+    
     
     
     </Wrapper>
@@ -52,7 +53,7 @@ const Wrapper = styled.div`
 
 .title {
   text-align: center;
-  font-size: 17px;
+  font-size: 25px;
   padding: 8px 0;
 }
 .zdjecie{
@@ -74,7 +75,7 @@ const Wrapper = styled.div`
 .ocenaZdjecie{
 position: relative;
 }
-.ocena{
-
+.gwiazdka{
+  color:goldenrod;
 }
 `;
