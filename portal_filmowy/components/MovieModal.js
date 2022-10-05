@@ -101,12 +101,14 @@ const MovieModal = () => {
 									postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
 									values)
 									.then((data)=> console.log(data))
-									.catch((error)=>console.log(error))
+									.catch((error)=>console.log(error));
+									window.location.reload(false);
 								}else if(czyOcenil>0){
 									putOcena('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
 									values)
 									.then((data)=> console.log(data))
-									.catch((error)=>console.log(error))
+									.catch((error)=>console.log(error));
+									window.location.reload(false);
 								}
 								else{
 									alert("Musisz być zalogowany, aby ocenić film!");
@@ -144,7 +146,8 @@ const MovieModal = () => {
 								postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 								values)
 								.then((data)=> console.log(data))
-								.catch((error)=>console.log(error))
+								.catch((error)=>console.log(error));
+								window.location.reload(false);
 							}
 							 }}>
 		
