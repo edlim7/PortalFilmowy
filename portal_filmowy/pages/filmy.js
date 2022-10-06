@@ -46,6 +46,9 @@ const [dataValues2, setDataValues2] = useState(posts2);
 const [dataValues3, setDataValues3] = useState(posts3);
 const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
 useEffect(() => {
+    document.title = 'Filizone - filmy';
+  });
+useEffect(() => {
 	const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
 	if (ZalogowanyUzytkownik) {
 		setZalogowanyUzytkownik(ZalogowanyUzytkownik);
@@ -145,6 +148,7 @@ console.log(filmOcena);
 					kategoria:post.kategoria,
 					filmId:post.filmId,
 					edukacyjny:post.edukacyjny,
+					kategoriaid:post.kategoriaId,
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>

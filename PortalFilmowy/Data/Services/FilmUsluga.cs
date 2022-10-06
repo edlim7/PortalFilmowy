@@ -92,7 +92,8 @@ namespace PortalFilmowy.Data.Services
                 Opis = film.produkcja.Opis,
                 Edukacyjny = film.produkcja.Edukacyjny,
                 ProdukcjaId = film.produkcja.ProdukcjaId,
-                Kategoria = film.produkcja.Kategoria.NazwaKategorii
+                Kategoria = film.produkcja.Kategoria.NazwaKategorii,
+                KategoriaId = film.produkcja.Kategoria.KategoriaId
             });
             return _filmProdukcja.ToList();
         }  

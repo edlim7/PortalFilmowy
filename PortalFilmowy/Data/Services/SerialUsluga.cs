@@ -67,6 +67,7 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
+                KategoriaId=serial.produkcja.Kategoria.KategoriaId,
                 Kategoria = serial.produkcja.Kategoria.NazwaKategorii,
                 ProdukcjaId = serial.produkcja.ProdukcjaId
             });

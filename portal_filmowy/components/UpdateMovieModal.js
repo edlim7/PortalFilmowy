@@ -29,6 +29,7 @@ const UpdateMovieModal = () => {
 	 const filmid=updateMovie.filmId;
 	 const textArea = (props) => (
 		<textArea  {...props}>
+			{updateMovie.opis}
 		</textArea>
 	  );
   return (
@@ -38,7 +39,10 @@ const UpdateMovieModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Edytuj film</h1>
-							<Formik initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) =>{ putFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
+							<Formik initialValues={{nazw: updateMovie.nazwa, opi: "", zdjeci: updateMovie.zdjecie, kategori: updateMovie.kategoriaid, 
+							edukacyjn: updateMovie.edukacyjny, oskar: updateMovie.oskary}} onSubmit={(values) =>{ 
+							
+							putFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));

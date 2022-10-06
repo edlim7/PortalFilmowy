@@ -36,6 +36,9 @@ export async function getStaticProps() {
 const Seriale = ({posts,posts2,posts3,posts4,posts5}) => {
 	const {searchTerm, setSearchTerm} = useContext(AppContext);
 	useEffect(() => {
+		document.title = 'Filizone - seriale';
+	  });
+	useEffect(() => {
 		setSearchTerm('');
 	}, [])
 	const {showModalSeries,setShowModalSeries, series, setSeries} = useContext(ModalContext)
@@ -68,9 +71,6 @@ useEffect(() => {
 		setNazwyProdukcji(posts);
 	}, [])
 
-	console.log("uzytkownik123123123:SERIAL "+ ZalogowanyUzytkownik.log);
-	console.log("nowe"); 
-	console.log(dataValues);
 	const serialOcena=[];
 	var komentarz=[];
 	var sum=0;
@@ -150,7 +150,8 @@ useEffect(() => {
 					kategoria: post.kategoria,
 					serialId:post.serialId,
 					edukacyjny:post.edukacyjny,
-					opis:post.opis
+					opis:post.opis,
+					kategoriaid:post.kategoriaId
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>

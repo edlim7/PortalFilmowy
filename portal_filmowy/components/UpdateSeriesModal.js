@@ -28,10 +28,12 @@ const UpdateSeriesModal = () => {
 	 }
 	 console.log("update "+updateSeries.kategoria);
 	 const serialid=updateSeries.serialId;
-	 const textArea = (props) => (
-		<textArea  {...props}>
+	 const textAreaa = (props) => (
+		<textArea {...props}>
+		{updateSeries.opis}
 		</textArea>
 	  );
+	  console.log("id: "+updateSeries.kategoriaid);
   return (
     <>
 {showUpdateModalSeries ? (
@@ -39,7 +41,9 @@ const UpdateSeriesModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Edytuj Serial</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, odcink: 0,sezon: 0, emm:0}} onSubmit={(values) => {putSerial('https://localhost:5001/api/SerialKontroler/updateSerialById2/'+serialid, 
+							<Formik enableReinitialize={true} initialValues={{nazw: updateSeries.nazwa, opi:  updateSeries.opis, zdjeci:  updateSeries.zdjecie, 
+							kategori: updateSeries.kategoriaid, edukacyjn:  updateSeries.edukacyjny, odcink:  updateSeries.odcinki,sezon:  updateSeries.sezony, emm: updateSeries.emmy}} onSubmit={(values) => {
+							putSerial('https://localhost:5001/api/SerialKontroler/updateSerialById2/'+serialid, 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));
@@ -60,7 +64,7 @@ const UpdateSeriesModal = () => {
 									</div>
 									<div className="prawo">
 									<h3 className="nowe">Nowe wartości</h3><br/>
-									<label className="field"><Field type ='nazwa' name='nazw' value={updateSeries.nazwa} required></Field></label><br /><br /><br />
+									<label className="field"><Field type ='nazwa' name='nazw'  required></Field></label><br /><br /><br />
 									<label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/" required></Field></label><br /><br /><br />
 									<label className="field"><Field as="select" name="kategori">
 			 						{Kategoria.map((post) => (
@@ -71,7 +75,7 @@ const UpdateSeriesModal = () => {
 									<label className="field"><Field type ='number' name='emm' min='0' max='100' ></Field></label><br /><br /><br />	
 									<label className="field"><Field type ='number' name='sezon' min='0' max='100' ></Field></label><br /><br /><br />	
 									<label className="field"><Field type ='number' name='odcink' min='0' max='100' ></Field></label><br /><br /><br />	
-									<label className="field"><Field as={textArea} name='opi'  className="nowyOpis" required></Field></label><br /><br /><br />
+									<label className="field"><Field as={textAreaa} name='opi'  className="nowyOpis" required></Field></label><br /><br /><br />
 									</div>							
 									
 								</Form>

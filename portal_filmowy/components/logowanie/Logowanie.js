@@ -1,4 +1,4 @@
-import React, { useContext, useState,useRef } from "react";
+import React, { useContext, useState,useRef,Alert } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../../contexts/ModalContext";
 import { AppContext } from "../../contexts/AppContext";
@@ -26,7 +26,8 @@ const Logowanie = () => {
 				}
 			})
 			if(zal===false)
-			alert("Zły login lub hasło!");
+			Alert.alert("myTitle", "my message");
+			//alert("Zły login lub hasło!");
 	}
 	return (
 		<>

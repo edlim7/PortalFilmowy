@@ -34,6 +34,9 @@ export async function getStaticProps() {
 const SerialeRanking = ({posts,posts2,posts3,posts4,posts5}) => {
 	const {searchTerm, setSearchTerm} = useContext(AppContext);
 	useEffect(() => {
+		document.title = 'Filizone - Ranking seriali';
+	  });
+	useEffect(() => {
 		setSearchTerm('');
 	}, [])
 	const {showModalSeries,setShowModalSeries, series, setSeries} = useContext(ModalContext)

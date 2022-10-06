@@ -59,6 +59,9 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	const [dataValues7, setDataValues7] = useState(posts7);  //serial
 	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
 	useEffect(() => {
+		document.title = 'Filizone';
+	  });
+	useEffect(() => {
 		const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
 		if (ZalogowanyUzytkownik) {
 			setZalogowanyUzytkownik(ZalogowanyUzytkownik);

@@ -43,6 +43,9 @@ const FilmyRanking = ({posts,posts2,posts3,posts4,posts5}) => {
 	const [dataValues3, setDataValues3] = useState(posts3);
 	const [dataValues4, setDataValues4] = useState(posts4);
 	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+	useEffect(() => {
+		document.title = 'Filizone - Ranking filmów';
+	  });
 useEffect(() => {
 	const ZalogowanyUzytkownik = JSON.parse(localStorage.getItem('uzytkownik'));
 	if (ZalogowanyUzytkownik) {
