@@ -27,7 +27,7 @@ const AddSeriesModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Dodaj nowy serial</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, odcink: 0,sezon: 0, emm:0}} onSubmit={(values) =>{ 
+							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, odcink: 1,sezon: 1, emm:0}} onSubmit={(values) =>{ 
 							czyWystepujeNazwa=0;
 							NazwyProdukcji.forEach((el)=>{
 								if(el.nazwa===values.nazw)
@@ -52,7 +52,7 @@ const AddSeriesModal = () => {
 									))}
            							</Field><br /><br />
 									<label>Edukacyjny: <Field type ='checkbox' name='edukacyjn' className="field"></Field> <br /><br /></label>
-									Emmy: <Field type ='number' name='emm' min='1' max='100' className="field" ></Field><br />	<br />	
+									Emmy: <Field type ='number' name='emm' min='0' max='100' className="field" ></Field><br />	<br />	
 									Ilość sezonów: <Field type ='number' name='odcink' min='1' max='100' className="field"></Field><br />	<br />	
 									Ilość odcinków: <Field type ='number' name='sezon' min='1' max='1000' className="field"></Field><br />	<br />	
 									Opis: <Field type ='opis' name='opi' className="nowyOpis" as={textArea} required></Field><br /><br />								
