@@ -18,6 +18,7 @@ const RejestracjaModal = () => {
 			body: JSON.stringify({login:data.log, haslo: data.hasl, typKonta: data.typKont,email:data.emai})
 		});
 		return res.json()
+		
 	}
 	return (
 		<>
@@ -33,13 +34,13 @@ const RejestracjaModal = () => {
 							if(el.login===values.log)
 							{
 								czyWystepujeLogin=czyWystepujeLogin+1;
-								alert("Ten login jest zajęty!")
+								alert("Ten login jest zajęty!");
 								
 							}
 							else if(el.email==values.emai)
 							{
-								czyWystepujeMail=czyWystepujeMail+1
-								alert("Ten email jest zajęty!")
+								czyWystepujeMail=czyWystepujeMail+1;
+								alert("Ten email jest zajęty!");
 							}
 							});
 							if(czyWystepujeLogin==0 && czyWystepujeMail==0)

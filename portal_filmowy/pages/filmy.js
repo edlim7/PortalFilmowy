@@ -162,7 +162,7 @@ console.log(filmOcena);
 export default Filmy;
 const Container = styled.div`
 position: relative;
-
+padding-left: 100PX;
 		display: grid;
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);

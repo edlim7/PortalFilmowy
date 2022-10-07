@@ -130,7 +130,10 @@ useEffect(() => {
 								<li key={post.id} >
 								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b>:  post.nazwaUzytkownika=="Personel" ? 
 								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
-								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)}}>X</button>: ""} <br />  {post.tresc} <hr />
+								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ 
+									deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)
+									window.location.reload(false);
+									}}>X</button>: ""} <br />  {post.tresc} <hr />
 								</li>
 							</ul>
 							)} 

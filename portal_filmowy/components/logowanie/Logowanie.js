@@ -26,8 +26,7 @@ const Logowanie = () => {
 				}
 			})
 			if(zal===false)
-			Alert.alert("myTitle", "my message");
-			//alert("Zły login lub hasło!");
+			alert("Zły login lub hasło!");
 	}
 	return (
 		<>

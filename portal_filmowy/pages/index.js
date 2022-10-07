@@ -362,4 +362,5 @@ const Container = styled.div`
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);
 		grid-template-rows: min-content;
+		padding-left: 100PX;
 `
