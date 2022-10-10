@@ -8,7 +8,7 @@ const UpdateMovieModal = () => {
   const {showUpdateModalMovie, setShowUpdateModalMovie, updateMovie} = useContext(ModalContext);
 	const [eduBool, setEduBool] = useState('');
 	const {Kategoria} = useContext(AppContext);
-	async function putFilm(url, data) {
+	async function edytujFilm(url, data) {
 		const res = await fetch(url, {
 			method:'PUT',
 			headers:{'Content-type':'application/json'},
@@ -42,7 +42,7 @@ const UpdateMovieModal = () => {
 							<Formik initialValues={{nazw: updateMovie.nazwa, opi: "", zdjeci: updateMovie.zdjecie, kategori: updateMovie.kategoriaid, 
 							edukacyjn: updateMovie.edukacyjny, oskar: updateMovie.oskary}} onSubmit={(values) =>{ 
 							
-							putFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
+							edytujFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));

@@ -17,7 +17,7 @@ const MovieModal = () => {
 			setZalogowanyUzytkownik(ZalogowanyUzytkownik);
 		}
 	  }, []);
-	async function postKom(url, data) {
+	async function skomentuj(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
@@ -25,7 +25,7 @@ const MovieModal = () => {
 		});
 		return res.json()
 	}
-	async function postOcena(url, data) {
+	async function ocen(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
@@ -33,7 +33,7 @@ const MovieModal = () => {
 		});
 		return res.json()
 	}
-	async function putOcena(url, data) {
+	async function zmienOcene(url, data) {
 		const res = await fetch(url, {
 			method:'PUT',
 			headers:{'Content-type':'application/json'},
@@ -41,12 +41,12 @@ const MovieModal = () => {
 		});
 		return res.json()
 	}
-	async function deleteFilm(url) {
+	async function usunFilm(url) {
 		const res = await fetch(url, {
 			method:'DELETE',
 		});
 	}
-	async function deleteKom(url) {
+	async function usunKom(url) {
 		const res = await fetch(url, {
 			method:'DELETE',
 		});
@@ -73,7 +73,7 @@ const MovieModal = () => {
 							<button 
 							onClick={() => {
 								setShowModalMovie((prevState) => !prevState)
-								deleteFilm('https://localhost:5001/api/FilmKontroler/deleteFilmById2/'+filmid);
+								usunFilm('https://localhost:5001/api/FilmKontroler/deleteFilmById2/'+filmid);
 								window.location.reload(false);
 							}}
 							className="usunFilm"
@@ -98,13 +98,13 @@ const MovieModal = () => {
 							     });
 								if(czyOcenil===0 && ZalogowanyUzytkownik.typKonta!=undefined)
 								{
-									postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+									ocen('https://localhost:5001/api/OcenaKontroler/addOcena', 
 									values)
 									.then((data)=> console.log(data))
 									.catch((error)=>console.log(error));
 									window.location.reload(false);
 								}else if(czyOcenil>0){
-									putOcena('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
+									zmienOcene('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
 									values)
 									.then((data)=> console.log(data))
 									.catch((error)=>console.log(error));
@@ -131,7 +131,7 @@ const MovieModal = () => {
 								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b>:  post.nazwaUzytkownika=="Personel" ? 
 								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
 								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ 
-									deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)
+									usunKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)
 									window.location.reload(false);
 									}}>X</button>: ""}  <br/>{post.tresc} <hr />
 								
@@ -146,7 +146,7 @@ const MovieModal = () => {
 							}
 							else
 							{
-								postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+								skomentuj('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 								values)
 								.then((data)=> console.log(data))
 								.catch((error)=>console.log(error));

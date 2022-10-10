@@ -17,7 +17,7 @@ useEffect(() => {
   const {Oceny} = useContext(AppContext);
   var czyOcenil=0;
 	var ocenaid=0;
-	async function postKom(url, data) {
+	async function skomentuj(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
@@ -25,7 +25,7 @@ useEffect(() => {
 		});
 		return res.json()
 	}
-	async function putOcena(url, data) {
+	async function zmienOcene(url, data) {
 		const res = await fetch(url, {
 			method:'PUT',
 			headers:{'Content-type':'application/json'},
@@ -33,7 +33,7 @@ useEffect(() => {
 		});
 		return res.json()
 	}
-	async function postOcena(url, data) {
+	async function ocen(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
@@ -46,7 +46,7 @@ useEffect(() => {
 			method:'DELETE',
 		});
 	}
-	async function deleteKom(url) {
+	async function usunKom(url) {
 		const res = await fetch(url, {
 			method:'DELETE',
 		});
@@ -99,7 +99,7 @@ useEffect(() => {
 							    });
 							if(czyOcenil===0 && ZalogowanyUzytkownik.typKonta!=undefined)
 							{
-								postOcena('https://localhost:5001/api/OcenaKontroler/addOcena', 
+								ocen('https://localhost:5001/api/OcenaKontroler/addOcena', 
 								values)
 								.then((data)=> console.log(data))
 								.catch((error)=>console.log(error));
@@ -107,14 +107,14 @@ useEffect(() => {
 							}
 							else if(czyOcenil>0)
 							{
-								putOcena('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
+								zmienOcene('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
 								values)
 								.then((data)=> console.log(data))
 								.catch((error)=>console.log(error));
 								window.location.reload(false);
 							}
 							else{
-								alert("Musisz być zalogowany, aby ocenić film!");
+								alert("Musisz być zalogowany, aby ocenić serial!");
 							}
 							 }}>
 								<Form>
@@ -131,7 +131,7 @@ useEffect(() => {
 								{post.nazwaUzytkownika=="Admin"  ? <b className="admin">{post.nazwaUzytkownika}</b>:  post.nazwaUzytkownika=="Personel" ? 
 								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
 								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ 
-									deleteKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)
+									usunKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)
 									window.location.reload(false);
 									}}>X</button>: ""} <br />  {post.tresc} <hr />
 								</li>
@@ -140,11 +140,11 @@ useEffect(() => {
 							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, tresc:''}} onSubmit={(values) => {
 							if(ZalogowanyUzytkownik.typKonta===undefined)
 							{
-								alert("Musisz być zalogowany, aby skomentować film!");
+								alert("Musisz być zalogowany, aby skomentować serial!");
 							}
 							else
 							{
-							postKom('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
+							skomentuj('https://localhost:5001/api/KomentarzKontroler/addKomentarz', 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));

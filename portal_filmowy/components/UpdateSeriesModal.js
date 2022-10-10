@@ -8,7 +8,7 @@ const UpdateSeriesModal = () => {
   const {showUpdateModalSeries, setShowUpdateModalSeries, updateSeries} = useContext(ModalContext);
   const {Kategoria} = useContext(AppContext);
 	const [eduBool, setEduBool] = useState('');
-	async function putSerial(url, data) {
+	async function edytujSerial(url, data) {
 		const res = await fetch(url, {
 			method:'PUT',
 			headers:{'Content-type':'application/json'},
@@ -16,17 +16,6 @@ const UpdateSeriesModal = () => {
 		});
 		return res.json()
 	}
-	var str2bool = (value) => {
-		if (value && typeof value === "string") {
-			 if (value.toLowerCase() === "true") return true;
-			 if (value.toLowerCase() === "false") return false;
-		}
-		return value;
-	 }
-	 var str2int = (value) => {
-		return parseInt(value,10);
-	 }
-	 console.log("update "+updateSeries.kategoria);
 	 const serialid=updateSeries.serialId;
 	 const textAreaa = (props) => (
 		<textArea {...props}>
@@ -43,7 +32,7 @@ const UpdateSeriesModal = () => {
 							<h1>Edytuj Serial</h1>
 							<Formik enableReinitialize={true} initialValues={{nazw: updateSeries.nazwa, opi:  updateSeries.opis, zdjeci:  updateSeries.zdjecie, 
 							kategori: updateSeries.kategoriaid, edukacyjn:  updateSeries.edukacyjny, odcink:  updateSeries.odcinki,sezon:  updateSeries.sezony, emm: updateSeries.emmy}} onSubmit={(values) => {
-							putSerial('https://localhost:5001/api/SerialKontroler/updateSerialById2/'+serialid, 
+							edytujSerial('https://localhost:5001/api/SerialKontroler/updateSerialById2/'+serialid, 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));

@@ -15,6 +15,11 @@ const PanelAdminaModal = () => {
 			setZalogowanyUzytkownik(ZalogowanyUzytkownik);
 		}
 	  }, []);
+	  async function usunKonto(url) {
+		const res = await fetch(url, {
+			method:'DELETE',
+		});
+	}
   return (
     <>
 	<UzytkownikModal/>
@@ -34,6 +39,16 @@ const PanelAdminaModal = () => {
 										setUser(post);										
 										}}className="edytuj">
 										Edytuj!
+										</button>
+										<button 
+										onClick={() => {
+											setShowModalMovie((prevState) => !prevState)
+											usunKonto('https://localhost:5001/api/UzytkownikKontroler/deleteUzytkownikById/'+post.uzytkownikId);
+											window.location.reload(false);
+										}}
+										className="usun_Konto"
+										>
+										Usuń Konto
 										</button>
 										<span className="logi">{post.login}: </span><span className="postTypKonta">{post.typKonta==1? "Admin": post.typKonta==2? "Personel":"Użytkownik" }</span>
 										<br/><br/>

@@ -11,7 +11,7 @@ const RejestracjaModal = () => {
 	const emailRef = useRef(null);
 	var czyWystepujeLogin=0;
 	var czyWystepujeMail=0;
-	async function postUzytkownik(url, data) {
+	async function rejestrujUzytkownik(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
@@ -45,7 +45,7 @@ const RejestracjaModal = () => {
 							});
 							if(czyWystepujeLogin==0 && czyWystepujeMail==0)
 							{
-								postUzytkownik('https://localhost:5001/api/UzytkownikKontroler/addUzytkownik2', 
+								rejestrujUzytkownik('https://localhost:5001/api/UzytkownikKontroler/addUzytkownik2', 
 								values)
 								.then((data)=> console.log(data))
 								.catch((error)=>console.log(error));

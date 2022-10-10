@@ -7,7 +7,7 @@ import { Formik, Form, Field } from 'formik';
 const UzytkownikModal = () => {
 	const {showModalUser, setShowModalUser,user, setUser} = useContext(ModalContext)
 	const {Uzytkownicy} = useContext(AppContext)
-	async function putTyp(url, data) {
+	async function zmienTyp(url, data) {
 		const res = await fetch(url, {
 			method:'PUT',
 			headers:{'Content-type':'application/json'},
@@ -30,7 +30,7 @@ const UzytkownikModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Zmień typ konta: {uzytkownikLog}</h1><br />
-							<Formik initialValues={{typKont: 3}} onSubmit={(values) =>{ putTyp('https://localhost:5001/api/UzytkownikKontroler/updateUzytkownikById2/'+uzytkownikid, 
+							<Formik initialValues={{typKont: 3}} onSubmit={(values) =>{ zmienTyp('https://localhost:5001/api/UzytkownikKontroler/updateUzytkownikById2/'+uzytkownikid, 
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error))
