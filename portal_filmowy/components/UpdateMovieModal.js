@@ -101,7 +101,7 @@ const Wrapper = styled.div`
 	width: 700px;
 	height: 700px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background: #DED7DE;
+	background: white;
 	color: #000;
 	position: absolute;
 	z-index: 1000;
@@ -110,6 +110,8 @@ const Wrapper = styled.div`
 `
 
 const Content = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+font-family: 'Roboto';
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -159,12 +161,9 @@ const Content = styled.div`
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid #f1e1fc;
+		border: 2px solid black;
 		text-align: left;
 		padding: 0.25rem;	
-	}
-	input:focus{
-		outline: 3px solid black;
 	}
 	.admin{
 		color:#ca3063;
@@ -185,7 +184,7 @@ const Content = styled.div`
 		padding-right: 60px;
 	}
 	input:focus{
-		outline: 3px solid black;
+		outline: 1px solid black;
 	}
 	.lewo{
 		float: left;

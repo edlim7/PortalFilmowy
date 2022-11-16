@@ -11,7 +11,6 @@ const SingleContent = ({id,
     <b className='kategoria'>{kategoria}</b>
     <b className='liczba'>{liczba}</b>
     <b className='produkcjaid'>{produkcjaid}</b>
-    
     <img className='zdjecie' src={zdjecie} />
     
     
@@ -24,6 +23,8 @@ const SingleContent = ({id,
 export default SingleContent
 
 const Wrapper = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+font-family:'Roboto';
 .media {
   display: flex;
   flex-direction: row;
@@ -33,7 +34,6 @@ const Wrapper = styled.div`
   background-color: #282c34;
   border-radius: 10px;
   position: relative;
-  font-family: "Montserrat", sans-serif;
 }
 
 .media:hover {
@@ -58,11 +58,11 @@ const Wrapper = styled.div`
 }
 .zdjecie{
   display: block;  
-  height: 360px; //  480px 640px
-  width: 	480px; 
+  height: 265px; //  480px 640px
+  width: 	430px; 
   margin-left: auto;  
   margin-right: auto;
-
+  box-shadow:2px 2px 5px black;
 }
 
 .subTitle {

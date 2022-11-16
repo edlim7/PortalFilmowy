@@ -164,12 +164,15 @@ useEffect(() => {
 export default Seriale;
 
 const Container = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+font-family: 'Roboto';
 position: relative;
 padding-left: 100PX;
 		display: grid;
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);
 		grid-template-rows: min-content;
+		
 
 .DodajFilm{
 	cursor: pointer;

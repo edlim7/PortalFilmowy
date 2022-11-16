@@ -86,7 +86,7 @@ const Wrapper = styled.div`
 	width: 700px;
 	height: 700px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background: #DED7DE;
+	background: white;
 	color: #000;
 	position: absolute;
 	z-index: 1000;

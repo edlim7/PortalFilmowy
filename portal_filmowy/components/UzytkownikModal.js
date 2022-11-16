@@ -45,7 +45,7 @@ const UzytkownikModal = () => {
 								<label className="labelSpacing3">Uzytkownik:<Field type="radio" name="typKont" value="3"></Field> </label> 
 								</label>
 								</center><br /><br />
-								<center><button type='submit'>Edytuj!</button></center>
+								<center><button type='submit' className="edytuj">Edytuj!</button></center>
 								</Form>
 							</Formik>
 
@@ -75,8 +75,7 @@ const Wrapper = styled.div`
 	width: 700px;
 	height: 225px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background: #DED7DE;
-	color: #000;
+	background: white;
 	position: absolute;
 	z-index: 1000;
 	border-radius: 10px;
@@ -116,15 +115,9 @@ const Content = styled.div`
    		border-radius: 5px;
 	}
 	.edytuj {
-		position: relative;
-		left: 30px;
-		cursor: pointer;
-		background: #141414;
-		color: #ffff;
-		border: none;
-		padding: 0px;
-		width: 60px;
-		height: 25px;
+		padding: 0;
+		width: 120px;
+		height: 35px;
 		
 	}
 	.edytuj:hover{

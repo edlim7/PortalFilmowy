@@ -33,16 +33,17 @@ const PanelAdminaModal = () => {
 									<center><label className="kont"><b>Nazwa konta:</b><b className="typKonta">Typ konta:</b>  </label></center><br /><br />
 			 						{Uzytkownicy.map((post) => (
 										<label className="selec">
-										<button type='button' onClick={() => {
+										<button type='button'
+										onClick={() => {
 										setShowModalUser((prevState) => !prevState);
 										setShowPanelAdminaModal((prevState) => !prevState);
 										setUser(post);										
-										}}className="edytuj">
+										}}className="edytuj_button">
 										Edytuj!
 										</button>
-										<button 
+										<button type='button'
 										onClick={() => {
-											setShowModalMovie((prevState) => !prevState)
+											setShowModalUser((prevState) => !prevState);
 											usunKonto('https://localhost:5001/api/UzytkownikKontroler/deleteUzytkownikById/'+post.uzytkownikId);
 											window.location.reload(false);
 										}}
@@ -66,6 +67,8 @@ const PanelAdminaModal = () => {
 };
 
 const Background = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
 	position: fixed;
 	display: flex;
 	left: 0;
@@ -76,13 +79,14 @@ const Background = styled.div`
 	justify-content: center;
 	align-items: center;
 	z-index: 1000;
+	
 `;
 
 const Wrapper = styled.div`
 	width: 700px;
 	height: 700px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background: #DED7DE;
+	background: white;
 	color: #000;
 	position: absolute;
 	z-index: 1000;
@@ -96,6 +100,7 @@ const Content = styled.div`
 	align-items: left;
 	padding-left: 5px;
 	color: #141414;
+	
 	h1{
 		text-align: center;
 	}
@@ -122,7 +127,22 @@ const Content = styled.div`
 		margin-right: 1px;
    		border-radius: 5px;
 	}
-	.edytuj {
+	.usun_Konto{
+		position: absolute;
+		left:230px;
+		cursor: pointer;
+		background: #141414;
+		color: #ffff;
+		border: none;
+		padding: 0px;
+		width: 120px;
+		height: 30px;
+	}
+	.usun_Konto:hover{
+		transition-duration: 1s;
+   		 background-color: rgb(105, 105, 105);
+	}
+	.edytuj_button {
 		position: absolute;
 		right:55px;
 		cursor: pointer;
@@ -130,14 +150,15 @@ const Content = styled.div`
 		color: #ffff;
 		border: none;
 		padding: 0px;
-		width: 60px;
-		height: 25px;
+		width: 120px;
+		height: 30px;
 		
 	}
-	.edytuj:hover{
+	.edytuj_button:hover{
 		transition-duration: 1s;
    		 background-color: rgb(105, 105, 105);
 	}
+	
 	input{
 		font: inherit;
 		background-color: #f1e1fc;
@@ -195,15 +216,15 @@ const Content = styled.div`
 	}
 	.typKonta{
 		position: relative;
-		left:150px;
+		left:180px;
 	}
 	.kont{
 		float: left;
-		padding-left: 100px;
+		padding-left: 70px;
 	}
 	.logi{
 		float: left;
-		padding-left: 100px;
+		padding-left: 70px;
 	}
 	.postTypKonta{
 		float:right;

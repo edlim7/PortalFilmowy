@@ -17,12 +17,14 @@ const Footer = () => {
 
 export default Footer;
 const Container = styled.div`
-	background-color: #A69595;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+	background-color: #32B3EB;//#A69595;
 	left: 0;
 	bottom: 0;
 	width: 100%;
 	text-align: center;
 	.foot {
+		font-family: 'Roboto';
 		margin: 1%;
 	}
 `;

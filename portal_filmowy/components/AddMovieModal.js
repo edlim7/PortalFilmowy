@@ -48,7 +48,7 @@ const AddMovieModal = () => {
 							}}}>
 									{({ values }) => (
 									<Form className="form">
-									Nazwa filmu: <Field type ='nazwa' name='nazw' className="field" required ></Field><br /><br />
+									<label className="tts">Nazwa filmu: </label><Field type ='nazwa' name='nazw' className="field" required ></Field><br /><br />
 									Zdjęcie: <Field type ='zdjecie' name='zdjeci' placeholder="obrazki/" className="field" required></Field><br /><br />
 									Kategoria:    <Field as="select" name="kategori" className="field">
 			 						{Kategoria.map((post) => (
@@ -85,10 +85,11 @@ const Background = styled.div`
 `;
 
 const Wrapper = styled.div`
+
 	width: 700px;
 	height: 700px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background: #DED7DE;
+	background: white;
 	color: #000;
 	position: absolute;
 	z-index: 1000;
@@ -102,6 +103,10 @@ const Content = styled.div`
 	align-items: left;
 	padding-left: 5px;
 	color: #141414;
+	.form{
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+font-family: 'Roboto';
+	}
 	h1{
 		text-align: center;
 	}
@@ -149,7 +154,7 @@ const Content = styled.div`
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid #f1e1fc;
+		border: 2px solid black;
 		text-align: left;
 		padding: 0.25rem;	
 	}
@@ -168,7 +173,7 @@ const Content = styled.div`
 		width:50%;
 	}
 	input:focus{
-		outline: 3px solid black;
+		outline: 1px solid black;
 	}
 	.field{
 		position: absolute;
@@ -184,7 +189,7 @@ const Content = styled.div`
 		left:400px;
 	}
 	.nowyOpis:focus{
-		outline: 3px solid black;
+		outline: 2px solid black;
 	}
 `;
 

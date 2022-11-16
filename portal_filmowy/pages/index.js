@@ -96,6 +96,8 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	var eduOcena=[];
 	var serialFilm=[];
 	var serialFilmEdu=[];
+	var licznikPolecane=0;
+	var licznikEdu=0;
 	dataValues2.forEach((el)=>{			// wyszukanie ocenionych produkcji przez danego uzytkownika
 		if(el.uzytkownikID==userid)
 		{
@@ -255,7 +257,9 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		<SeriesModal />
 		<MovieModal />
 			<Navbar></Navbar>
-			<center><h1>Ze względu na to co oglądasz polecamy:</h1></center>
+			{ZalogowanyUzytkownik.typKonta===undefined ? 
+			<center><h1>Polecamy obejrzeć:</h1></center>
+			: <center><h1>Ze względu na to co oglądasz polecamy:</h1></center>}
 <Container>
 			{polecaneDesc.filter((val)=>{
 				if(searchTerm==""){
@@ -313,7 +317,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 					return val;
 				}
 			}).map((post) => (
-			post.sezony > 0 ? 				
+			post.sezony > 0? 				
 			<ul key={post.id} onClick={()=>{
 				setShowModalSeries((prevState) => !prevState);
 					setSeries({
@@ -358,9 +362,14 @@ export default Home;
 
 
 const Container = styled.div`
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 		display: grid;
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);
 		grid-template-rows: min-content;
 		padding-left: 100PX;
+		font-family: 'Roboto';
+		background-color: white;
+
+
 `

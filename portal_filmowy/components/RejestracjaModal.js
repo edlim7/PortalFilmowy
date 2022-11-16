@@ -80,6 +80,8 @@ const RejestracjaModal = () => {
 };
 
 const Background = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+font-family: 'Roboto';
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -139,12 +141,15 @@ const Wrapper = styled.div`
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid white;
+		border: 2px solid black;
 		width: 100%;
 		text-align: left;
 		padding: 0.25rem;
 	}
-
+	.control input:focus {
+		outline: 1px solid black;
+	}
+	
 	.actions {
 		margin-top: 1.5rem;
 		display: flex;

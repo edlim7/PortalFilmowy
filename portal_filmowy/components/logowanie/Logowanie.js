@@ -137,10 +137,13 @@ const Wrapper = styled.div`
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid white;
+		border: 2px solid black;
 		width: 100%;
 		text-align: left;
 		padding: 0.25rem;
+	}
+	.control input:focus {
+		outline: 1px solid black;
 	}
 
 	.actions {

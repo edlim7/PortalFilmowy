@@ -37,7 +37,7 @@ const Navbar = () => {
 				Zaloguj się
 				</button>
 			: 	
-				<label><span className="zalogowanyLogin">Zalogowany jako:<br/><i>{ZalogowanyUzytkownik.login}</i></span>
+				<label><span className="zalogowanyLogin"><h3>Zalogowany jako:<br/>{ZalogowanyUzytkownik.login}</h3></span>
 				<button onClick={() => {wylogujUzytkownika();}} className="Login">
 				Wyloguj się
 				</button>
@@ -58,10 +58,10 @@ const Navbar = () => {
 			<span className="linki"><Link href="/filmy" ><a className="link1">Filmy</a></Link></span>
 			<span className="linki"><Link href="/seriale"><a className="link1">Seriale</a></Link></span>
 			<span className="linki"><Link href="/filmyRanking"><a className="link1">Ranking Filmów</a></Link></span>
-			<span className="linki"><Link href="/serialeRanking"><a className="link1">Ranking Serialii</a></Link></span>
+			<span className="linki"><Link href="/serialeRanking"><a className="link1">Ranking Seriali</a></Link></span>
 			</center>
+			<br/>
 			<center>
-			<h1>Wyszukaj interesującą Ciebie produkcję!</h1>
 			<input className="szukaj"
 			type="text" 
 			placeholder="Wyszukaj..." 
@@ -74,11 +74,13 @@ const Navbar = () => {
 
 export default Navbar;
 const Container = styled.div`
-	background-color: #A69595;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+	background-color: #32B3EB;//#A69595;
+	font-family:'Roboto';
 	
-
 h1{
 	position:relative ;
+	
 }
 button{
 	
@@ -91,20 +93,28 @@ button{
 	margin-right: 1px;
     border-radius: 5px;
 	}
-button:hover{
-		transition-duration: 1s;
-   		 background-color: rgb(105, 105, 105);
-	}
+
 .Login{
+	
+	font-family: 'Roboto';
 	position: absolute;
 	right:5px;
 	top:10px;
 }
+.Login:hover{
+		transition-duration: 1s;
+   		 background-color: rgb(105, 105, 105);
+	}
 .Panel{
+	font-family: 'Roboto';
 	position: absolute;
 	right:5px;
 	top:50px;
 }
+.Panel:hover{
+		transition-duration: 1s;
+   		 background-color: rgb(105, 105, 105);
+	}
 .linki{
 	padding-right: 30px;
 }
@@ -128,9 +138,8 @@ button:hover{
 }
 .zalogowanyLogin
 {
-	
 	position: absolute;
-	top: 10px;
+	top: -19px;
 	left:10px;
 	float:left;
 	font-size: 18px;
@@ -140,7 +149,7 @@ button:hover{
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid #DED7DE;
+		border: 2px solid black;
 		text-align: left;
 		padding: 0.25rem;
 		margin-bottom:10px;
@@ -149,10 +158,9 @@ button:hover{
 		font-size: 20px;
 	}
 	.szukaj:focus{
-		outline: 3px solid black;
+		outline: 2px solid black;
 	}
-	.glowna{
-		font-family: cursive;
-	}
+
+
 `;
 

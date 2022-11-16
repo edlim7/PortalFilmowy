@@ -9,8 +9,7 @@ import { AppContext } from "../contexts/AppContext";
 import SingleContent from "../components/SingleContent/SingleContent";
 
 export async function getStaticProps() {
-	// Call an external API endpoint to get posts
-	const res = await fetch("http://localhost:5000/api/FilmKontroler/getFilmProdukcja");	// pozniej tutaj getallfilmyale mozliwe ze je przerobie jeszcze
+	const res = await fetch("http://localhost:5000/api/FilmKontroler/getFilmProdukcja");
 	const res2 = await fetch("http://localhost:5000/api/OcenaKontroler/getAllOcena"); 
 	const res3 = await fetch("http://localhost:5000/api/KomentarzKontroler/getAllKomentarz"); 
 	const res4 = await fetch("http://localhost:5000/api/UzytkownikKontroler/getAllUzytkownik");
@@ -20,8 +19,6 @@ export async function getStaticProps() {
 	const posts3 = await res3.json();
 	const posts4 = await res4.json();
 	const posts5 = await res5.json();
-	// By returning { props: { posts } }, the Blog component
-	// will receive `posts` as a prop at build time
 	return {
 		props: {
 			posts,
@@ -161,6 +158,8 @@ console.log(filmOcena);
 
 export default Filmy;
 const Container = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+font-family: 'Roboto';
 position: relative;
 padding-left: 100PX;
 		display: grid;

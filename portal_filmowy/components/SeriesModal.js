@@ -88,7 +88,7 @@ useEffect(() => {
 							 Ilość emmy: {series.emmy} <br /><br />
 							 Kategoria: {series.kategoria} <br /><br />
 							 	Ocena: {series.ocena} 
-							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, oce: 1}} onSubmit={(values) =>{ 
+							<Formik initialValues={{id: series.produkcjaId, name: ZalogowanyUzytkownik.uzytkownikId, ocea: 1}} onSubmit={(values) =>{ 
 							Oceny.forEach((el)=>{
 							czyOcenil=0;
 							if(el.uzytkownikID===ZalogowanyUzytkownik.uzytkownikId && el.produkcjaId===series.produkcjaId)
@@ -183,7 +183,7 @@ const Wrapper = styled.div`
 	width: 700px;
 	height: 700px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	background: #DED7DE;
+	background: white;//#DED7DE;
 	color: #000;
 	position: absolute;
 	z-index: 1000;
@@ -192,6 +192,8 @@ const Wrapper = styled.div`
 `
 
 const Content = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+	font-family: 'Roboto';
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -224,6 +226,7 @@ const Content = styled.div`
 		width: 	320px;
 		margin-right: 1px;
    		border-radius: 5px;
+		box-shadow:2px 2px 5px black;
 	}
 	button {
 		cursor: pointer;
@@ -241,9 +244,10 @@ const Content = styled.div`
 		background-color: #f1e1fc;
 		color: #38015c;
 		border-radius: 4px;
-		border: 1px solid #f1e1fc;
+		border: 2px solid black;
 		text-align: left;
-		padding: 0.25rem;	
+		padding: 0.25rem;
+		margin-right:5px;	
 	}
 	.admin{
 		color:#ca3063;
@@ -283,7 +287,7 @@ const Content = styled.div`
 		height: 22px;
 	}
 	input:focus{
-		outline: 3px solid black;
+		outline: 1px solid black;
 	}
 	.tytulSerial{
 		width:350px;
