@@ -58,6 +58,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	const [dataValues6, setDataValues6] = useState(posts6); // film
 	const [dataValues7, setDataValues7] = useState(posts7);  //serial
 	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
+	console.log(posts6)
 	useEffect(() => {
 		document.title = 'Filizone';
 	  });
@@ -284,6 +285,9 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 						kategoria: post.kategoria,
 						serialId:post.serialId,
 						edukacyjny:post.edukacyjny,
+						popularnonaukowy:post.popularnonaukowy,
+						eksperymentalny:post.eksperymentalny,
+						kino_off:post.kino_off,
 						opis:post.opis
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
@@ -301,6 +305,9 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 					kategoria:post.kategoria,
 					filmId:post.filmId,
 					edukacyjny:post.edukacyjny,
+					popularnonaukowy:post.popularnonaukowy,
+					eksperymentalny:post.eksperymentalny,
+					kino_off:post.kino_off,
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
@@ -333,6 +340,9 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 						kategoria: post.kategoria,
 						serialId:post.serialId,
 						edukacyjny:post.edukacyjny,
+						popularnonaukowy:post.popularnonaukowy,
+						eksperymentalny:post.eksperymentalny,
+						kino_off:post.kino_off,
 						opis:post.opis
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
@@ -350,6 +360,9 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 					kategoria:post.kategoria,
 					filmId:post.filmId,
 					edukacyjny:post.edukacyjny,
+					popularnonaukowy:post.popularnonaukowy,
+						eksperymentalny:post.eksperymentalny,
+						kino_off:post.kino_off,
 					})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>

@@ -14,7 +14,6 @@ namespace PortalFilmowy.Controllers
         {
             _kategoriaUsluga = kategoriaUsluga;
         }
-        [EnableCors("AllowOrigin")]
         [HttpPost("addKategoria")]
         public IActionResult AddKategoria([FromBody]KategoriaVM kategoria)
         {

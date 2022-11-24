@@ -17,6 +17,9 @@ namespace PortalFilmowy.Models
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
         public bool Edukacyjny { get; set; }
+        public bool Kino_off { get; set; }
+        public bool Popularnonaukowy { get; set; }
+        public bool Eksperymentalny { get; set; }
         public int ProdukcjaId { get; set; }
         public string Kategoria { get; set; } 
         public int KategoriaId { get; set; }    
@@ -28,6 +31,9 @@ namespace PortalFilmowy.Models
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
         public bool Edukacyjny { get; set; }
+        public bool Kino_off { get; set; }
+        public bool Popularnonaukowy { get; set; }
+        public bool Eksperymentalny { get; set; }
         public int ProdukcjaId { get; set; }
         public int KategoriaId { get; set; }   
     }
@@ -38,6 +44,9 @@ namespace PortalFilmowy.Models
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
         public bool Edukacyjny { get; set; }
+        public bool Kino_off { get; set; }
+        public bool Popularnonaukowy { get; set; }
+        public bool Eksperymentalny { get; set; }
         public int KategoriaId { get; set; }   
     }
 

@@ -31,7 +31,9 @@ const UpdateSeriesModal = () => {
 						<Content>
 							<h1>Edytuj Serial</h1>
 							<Formik enableReinitialize={true} initialValues={{nazw: updateSeries.nazwa, opi:  updateSeries.opis, zdjeci:  updateSeries.zdjecie, 
-							kategori: updateSeries.kategoriaid, edukacyjn:  updateSeries.edukacyjny, odcink:  updateSeries.odcinki,sezon:  updateSeries.sezony, emm: updateSeries.emmy}} onSubmit={(values) => {
+							kategori: updateSeries.kategoriaid, edukacyjn:  updateSeries.edukacyjny, odcink:  updateSeries.odcinki,sezon:  updateSeries.sezony, 
+							emm: updateSeries.emmy, popularnonauk: updateSeries.popularnonaukowy,
+							eksperymen: updateSeries.eksperymentalny, kinooff: updateSeries.kino_off}} onSubmit={(values) => {
 							edytujSerial('https://localhost:5001/api/SerialKontroler/updateSerialById2/'+serialid, 
 							values)
 							.then((data)=> console.log(data))
@@ -46,6 +48,9 @@ const UpdateSeriesModal = () => {
 									<label className="stareWartosci">Zdjęcie: {updateSeries.zdjecie}</label><br /><br /><br />
 									<label className="stareWartosci">Kategoria: {updateSeries.kategoria}</label><br /><br /><br />
 									<label className="stareWartosci">Edukacyjny: {updateSeries.edukacyjny==true?"tak":"nie"}</label><br /><br /><br />
+									<label className="stareWartosci">Popularnonaukowy:{updateSeries.popularnonaukowy==true?" tak":" nie"}</label><br/><br/><br/>
+									<label className="stareWartosci">Eksperymentalny:{updateSeries.eksperymentalny==true?" tak":" nie"}</label><br/><br/><br/>
+									<label className="stareWartosci">kino_off:{updateSeries.kino_off==true?" tak":" nie"}</label><br/><br/><br/>
 									<label className="stareWartosci">Emmy: {updateSeries.emmy}</label><br /><br /><br />
 									<label className="stareWartosci">Ilość sezonów: {updateSeries.sezony}</label><br /><br /><br />
 									<label className="stareWartosci">Ilość odcinków: {updateSeries.odcinki}</label><br /><br /><br />
@@ -61,9 +66,12 @@ const UpdateSeriesModal = () => {
 									))}
            							</Field></label><br /><br /><br />
 									<label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label> <br /><br /><br />
+									<label className="field"><Field type ='checkbox' name='popularnonauk'></Field></label><br /><br /> <br/>
+									<label className="field"><Field type ='checkbox' name='eksperymen'></Field></label><br /><br /> <br/>
+									<label className="field"><Field type ='checkbox' name='kinooff'></Field></label><br /><br /> <br/>
 									<label className="field"><Field type ='number' name='emm' min='0' max='100' ></Field></label><br /><br /><br />	
 									<label className="field"><Field type ='number' name='sezon' min='0' max='100' ></Field></label><br /><br /><br />	
-									<label className="field"><Field type ='number' name='odcink' min='0' max='100' ></Field></label><br /><br /><br />	
+									<label className="field"><Field type ='number' name='odcink' min='0' max='1000' ></Field></label><br /><br /><br />	
 									<label className="field"><Field as={textAreaa} name='opi'  className="nowyOpis" required></Field></label><br /><br /><br />
 									</div>							
 									

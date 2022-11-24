@@ -39,7 +39,10 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie= serial.Zdjecie,
                 Opis = serial.Opis,
                 KategoriaId = serial.KategoriaId,
-                Edukacyjny = serial.Edukacyjny
+                Edukacyjny = serial.Edukacyjny,
+                Kino_off = serial.Kino_off,
+                Popularnonaukowy = serial.Popularnonaukowy,
+                Eksperymentalny = serial.Eksperymentalny,
             };
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
@@ -67,6 +70,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
+                Kino_off = serial.produkcja.Kino_off,
+                Popularnonaukowy = serial.produkcja.Popularnonaukowy,
+                Eksperymentalny = serial.produkcja.Eksperymentalny,
                 KategoriaId=serial.produkcja.Kategoria.KategoriaId,
                 Kategoria = serial.produkcja.Kategoria.NazwaKategorii,
                 ProdukcjaId = serial.produkcja.ProdukcjaId
@@ -85,6 +91,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
+                Kino_off = serial.produkcja.Kino_off,
+                Popularnonaukowy = serial.produkcja.Popularnonaukowy,
+                Eksperymentalny = serial.produkcja.Eksperymentalny,
                 ProdukcjaId = serial.produkcja.ProdukcjaId,
                 Kategoria = serial.produkcja.Kategoria.NazwaKategorii,
 
@@ -103,6 +112,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
+                Kino_off = serial.produkcja.Kino_off,
+                Popularnonaukowy = serial.produkcja.Popularnonaukowy,
+                Eksperymentalny = serial.produkcja.Eksperymentalny,
                 ProdukcjaId = serial.produkcja.ProdukcjaId,
                 Kategoria = serial.produkcja.Kategoria.NazwaKategorii,
 
@@ -121,6 +133,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =serial.produkcja.Zdjecie,
                 Opis = serial.produkcja.Opis,
                 Edukacyjny = serial.produkcja.Edukacyjny,
+                Kino_off = serial.produkcja.Kino_off,
+                Popularnonaukowy = serial.produkcja.Popularnonaukowy,
+                Eksperymentalny = serial.produkcja.Eksperymentalny,
                 ProdukcjaId = serial.produkcja.ProdukcjaId,
                 Kategoria = serial.produkcja.Kategoria.NazwaKategorii
             });
@@ -151,6 +166,9 @@ namespace PortalFilmowy.Data.Services
             _serial.produkcja.Zdjecie =serial.Zdjecie;
             _serial.produkcja.Opis = serial.Opis;
             _serial.produkcja.Edukacyjny = serial.Edukacyjny;
+            _serial.produkcja.Kino_off = serial.Kino_off;
+            _serial.produkcja.Popularnonaukowy = serial.Popularnonaukowy;
+            _serial.produkcja.Eksperymentalny = serial.Eksperymentalny;
             _serial.produkcja.KategoriaId = serial.KategoriaId;
             _context.SaveChanges();
             

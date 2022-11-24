@@ -7,14 +7,12 @@ const AddMovieModal = () => {
   const {showAddModalMovie, setShowAddModalMovie, addMovie} = useContext(ModalContext);
 	const {Kategoria, NazwyProdukcji} = useContext(AppContext);
 	var czyWystepujeNazwa=0;
-	const radioRef = useRef(null);
-	const selectRef = useRef(null);
-	const [eduBool, setEduBool] = useState('');
 	async function postKom(url, data) {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
-			body: JSON.stringify({nazwa:data.nazw, opis: data.opi, zdjecie: data.zdjeci, kategoriaId: data.kategori, edukacyjny: data.edukacyjn, oskary: data.oskar})
+			body: JSON.stringify({nazwa:data.nazw, opis: data.opi, zdjecie: data.zdjeci, kategoriaId: data.kategori, edukacyjny: data.edukacyjn, oskary: data.oskar, 
+				popularnonaukowy: data.popularnonauk,eksperymentalny: data.eksperymen,kino_off: data.kinooff})
 		});
 		return res.json()
 	}
@@ -30,7 +28,8 @@ const AddMovieModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Dodaj nowy film</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, oskar: 0}} onSubmit={(values) =>{ 
+							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "obrazki/", kategori: 1, edukacyjn: false, oskar: 0, 
+							popularnonauk:false, eksperymen:false, kinooff:false}} onSubmit={(values) =>{ 
 							czyWystepujeNazwa=0;
 							NazwyProdukcji.forEach((el)=>{
 								if(el.nazwa===values.nazw)
@@ -56,6 +55,9 @@ const AddMovieModal = () => {
 									))}
            							</Field><br /><br />
 									<label>Edukacyjny: <Field type ='checkbox' name='edukacyjn' className="field"></Field> <br /><br /></label>
+									<label>Popularnonaukowy: <Field type ='checkbox' name='popularnonauk' className="field"></Field> <br /><br /></label>
+									<label>Eksperymentalny: <Field type ='checkbox' name='eksperymen' className="field"></Field> <br /><br /></label>
+									<label>Kino-Off: <Field type ='checkbox' name='kinooff' className="field"></Field> <br /><br /></label>
 									Ilość oskarów: <Field type ='number' name='oskar' min='0' max='100' className="field"  required></Field><br />	<br />
 									Opis: <Field type ='opis' name='opi' className="nowyOpis" as={textArea} required ></Field><br /><br />								
 									<center><button type='submit'>Dodaj!</button></center>

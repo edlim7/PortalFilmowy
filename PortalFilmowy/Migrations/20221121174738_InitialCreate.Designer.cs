@@ -11,7 +11,7 @@ using PortalFilmowy.Data;
 namespace PortalFilmowy.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20221005172135_InitialCreate")]
+    [Migration("20221121174738_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,14 +123,23 @@ namespace PortalFilmowy.Migrations
                     b.Property<bool>("Edukacyjny")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("Eksperymentalny")
+                        .HasColumnType("bit");
+
                     b.Property<int>("KategoriaId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Kino_off")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nazwa")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Opis")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Popularnonaukowy")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Zdjecie")
                         .HasColumnType("nvarchar(max)");

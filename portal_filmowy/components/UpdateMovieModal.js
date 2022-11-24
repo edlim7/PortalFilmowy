@@ -3,29 +3,18 @@ import styled from "styled-components";
 import { ModalContext } from "../contexts/ModalContext";
 import { AppContext } from "../contexts/AppContext";
 import { Formik, Form, Field } from 'formik';
-import MovieModal from "./MovieModal";
 const UpdateMovieModal = () => {
   const {showUpdateModalMovie, setShowUpdateModalMovie, updateMovie} = useContext(ModalContext);
-	const [eduBool, setEduBool] = useState('');
 	const {Kategoria} = useContext(AppContext);
 	async function edytujFilm(url, data) {
 		const res = await fetch(url, {
 			method:'PUT',
 			headers:{'Content-type':'application/json'},
-			body: JSON.stringify({nazwa:data.nazw, opis: data.opi, zdjecie: data.zdjeci, kategoriaId: data.kategori, edukacyjny: data.edukacyjn, oskary: data.oskar})
+			body: JSON.stringify({nazwa:data.nazw, opis: data.opi, zdjecie: data.zdjeci, kategoriaId: data.kategori, edukacyjny: data.edukacyjn, oskary: data.oskar,
+				popularnonaukowy: data.popularnonauk,eksperymentalny: data.eksperymen,kino_off: data.kinooff})
 		});
 		return res.json()
 	}
-	var str2bool = (value) => {
-		if (value && typeof value === "string") {
-			 if (value.toLowerCase() === "true") return true;
-			 if (value.toLowerCase() === "false") return false;
-		}
-		return value;
-	 }
-	 var str2int = (value) => {
-		return parseInt(value,10);
-	 }
 	 const filmid=updateMovie.filmId;
 	 const textArea = (props) => (
 		<textArea  {...props}>
@@ -39,8 +28,9 @@ const UpdateMovieModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Edytuj film</h1>
-							<Formik initialValues={{nazw: updateMovie.nazwa, opi: "", zdjeci: updateMovie.zdjecie, kategori: updateMovie.kategoriaid, 
-							edukacyjn: updateMovie.edukacyjny, oskar: updateMovie.oskary}} onSubmit={(values) =>{ 
+							<Formik initialValues={{nazw: updateMovie.nazwa, opi: updateMovie.opis, zdjeci: updateMovie.zdjecie, kategori: updateMovie.kategoriaid, 
+							edukacyjn: updateMovie.edukacyjny, oskar: updateMovie.oskary, popularnonauk: updateMovie.popularnonaukowy,
+							eksperymen: updateMovie.eksperymentalny, kinooff: updateMovie.kino_off }} onSubmit={(values) =>{ 
 							
 							edytujFilm('https://localhost:5001/api/FilmKontroler/updateFilmById2/'+filmid, 
 							values)
@@ -56,6 +46,9 @@ const UpdateMovieModal = () => {
 									<label className="stareWartosci">Zdjęcie: {updateMovie.zdjecie}</label><br/><br/><br/>
 									<label className="stareWartosci">Kategoria: {updateMovie.kategoria}</label><br/><br/><br/>
 									<label className="stareWartosci">Edukacyjny:{updateMovie.edukacyjny==true?" tak":" nie"}</label><br/><br/><br/>
+									<label className="stareWartosci">Popularnonaukowy:{updateMovie.popularnonaukowy==true?" tak":" nie"}</label><br/><br/><br/>
+									<label className="stareWartosci">Eksperymentalny:{updateMovie.eksperymentalny==true?" tak":" nie"}</label><br/><br/><br/>
+									<label className="stareWartosci">kino_off:{updateMovie.kino_off==true?" tak":" nie"}</label><br/><br/><br/>
 									<label className="stareWartosci">Ilość oskarów: {updateMovie.oskary}</label><br/><br/><br/>
 									<label className="opiss">Opis: {updateMovie.opis}</label><br/><br/><br/>
 									</div>
@@ -69,6 +62,9 @@ const UpdateMovieModal = () => {
 									))}
            							</Field></label><br /><br /><br/>
 									<label className="field"><Field type ='checkbox' name='edukacyjn'></Field></label><br /><br /> <br/>
+									<label className="field"><Field type ='checkbox' name='popularnonauk'></Field></label><br /><br /> <br/>
+									<label className="field"><Field type ='checkbox' name='eksperymen'></Field></label><br /><br /> <br/>
+									<label className="field"><Field type ='checkbox' name='kinooff'></Field></label><br /><br /> <br/>
 									<label className="field"><Field type ='number' name='oskar' min='0' max='100' ></Field></label><br /><br /><br />
 									<label className="field"><Field as={textArea} name='opi' className="nowyOpis" required></Field></label><br /><br /><br />
 									</div>													

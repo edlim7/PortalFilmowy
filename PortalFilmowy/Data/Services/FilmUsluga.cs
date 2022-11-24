@@ -38,7 +38,10 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie= film.Zdjecie,
                 Opis = film.Opis,
                 KategoriaId = (int)film.KategoriaId,
-                Edukacyjny = film.Edukacyjny
+                Edukacyjny = film.Edukacyjny,
+                Popularnonaukowy = film.Popularnonaukowy,
+                Eksperymentalny = film.Eksperymentalny,
+                Kino_off = film.Kino_off,
             };
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
@@ -61,6 +64,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =film.produkcja.Zdjecie,
                 Opis = film.produkcja.Opis,
                 Edukacyjny = film.produkcja.Edukacyjny,
+                Popularnonaukowy = film.produkcja.Popularnonaukowy,
+                Eksperymentalny = film.produkcja.Eksperymentalny,
+                Kino_off = film.produkcja.Kino_off,
                 ProdukcjaId = film.produkcja.ProdukcjaId,
                 Kategoria = film.produkcja.Kategoria.NazwaKategorii
             }).FirstOrDefault();
@@ -76,6 +82,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =film.produkcja.Zdjecie,
                 Opis = film.produkcja.Opis,
                 Edukacyjny = film.produkcja.Edukacyjny,
+                Popularnonaukowy = film.produkcja.Popularnonaukowy,
+                Eksperymentalny = film.produkcja.Eksperymentalny,
+                Kino_off = film.produkcja.Kino_off,
                 ProdukcjaId = film.produkcja.ProdukcjaId,
                 Kategoria = film.produkcja.Kategoria.NazwaKategorii
             }).FirstOrDefault();
@@ -91,6 +100,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie =film.produkcja.Zdjecie,
                 Opis = film.produkcja.Opis,
                 Edukacyjny = film.produkcja.Edukacyjny,
+                Popularnonaukowy = film.produkcja.Popularnonaukowy,
+                Eksperymentalny = film.produkcja.Eksperymentalny,
+                Kino_off = film.produkcja.Kino_off,
                 ProdukcjaId = film.produkcja.ProdukcjaId,
                 Kategoria = film.produkcja.Kategoria.NazwaKategorii,
                 KategoriaId = film.produkcja.Kategoria.KategoriaId
@@ -118,6 +130,9 @@ namespace PortalFilmowy.Data.Services
                 _film.produkcja.Zdjecie =film.Zdjecie;
                 _film.produkcja.Opis = film.Opis;
                 _film.produkcja.Edukacyjny = film.Edukacyjny;
+                _film.produkcja.Popularnonaukowy = film.Popularnonaukowy;
+                _film.produkcja.Eksperymentalny = film.Eksperymentalny;
+                _film.produkcja.Kino_off = film.Kino_off;
                 _film.produkcja.KategoriaId = film.KategoriaId;
                 _context.SaveChanges();
             

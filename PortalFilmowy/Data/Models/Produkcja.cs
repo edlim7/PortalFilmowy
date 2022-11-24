@@ -10,9 +10,12 @@ namespace PortalFilmowy.Models
         public string Nazwa { get; set; }
         public string Zdjecie { get; set; }
         public string Opis { get; set; }
-        public bool Edukacyjny { get; set; } // na int 
+        public bool Edukacyjny { get; set; } 
+        public bool Kino_off { get; set; }
+        public bool Popularnonaukowy { get; set; }
+        public bool Eksperymentalny { get; set; }
 
-        //Navigation properties
+        //Nav
         public int KategoriaId { get; set; }
         public Kategoria Kategoria { get; set; }
         public List<Film> film { get; set; }

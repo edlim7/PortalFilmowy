@@ -27,7 +27,10 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie=produkcja.Zdjecie,
                 Opis = produkcja.Opis,
                 KategoriaId = produkcja.KategoriaId,
-                Edukacyjny = produkcja.Edukacyjny
+                Edukacyjny = produkcja.Edukacyjny,
+                Popularnonaukowy = produkcja.Popularnonaukowy,
+                Eksperymentalny = produkcja.Eksperymentalny,
+                Kino_off = produkcja.Kino_off,
             };
             _context.Produkcja.Add(_produkcja);
             _context.SaveChanges();
@@ -43,6 +46,9 @@ namespace PortalFilmowy.Data.Services
                 Zdjecie = produkcja.Zdjecie,
                 Opis=produkcja.Opis,
                 Edukacyjny = produkcja.Edukacyjny,
+                Popularnonaukowy = produkcja.Popularnonaukowy,
+                Eksperymentalny = produkcja.Eksperymentalny,
+                Kino_off = produkcja.Kino_off,
                 KategoriaId = produkcja.Kategoria.KategoriaId,
                 NazwaKategorii = produkcja.Kategoria.NazwaKategorii
             });
@@ -90,6 +96,9 @@ namespace PortalFilmowy.Data.Services
                 _produkcja.Zdjecie=produkcja.Zdjecie;
                 _produkcja.Opis = produkcja.Opis;
                 _produkcja.Edukacyjny = produkcja.Edukacyjny;
+                _produkcja.Popularnonaukowy = produkcja.Popularnonaukowy;
+                _produkcja.Eksperymentalny = produkcja.Eksperymentalny;
+                _produkcja.Kino_off = produkcja.Kino_off;
                 _produkcja.KategoriaId=produkcja.KategoriaId;
                 _context.SaveChanges();
             }

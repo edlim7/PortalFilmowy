@@ -11,7 +11,8 @@ const AddSeriesModal = () => {
 		const res = await fetch(url, {
 			method:'POST',
 			headers:{'Content-type':'application/json'},
-			body: JSON.stringify({nazwa:data.nazw, opis: data.opi, zdjecie: data.zdjeci, kategoriaId: data.kategori, edukacyjny: data.edukacyjn, odcinki: data.odcink, sezony:data.sezon, emmy:data.emm})
+			body: JSON.stringify({nazwa:data.nazw, opis: data.opi, zdjecie: data.zdjeci, kategoriaId: data.kategori, edukacyjny: data.edukacyjn, odcinki: data.odcink, 
+				sezony:data.sezon, emmy:data.emm, popularnonaukowy: data.popularnonauk,eksperymentalny: data.eksperymen,kino_off: data.kinooff})
 		});
 		return res.json()
 	}
@@ -27,7 +28,8 @@ const AddSeriesModal = () => {
 					<Wrapper onClick={(e) => e.stopPropagation()}>
 						<Content>
 							<h1>Dodaj nowy serial</h1>
-							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "", kategori: 1, edukacyjn: false, odcink: 1,sezon: 1, emm:0}} onSubmit={(values) =>{ 
+							<Formik enableReinitialize initialValues={{nazw: "", opi: "", zdjeci: "obrazki/", kategori: 1, edukacyjn: false, odcink: 1,sezon: 1, emm:0,
+							popularnonauk:false, eksperymen:false, kinooff:false}} onSubmit={(values) =>{ 
 							czyWystepujeNazwa=0;
 							NazwyProdukcji.forEach((el)=>{
 								if(el.nazwa===values.nazw)
@@ -52,6 +54,9 @@ const AddSeriesModal = () => {
 									))}
            							</Field><br /><br />
 									<label>Edukacyjny: <Field type ='checkbox' name='edukacyjn' className="field"></Field> <br /><br /></label>
+									<label>Popularnonaukowy: <Field type ='checkbox' name='popularnonauk' className="field"></Field> <br /><br /></label>
+									<label>Eksperymentalny: <Field type ='checkbox' name='eksperymen' className="field"></Field> <br /><br /></label>
+									<label>Kino-Off: <Field type ='checkbox' name='kinooff' className="field"></Field> <br /><br /></label>
 									Emmy: <Field type ='number' name='emm' min='0' max='100' className="field" ></Field><br />	<br />	
 									Ilość sezonów: <Field type ='number' name='odcink' min='1' max='100' className="field"></Field><br />	<br />	
 									Ilość odcinków: <Field type ='number' name='sezon' min='1' max='1000' className="field"></Field><br />	<br />	
@@ -136,7 +141,7 @@ const Content = styled.div`
 		padding: 15px 40px;	
 		position: absolute;
 		left:285px;
-		bottom:100px;
+		bottom:50px;
 	}
 	button:hover{
 		transition-duration: 1s;

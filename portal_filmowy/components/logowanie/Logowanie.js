@@ -1,4 +1,4 @@
-import React, { useContext, useState,useRef,Alert } from "react";
+import React, { useContext, useState,useRef } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../../contexts/ModalContext";
 import { AppContext } from "../../contexts/AppContext";
@@ -11,9 +11,6 @@ const Logowanie = () => {
 	const passRef = useRef(null);
 	const loginRef = useRef(null);
 	const emailRef = useRef(null);
-	function switchAuthModeHandler() {
-		setIsLogin((prevState) => !prevState);
-	}
 	function zalogujUzytkownika() {
 		
 			Uzytkownicy.forEach((el)=>{

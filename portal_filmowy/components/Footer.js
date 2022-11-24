@@ -18,7 +18,7 @@ const Footer = () => {
 export default Footer;
 const Container = styled.div`
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
-	background-color: #32B3EB;//#A69595;
+	background-color: #6AA8B7;//#A69595;
 	left: 0;
 	bottom: 0;
 	width: 100%;

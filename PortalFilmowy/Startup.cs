@@ -38,7 +38,7 @@ namespace PortalFilmowy
             options.AddDefaultPolicy(
             builder =>
             {
-                builder.WithOrigins("http://localhost:3000", "https://localhost:5001", "http://localhost:5000","https://localhost:5001/api/KomentarzKontroler/addKomentarz","http://localhost:3000/filmy","http://localhost:3000/seriale","http://localhost:3000/filmyRanking","http://localhost:3000/serialeRanking")
+                builder.WithOrigins("http://localhost:3000", "https://localhost:5001", "http://localhost:5000","https://localhost:5001/api/KomentarzKontroler/addKomentarz","http://localhost:3000/filmy","http://localhost:3000/seriale","http://localhost:3000/filmyRanking","http://localhost:3000/serialeRanking","https://localhost:5001/api/KategoriaKontroler/addKategoria")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                 });

@@ -47,6 +47,9 @@ namespace PortalFilmowy.Migrations
                     Zdjecie = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Edukacyjny = table.Column<bool>(type: "bit", nullable: false),
+                    Kino_off = table.Column<bool>(type: "bit", nullable: false),
+                    Popularnonaukowy = table.Column<bool>(type: "bit", nullable: false),
+                    Eksperymentalny = table.Column<bool>(type: "bit", nullable: false),
                     KategoriaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

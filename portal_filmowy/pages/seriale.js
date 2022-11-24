@@ -151,7 +151,10 @@ useEffect(() => {
 					serialId:post.serialId,
 					edukacyjny:post.edukacyjny,
 					opis:post.opis,
-					kategoriaid:post.kategoriaId
+					kategoriaid:post.kategoriaId,
+					popularnonaukowy:post.popularnonaukowy,
+					eksperymentalny:post.eksperymentalny,
+					kino_off:post.kino_off,
 				})}}>
 				<SingleContent key={post.id} nazwa={post.nazwa} zdjecie={post.zdjecie} />
 				</ul>
