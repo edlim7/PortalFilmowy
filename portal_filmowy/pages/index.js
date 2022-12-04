@@ -58,7 +58,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	const [dataValues6, setDataValues6] = useState(posts6); // film
 	const [dataValues7, setDataValues7] = useState(posts7);  //serial
 	const [ZalogowanyUzytkownik, setZalogowanyUzytkownik]= useState([]);
-	console.log(posts6)
+
 	useEffect(() => {
 		document.title = 'Filizone';
 	  });
@@ -89,7 +89,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	const ocenioneProdukcje=[];
 	const policzoneKategorie=[];
 	var polecane=dataValues;
-	var edukacyjnePolecane=dataValues;
+	var niePopularnePolecane=dataValues;
 	var sum=0;
 	var counter=0;
 	var komentarz=[];
@@ -97,8 +97,10 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 	var eduOcena=[];
 	var serialFilm=[];
 	var serialFilmEdu=[];
-	var licznikPolecane=0;
 	var licznikEdu=0;
+	var licznikKinoOff=0;
+	var licznikEksperymentalne=0;
+	var licznikPopularnonaukowe=0;
 	dataValues2.forEach((el)=>{			// wyszukanie ocenionych produkcji przez danego uzytkownika
 		if(el.uzytkownikID==userid)
 		{
@@ -115,6 +117,14 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			if(el3.kategoriaId==el4.kategoriaId)
 			{
 				licznikKategorii++;
+				if(el4.popularnonaukowy==true)
+				licznikPopularnonaukowe+=1
+				if(el4.edukacyjny==true)
+				licznikEdu+=1
+				if(el4.eksperymentalny==true)
+				licznikEksperymentalne+=1
+				if(el4.kino_off==true)
+				licznikKinoOff+=1
 			}
 		})
 		policzoneKategorie.push(el3);
@@ -130,6 +140,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			return obj.produkcjaId !== el3.produkcjaId && obj.kategoriaId==sortPoliczoneKategorie[0].kategoriaId;
 		})
 	})
+
 	polecane.forEach((el)=>{		// liczenie oceny
 		dataValues2.forEach((el2)=>{
 			if(el2.produkcjaId==el.produkcjaId)
@@ -146,6 +157,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		sum=0;
 		counter=0;
 	})
+
    // przypisanie serialu i filmu do produkcji
 	test.forEach((el)=>{
 		dataValues4.forEach((el2)=>{
@@ -156,6 +168,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			}
 		})
 	})
+
 	test.forEach((el)=>{
 		dataValues5.forEach((el2)=>{
 			if(el.produkcjaId==el2.produkcjaId)
@@ -165,6 +178,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			}
 		})
 	})
+
 	const polecaneDesc = [...serialFilm].sort((a,b)=>b.ocena-a.ocena);	//wyswietlanie polecanych od najwyzej ocenianego
 	// przypisanie komentarzy do polecanych:
 	dataValues6.forEach((el)=>{ //komentarze | przypisanie nazwy uzytkownika do uzytkownika
@@ -186,13 +200,22 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		komentarz=[];
 		
 	})
-	// edukacyjne
-	ocenioneProdukcje.forEach((el3)=>{		// polecane produkcje dla uzytkownika
-		edukacyjnePolecane = edukacyjnePolecane.filter(obj => {
-			return obj.produkcjaId !== el3.produkcjaId && obj.edukacyjny==true;			
+
+
+	// Produkcjie niepopularne
+	ocenioneProdukcje.forEach((el3)=>{		
+		niePopularnePolecane = niePopularnePolecane.filter(obj => {
+			if (licznikEdu <= licznikKinoOff && licznikEdu <= licznikEksperymentalne && licznikEdu <= licznikPopularnonaukowe)
+			return obj.produkcjaId !== el3.produkcjaId && obj.edukacyjny==true;
+			if (licznikKinoOff <= licznikEdu  && licznikKinoOff <= licznikEksperymentalne && licznikKinoOff <= licznikPopularnonaukowe)
+			return obj.produkcjaId !== el3.produkcjaId && obj.kino_off==true;
+			if (licznikEksperymentalne <= licznikEdu  && licznikEksperymentalne <= licznikKinoOff && licznikEksperymentalne <= licznikPopularnonaukowe)
+			return obj.produkcjaId !== el3.produkcjaId && obj.eksperymentalny==true;
+			if (licznikPopularnonaukowe <= licznikEdu  && licznikPopularnonaukowe <= licznikKinoOff && licznikPopularnonaukowe <= licznikEksperymentalne)
+			return obj.produkcjaId !== el3.produkcjaId && obj.popularnonaukowy==true;			
 		})
 	})
-	edukacyjnePolecane.forEach((el)=>{		// liczenie oceny
+	niePopularnePolecane.forEach((el)=>{		// liczenie oceny
 		dataValues2.forEach((el2)=>{
 			if(el2.produkcjaId==el.produkcjaId)
 				{
@@ -209,7 +232,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 		sum=0;
 		counter=0;
 	})
-
+	
 	eduOcena.forEach((el)=>{
 		dataValues4.forEach((el2)=>{
 			if(el.produkcjaId==el2.produkcjaId)
@@ -219,6 +242,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			}
 		})
 	})
+
 	eduOcena.forEach((el)=>{
 		dataValues5.forEach((el2)=>{
 			if(el.produkcjaId==el2.produkcjaId)
@@ -228,8 +252,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 			}
 		})
 	})
-	console.log("eduOcena:")
-	console.log(eduOcena);
+
 	dataValues6.forEach((el)=>{ //komentarze | przypisanie nazwy uzytkownika do uzytkownika
 		dataValues7.forEach((el2)=>{	// uzytkownik
 			if(el2.uzytkownikId==el.uzytkownikID) 
@@ -238,7 +261,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 				}
 		})
 	})
-	eduOcena.forEach((el)=>{ 
+	serialFilmEdu.forEach((el)=>{ 
 		dataValues6.forEach((el2)=>{
 			if(el2.produkcjaId==el.produkcjaId)
 				{
@@ -246,12 +269,8 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 				}
 		})
 		el.komentarze=komentarz;
-		komentarz=[];
-		
+		komentarz=[];	
 	})
-	//serialFilmEdu = serialFilmEdu.sort(() => Math.random()-0.5) // losowanie robi te hydrate
-	//console.log("Wymieszane edu");
-	//console.log(serialFilmEdu);
 	return (
 		<>
 		<div style={{minHeight:"784px"}}>
@@ -317,7 +336,7 @@ const Home= ({posts,posts2,posts3,posts4,posts5,posts6,posts7}) => {
 
 			<center><h1>Polecamy również zapoznać się z mniej popularnymi produkcjami:</h1></center>
 <Container>
-			{eduOcena.filter((val)=>{
+			{serialFilmEdu.filter((val)=>{
 				if(searchTerm==""){
 					return val;
 				}else if(val.nazwa.toLowerCase().includes(searchTerm.toLowerCase())){
