@@ -27,6 +27,9 @@ const Navbar = () => {
 			
 			<div>
 			<h1><center><Link href="/" ><a className="glowna">Filizone</a></Link></center>
+			{ZalogowanyUzytkownik.typKonta!==undefined ?
+			<span className="zalogowanyLogin"><h3>Zalogowany jako:<br/>{ZalogowanyUzytkownik.login}</h3></span>
+			:<></>}
 			{ZalogowanyUzytkownik.typKonta===undefined ? 
 				<button 
 				onClick={() => {
@@ -37,7 +40,7 @@ const Navbar = () => {
 				Zaloguj się
 				</button>
 			: 	
-				<label><span className="zalogowanyLogin"><h3>Zalogowany jako:<br/>{ZalogowanyUzytkownik.login}</h3></span>
+				<label>
 				<button onClick={() => {wylogujUzytkownika();}} className="Login">
 				Wyloguj się
 				</button>

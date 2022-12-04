@@ -201,7 +201,6 @@ const Content = styled.div`
 	padding-left: 5px;
 	padding-bottom: 10px;
 	color: #141414;
-	
 	p {
 		font-weight: bold;
 		flex: 1 0;

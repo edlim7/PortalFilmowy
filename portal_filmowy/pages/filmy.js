@@ -169,7 +169,10 @@ padding-left: 100PX;
 		margin: auto;
 		grid-template-columns: repeat(auto-fit, 550px);
 		grid-template-rows: min-content;
-
+.zdjecie{
+	height: 245px;
+	width: 	410px; 
+}
 .DodajFilm{
 	cursor: pointer;
 	position: absolute;
