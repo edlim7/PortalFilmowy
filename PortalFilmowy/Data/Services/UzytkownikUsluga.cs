@@ -1,14 +1,9 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using PortalFilmowy.Data;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using PortalFilmowy.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace PortalFilmowy.Data.Services
 {
@@ -21,27 +16,43 @@ namespace PortalFilmowy.Data.Services
         }
         public void AddUzytkownik(UzytkownikVM uzytkownik)
         {
-            var _uzytkownik= new Uzytkownik()
-            {
-                Login = uzytkownik.Login,
-                Haslo =uzytkownik.Haslo,
-                Email = uzytkownik.Email,
-                TypKonta = uzytkownik.TypKonta
-            };
-            _context.Uzytkownik.Add(_uzytkownik);
-            _context.SaveChanges();
+            using (SHA256 sha256Hash = SHA256.Create()){
+                string hash = getHash(sha256Hash, uzytkownik.Haslo);
+                if (VerifyHash(sha256Hash, uzytkownik.Haslo, hash)){
+                    Console.WriteLine("Hash taki sam.");
+                    var _uzytkownik= new Uzytkownik()
+                    {
+                        Login = uzytkownik.Login,
+                        Haslo = hash,
+                        Email = uzytkownik.Email,
+                        TypKonta = uzytkownik.TypKonta
+                    };
+                    _context.Uzytkownik.Add(_uzytkownik);
+                    _context.SaveChanges();
+                } else{
+                Console.WriteLine("Hash nie jest taki sam!.");
+                }
+            }
         }
         public void AddUzytkownik2(UzytkownikVM uzytkownik) // rejestracja
         {
-            var _uzytkownik= new Uzytkownik()
-            {
-                Login = uzytkownik.Login,
-                Haslo =uzytkownik.Haslo,
-                Email = uzytkownik.Email,
-                TypKonta = 3
-            };
-            _context.Uzytkownik.Add(_uzytkownik);
-            _context.SaveChanges();
+            using (SHA256 sha256Hash = SHA256.Create()){
+                string hash = getHash(sha256Hash, uzytkownik.Haslo);
+                if (VerifyHash(sha256Hash, uzytkownik.Haslo, hash)){
+                    Console.WriteLine("Hash taki sam.");
+                    var _uzytkownik= new Uzytkownik()
+                    {
+                        Login = uzytkownik.Login,
+                        Haslo = hash,
+                        Email = uzytkownik.Email,
+                        TypKonta = 3
+                    };
+                    _context.Uzytkownik.Add(_uzytkownik);
+                    _context.SaveChanges();
+                } else{
+                    Console.WriteLine("Hash nie jest taki sam!.");
+                }
+            }
         }
         public List<Uzytkownik> getAllUzytkownik() => _context.Uzytkownik.ToList();
         public Uzytkownik getUzytkownikById(int uzytkownikId)
@@ -50,16 +61,25 @@ namespace PortalFilmowy.Data.Services
         }
         public Uzytkownik updateUzytkownikById(int uzytkownikId, UzytkownikVM uzytkownik)
         {
-            var _uzytkownik = _context.Uzytkownik.FirstOrDefault(n=>n.UzytkownikId==uzytkownikId);
-            if(_uzytkownik!=null)
-            {
-                _uzytkownik.Login = uzytkownik.Login;
-                _uzytkownik.Haslo =uzytkownik.Haslo;
-                _uzytkownik.Email = uzytkownik.Email;
-                _uzytkownik.TypKonta = uzytkownik.TypKonta;
-                _context.SaveChanges();
-            }
-            return _uzytkownik;
+            using (SHA256 sha256Hash = SHA256.Create()){
+                string hash = getHash(sha256Hash, uzytkownik.Haslo);
+                if (VerifyHash(sha256Hash, uzytkownik.Haslo, hash)){
+                    Console.WriteLine("Hash taki sam.");
+                    var _uzytkownik = _context.Uzytkownik.FirstOrDefault(n=>n.UzytkownikId==uzytkownikId);
+                    if(_uzytkownik!=null)
+                    {
+                    _uzytkownik.Login = uzytkownik.Login;
+                    _uzytkownik.Haslo = hash;
+                    _uzytkownik.Email = uzytkownik.Email;
+                    _uzytkownik.TypKonta = uzytkownik.TypKonta;
+                    _context.SaveChanges();
+                    }
+                    return _uzytkownik;  
+                } else{
+                    Console.WriteLine("Hash nie jest taki sam!.");
+                    return null;
+                }
+            }   
         }
         public Uzytkownik updateUzytkownikById2(int uzytkownikId, UzytkownikVM uzytkownik)
         {
@@ -80,6 +100,20 @@ namespace PortalFilmowy.Data.Services
                 _context.SaveChanges();
             }
         }
-      
-    }   
+        private static string getHash(HashAlgorithm hashAlgorithm, string input){
+            
+            byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+            var sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++){
+            sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+
+        }   
+        private static bool VerifyHash(HashAlgorithm hashAlgorithm, string input, string hash){
+            var hashOfInput = getHash(hashAlgorithm, input);
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+            return comparer.Compare(hashOfInput, hash) == 0;
+        }
+    }
 }

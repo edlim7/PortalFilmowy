@@ -3,6 +3,13 @@ import styled from "styled-components";
 import { ModalContext } from "../../contexts/ModalContext";
 import { AppContext } from "../../contexts/AppContext";
 import RejestracjaModal from "../RejestracjaModal";
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);                    
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));                 
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
 const Logowanie = () => {
 	const { showModalLogin, setShowModalLogin,setShowRejestracjaModal} = useContext(ModalContext);
 	const {Uzytkownicy,ZalogowanyUzytkownik, setZalogowanyUzytkownik} = useContext(AppContext);
@@ -12,18 +19,21 @@ const Logowanie = () => {
 	const loginRef = useRef(null);
 	const emailRef = useRef(null);
 	function zalogujUzytkownika() {
-		
+			var hash=sha256(passRef.current.value)
+			hash.then((haslo)=>{
 			Uzytkownicy.forEach((el)=>{
-				if(passRef.current.value===el.haslo && emailRef.current.value===el.email)
-				{
+					if(haslo===el.haslo && emailRef.current.value===el.email)
+					{
+					zal=true;
 					localStorage.setItem('uzytkownik',JSON.stringify(el));
 					console.log("Udało sie zalogować!");
-					zal=true;
 					window.location.reload(false);
-				}
-			})
-			if(zal===false)
+					}
+				})
+				if(zal===false)
 			alert("Zły login lub hasło!");
+			})
+			
 	}
 	return (
 		<>
