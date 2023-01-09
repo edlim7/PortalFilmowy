@@ -39,7 +39,7 @@ const UpdateSeriesModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));
-							window.location.reload(false) }}>
+							window.location.reload(true) }}>
 							{({ values }) => (
 								<Form>
 									<center><button type='submit'>Edytuj!</button></center>
@@ -61,7 +61,7 @@ const UpdateSeriesModal = () => {
 									<h3 className="nowe">Nowe wartości</h3><br/>
 									<label className="field"><Field type ='nazwa' name='nazw'  required></Field></label><br /><br /><br />
 									<label className="field"><Field type ='zdjecie' name='zdjeci' placeholder="obrazki/" required></Field></label><br /><br /><br />
-									<label className="field"><Field as="select" name="kategori">
+									<label className="field"><Field as="select" name="kategori" >
 			 						{Kategoria.map((post) => (
 									<option value={post.kategoriaId}>{post.nazwaKategorii}</option>
 									))}
@@ -70,9 +70,9 @@ const UpdateSeriesModal = () => {
 									<label className="field"><Field type ='checkbox' name='popularnonauk'></Field></label><br /><br /> <br/>
 									<label className="field"><Field type ='checkbox' name='eksperymen'></Field></label><br /><br /> <br/>
 									<label className="field"><Field type ='checkbox' name='kinooff'></Field></label><br /><br /> <br/>
-									<label className="field"><Field type ='number' name='emm' min='0' max='100' ></Field></label><br /><br /><br />	
-									<label className="field"><Field type ='number' name='sezon' min='0' max='100' ></Field></label><br /><br /><br />	
-									<label className="field"><Field type ='number' name='odcink' min='0' max='1000' ></Field></label><br /><br /><br />	
+									<label className="field"><Field type ='number' name='emm' min='0' max='100' required></Field></label><br /><br /><br />	
+									<label className="field"><Field type ='number' name='sezon' min='0' max='100' required></Field></label><br /><br /><br />	
+									<label className="field"><Field type ='number' name='odcink' min='0' max='1000' required></Field></label><br /><br /><br />	
 									<label className="field"><Field as={textAreaa} name='opi'  className="nowyOpis" required></Field></label><br /><br /><br />
 									</div>							
 									

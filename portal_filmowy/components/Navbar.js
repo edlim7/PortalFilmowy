@@ -18,7 +18,7 @@ const Navbar = () => {
 	  }, []);
 	function wylogujUzytkownika() {
 		localStorage.removeItem('uzytkownik',JSON.stringify());
-		window.location.reload(false);
+		window.location.reload(true);
 	}
 	return (
 		<Container>

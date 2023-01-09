@@ -43,7 +43,7 @@ const AddSeriesModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));
-							window.location.reload(false)}}}>
+							window.location.reload(true)}}}>
 							{({ values }) => (
 								<Form className="form">
 									Nazwa serialu <Field type ='nazwa' name='nazw' className="field" required></Field><br /><br />
@@ -57,9 +57,9 @@ const AddSeriesModal = () => {
 									<label>Popularnonaukowy: <Field type ='checkbox' name='popularnonauk' className="field"></Field> <br /><br /></label>
 									<label>Eksperymentalny: <Field type ='checkbox' name='eksperymen' className="field"></Field> <br /><br /></label>
 									<label>Kino-Off: <Field type ='checkbox' name='kinooff' className="field"></Field> <br /><br /></label>
-									Emmy: <Field type ='number' name='emm' min='0' max='100' className="field" ></Field><br />	<br />	
-									Ilość sezonów: <Field type ='number' name='odcink' min='1' max='100' className="field"></Field><br />	<br />	
-									Ilość odcinków: <Field type ='number' name='sezon' min='1' max='1000' className="field"></Field><br />	<br />	
+									Emmy: <Field type ='number' name='emm' min='0' max='100' className="field" required></Field><br />	<br />	
+									Ilość sezonów: <Field type ='number' name='odcink' min='1' max='100' className="field" required></Field><br />	<br />	
+									Ilość odcinków: <Field type ='number' name='sezon' min='1' max='1000' className="field" required></Field><br />	<br />	
 									Opis: <Field type ='opis' name='opi' className="nowyOpis" as={textArea} required></Field><br /><br />								
 									<center><button type='submit'>Dodaj!</button></center>
 								</Form>

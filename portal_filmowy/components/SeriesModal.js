@@ -75,7 +75,7 @@ useEffect(() => {
 							onClick={() => {
 								setShowModalSeries((prevState) => !prevState)
 								deleteSeries('https://localhost:5001/api/SerialKontroler/deleteSerialById2/'+series.serialId);
-								window.location.reload(false);
+								window.location.reload(true);
 							}}
 							className="usunFilm"
 							>
@@ -103,7 +103,7 @@ useEffect(() => {
 								values)
 								.then((data)=> console.log(data))
 								.catch((error)=>console.log(error));
-								window.location.reload(false);
+								window.location.reload(true);
 							}
 							else if(czyOcenil>0)
 							{
@@ -111,14 +111,14 @@ useEffect(() => {
 								values)
 								.then((data)=> console.log(data))
 								.catch((error)=>console.log(error));
-								window.location.reload(false);
+								window.location.reload(true);
 							}
 							else{
 								alert("Musisz być zalogowany, aby ocenić serial!");
 							}
 							 }}>
 								<Form>
-								<br/><Field type ='number' name='ocea' min='1' max='10'></Field>
+								<br/><Field type ='number' name='ocea' min='1' max='10' required></Field>
 									<button type='submit' className="oc">Oceń</button>
 								</Form>
 							</Formik>
@@ -132,7 +132,7 @@ useEffect(() => {
 								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
 								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ 
 									usunKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)
-									window.location.reload(false);
+									window.location.reload(true);
 									}}>X</button>: ""} <br />  {post.tresc} <hr />
 								</li>
 							</ul>
@@ -148,11 +148,11 @@ useEffect(() => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));
-							window.location.reload(false);} 
+							window.location.reload(true);} 
 							}}>
 		
 								<Form>
-									<Field type='tresc' name='tresc'></Field>
+									<Field type='tresc' name='tresc' required></Field>
 									<button type='submit'>Skomentuj</button>
 								</Form>
 							</Formik>

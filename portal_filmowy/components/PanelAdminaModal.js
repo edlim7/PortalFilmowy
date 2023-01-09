@@ -45,7 +45,7 @@ const PanelAdminaModal = () => {
 										onClick={() => {
 											setShowModalUser((prevState) => !prevState);
 											usunKonto('https://localhost:5001/api/UzytkownikKontroler/deleteUzytkownikById/'+post.uzytkownikId);
-											window.location.reload(false);
+											window.location.reload(true);
 										}}
 										className="usun_Konto"
 										>

@@ -36,7 +36,7 @@ const UpdateMovieModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));
-							window.location.reload(false) }}>
+							window.location.reload(true) }}>
 								{({ values }) => (
 								<Form>
 									<center><button type='submit' className="edytujButton">Edytuj!</button></center>
@@ -65,7 +65,7 @@ const UpdateMovieModal = () => {
 									<label className="field"><Field type ='checkbox' name='popularnonauk'></Field></label><br /><br /> <br/>
 									<label className="field"><Field type ='checkbox' name='eksperymen'></Field></label><br /><br /> <br/>
 									<label className="field"><Field type ='checkbox' name='kinooff'></Field></label><br /><br /> <br/>
-									<label className="field"><Field type ='number' name='oskar' min='0' max='100' ></Field></label><br /><br /><br />
+									<label className="field"><Field type ='number' name='oskar' min='0' max='100' required></Field></label><br /><br /><br />
 									<label className="field"><Field as={textArea} name='opi' className="nowyOpis" required></Field></label><br /><br /><br />
 									</div>													
 								</Form>

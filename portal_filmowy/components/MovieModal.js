@@ -74,7 +74,7 @@ const MovieModal = () => {
 							onClick={() => {
 								setShowModalMovie((prevState) => !prevState)
 								usunFilm('https://localhost:5001/api/FilmKontroler/deleteFilmById2/'+filmid);
-								window.location.reload(false);
+								window.location.reload(true);
 							}}
 							className="usunFilm"
 							>
@@ -102,20 +102,20 @@ const MovieModal = () => {
 									values)
 									.then((data)=> console.log(data))
 									.catch((error)=>console.log(error));
-									window.location.reload(false);
+									window.location.reload(true);
 								}else if(czyOcenil>0){
 									zmienOcene('https://localhost:5001/api/OcenaKontroler/updateOcenaById/'+ocenaid, 
 									values)
 									.then((data)=> console.log(data))
 									.catch((error)=>console.log(error));
-									window.location.reload(false);
+									window.location.reload(true);
 								}
 								else{
 									alert("Musisz być zalogowany, aby ocenić film!");
 								}
 								 }}>
 									<Form>
-									<br/><Field type ='number' name='ocea' min='1' max='10' className="ocenienanie"></Field>
+									<br/><Field type ='number' name='ocea' min='1' max='10' className="ocenienanie" required></Field>
 									<button type='submit' className="oc">Oceń</button>
 								</Form>
 							</Formik>
@@ -132,7 +132,7 @@ const MovieModal = () => {
 								<b className="personel">{post.nazwaUzytkownika}</b>:<b>{post.nazwaUzytkownika}</b>}
 								: {ZalogowanyUzytkownik.typKonta==1 || ZalogowanyUzytkownik.typKonta==2 ? <button className="usunKom" onClick={() =>{ 
 									usunKom('https://localhost:5001/api/KomentarzKontroler/deleteKomentarzById/'+post.komentarzId)
-									window.location.reload(false);
+									window.location.reload(true);
 									}}>X</button>: ""}  <br/>{post.tresc} <hr />
 								
 								</li>
@@ -150,12 +150,12 @@ const MovieModal = () => {
 								values)
 								.then((data)=> console.log(data))
 								.catch((error)=>console.log(error));
-								window.location.reload(false);
+								window.location.reload(true);
 							}
 							 }}>
 		
 								<Form>
-									<Field type='tresc' name='tresc'></Field>
+									<Field type='tresc' name='tresc' required></Field>
 									<button type='submit'>Skomentuj</button>
 								</Form>
 							</Formik>

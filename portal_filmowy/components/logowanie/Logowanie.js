@@ -27,7 +27,7 @@ const Logowanie = () => {
 					zal=true;
 					localStorage.setItem('uzytkownik',JSON.stringify(el));
 					console.log("Udało sie zalogować!");
-					window.location.reload(false);
+					window.location.reload(true);
 					}
 				})
 				if(zal===false)

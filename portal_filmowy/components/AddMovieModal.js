@@ -43,7 +43,7 @@ const AddMovieModal = () => {
 							values)
 							.then((data)=> console.log(data))
 							.catch((error)=>console.log(error));
-							window.location.reload(false);
+							window.location.reload(true);
 							}}}>
 									{({ values }) => (
 									<Form className="form">
