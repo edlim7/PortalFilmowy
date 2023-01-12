@@ -51,7 +51,6 @@ useEffect(() => {
 			method:'DELETE',
 		});
 	}
-	console.log("series: "+ series);
 	const serialid=series.serialId;
   return (
     <>

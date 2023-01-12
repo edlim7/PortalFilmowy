@@ -111,8 +111,7 @@ useEffect(() => {
 		komentarz=[];
 		
 	})
-	console.log("serialOcena z kom");
-	console.log(serialOcena);
+
 	
 	return (
 		<>

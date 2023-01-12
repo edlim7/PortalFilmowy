@@ -67,9 +67,6 @@ useEffect(() => {
 	useEffect(() => {
 		setNazwyProdukcji(posts);
 	}, [])
-	console.log("uzytkownik123123123 RANKING SERIAL: "+ ZalogowanyUzytkownik.log); 
-	console.log("POLICE",dataValues);
-	console.log("POLICE2",dataValues2);
 	const test=[];
 	var komentarz=[];
 	var sum=0;
@@ -92,7 +89,6 @@ useEffect(() => {
 		counter=0;
 	})
 	const testDesc = [...test].sort((a,b)=>b.ocena-a.ocena);
-	console.log(testDesc);
 	dataValues3.forEach((el)=>{ //komentarze | przypisanie nazwy uzytkownika do uzytkownika
 		dataValues4.forEach((el2)=>{	// uzytkownik
 			if(el2.uzytkownikId==el.uzytkownikID) 

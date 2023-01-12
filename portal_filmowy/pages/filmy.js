@@ -108,8 +108,6 @@ filmOcena.forEach((el)=>{
 	komentarz=[];
 	
 })
-console.log("filmOcena z kom");
-console.log(filmOcena);
 	return (
 		<>
 		<div style={{minHeight:"784px"}}>
